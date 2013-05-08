@@ -169,7 +169,7 @@ NSString *const HTMLExtentsion = @".html";
     {
         if ([docAccess iCloudOn])
         {
-            //[docAccess stopQuery];
+            [docAccess stopQuery];
         }
     }
 }
@@ -248,6 +248,7 @@ NSString *const HTMLExtentsion = @".html";
     if (needReload)
     {
         [entityArray removeAllObjects];
+        [self.mTableView reloadData];
     }
     
     if (docAccess == nil)

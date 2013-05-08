@@ -7,7 +7,6 @@
         <script type="text/javascript" defer>
             function initElement()
             {
-                // window.location.href="objc:caonima";//Call OC
                 document.getElementById('content').onkeyup = onKeyboardUp;
                 document.addEventListener('touchend', touchEnd, false);
                 document.addEventListener("touchstart", touchStart, false);
@@ -128,12 +127,6 @@
                 elm.innerHTML = html;
             }
             
-            function nnertHtmlr()
-            {
-                var elmsss = document.getElementById('content');
-                return elmsss.innerHTML;
-            }
-            
             function getCaretClientPostion()
             {
                 var x = 0;
@@ -194,43 +187,6 @@
                 
                 // Re-insert the image
                 document.execCommand('insertImage', false, imageSrc);
-            }
-            
-            function setEndOfContenteditable(pos)
-            {
-                var contentEditableElement= document.getElementById('content');
-                var range,selection;
-                if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
-                {
-                    range = document.createRange();//Create a range (a range is a like the selection but invisible)
-                    range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
-                    //collapse the range to the end point. false means collapse to end rather than the start
-                    range.setStart(contentEditableElement.childNodes[0], pos);
-                    //range.setStart(contentEditableElement.childNodes[1], pos);
-                    range.collapse(true);
-                    selection = window.getSelection();//get the selection object (allows you to change selection)
-                    selection.removeAllRanges();//remove any selections already made
-                    selection.addRange(range);//make the range you have just created the visible selection
-                }
-            }
-            
-            function setCursorPos(pos)
-            {
-                var textNode = document.getElementById('content').childNodes[0];
-                var textNode2 = document.getElementById('content').childNodes[1].childNodes[0];
-                var range = document.createRange();
-                if (pos < 15)
-                {
-                    range.setStart(textNode, pos);
-                    
-                }
-                else{
-                    range.setStart(textNode2, pos-15);
-                }
-                range.collapse(true);
-                var sel = window.getSelection();
-                sel.removeAllRanges();
-                sel.addRange(range);
             }
             
             function ajustImageSize(src, width, height)

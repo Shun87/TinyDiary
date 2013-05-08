@@ -53,47 +53,19 @@
         float currentWidth = 5;
         for (int i = 0; i < 14; i++)
         {
-            NSString *title = [self buttonTextOfIndex:i];
-            
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
              button.tag = i + 1000;
             [button addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
             [button addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
-//            if (i == 0)
-//            {
-//                button.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-//            }
-//            else if (i == 1)
-//            {
-//                button.titleLabel.font = [UIFont italicSystemFontOfSize:18];
-//            }
-//            else if (i == 2 || i ==3 || i==4)
-//            {
-//                button.titleLabel.font = [UIFont systemFontOfSize:18];
-//            }
-           
             
-            NSInteger index = i;
-            if (index >= 0)
-            {
-                UIImage *buttonImage = [UIImage imageNamed:[names objectAtIndex:i]];
-                [button setImage:buttonImage forState:UIControlStateNormal];
-                [button setImage:buttonImage forState:UIControlStateHighlighted];
-            }
-            else
-            {
-                [button setTitle:title forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            }
-           
+            UIImage *buttonImage = [UIImage imageNamed:[names objectAtIndex:i]];
+            [button setImage:buttonImage forState:UIControlStateNormal];
+            [button setImage:buttonImage forState:UIControlStateHighlighted];
+            
             CGRect rect = CGRectMake(0, 1, 47, scrollHeight);
             rect.origin.x = currentWidth;
             button.frame = rect;
-            UIImage *backButtonImage = [[UIImage imageNamed:@"item-select_b.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,15,0,10)];
-            if (i < 13)
-            {
-                [button setBackgroundImage:backButtonImage forState:UIControlStateHighlighted];
-            }
+
             currentWidth += 40 + 5;
             
             if (i == 13)
@@ -113,7 +85,7 @@
                 [scrollView addSubview:button];
             }
         }
-//
+
         scrollView.contentSize = CGSizeMake(32*20, scrollHeight);
         _maxContentOffset = 32*20 - 320;
         _minContentOffset = 0.0;

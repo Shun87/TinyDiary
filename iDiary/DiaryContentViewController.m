@@ -89,36 +89,6 @@ const NSInteger kActionSheetPickPhoto = 1000;
 @synthesize toolbar;
 @synthesize listViewController;
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [richEditor release];
-    [resaveDate release];
-    [htmlFileURL release];
-    [scrollableToolView release];
- 
-    [filePathToSave release];
-    [doc release];
-    
-    [regularFiles release];
-  
-    [insertImagePath release];
-    [htmlPath release];
-    [shareButton release];
-    [deleteButton release];
-    [saveButton release];
-    [editButton release];
-    [addButton release];
-    [cancleButton release];
-    
-    [innerHtmlAtStart release];
-    [entity release];
-    [imagePickerController release];
-    [rightItems release];
-    [toolbar release];
-    [super dealloc];
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
@@ -182,7 +152,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     lable.backgroundColor = [UIColor clearColor];
     lable.textAlignment = UITextAlignmentCenter;
     lable.text = @"Nov.17";
-    lable.font = [UIFont boldSystemFontOfSize:18];
+    lable.font = [UIFont boldSystemFontOfSize:20];
     lable.textColor = [UIColor grayColor];
     self.navigationItem.titleView = lable;
     [lable release];
@@ -231,8 +201,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
     }
 
 
-    NSArray *images = [NSArray arrayWithObjects:@"bold.png", @"italic", @"underline",@"fontp", @"fontj", @"pic.png", @"indent.png", @"outdent.png", @"List.png",
-                       @"List123.png",@"justLeft",@"justCenter",@"justRight",@"HideKey.png", nil];
+    NSArray *images = [NSArray arrayWithObjects:@"bold.png", @"italic", @"underline",@"fontp", @"fontj", @"pic.png", @"indent.png", @"outdent.png", @"list.png",
+                       @"list123.png",@"justLeft",@"justCenter",@"justRight",@"HideKey.png", nil];
     CGRect rect = [[UIScreen mainScreen] bounds];
     self.scrollableToolView = [[[ScrollableToolView alloc] initWithFrame:CGRectMake(0, rect.size.height, rect.size.width, 68)
                                                               imageNames:images
@@ -293,7 +263,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
     else
     {
         [editButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
-        [self.richEditor setEditable:YES];
+        [self.richEditor closeKeyboard];
+        [self.richEditor setEditable:NO];
     }
     
     editMode = !editMode;
@@ -629,15 +600,6 @@ const NSInteger kActionSheetPickPhoto = 1000;
             NSInteger fontSize = [self.richEditor getCurrentFontSize];
             [self.richEditor setFontSize:fontSize - 1];
         }break;
-//        case 1005:
-//        {
-//            // color
-//            [self.richEditor setFontColor:@"red"];
-//        }break;
-//        case 1006:
-//        {
-//            [self.richEditor setFont:@""];
-//        }break;
         case 1005:
         {
             [self askPhotoSourceType];
@@ -761,5 +723,33 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [self dismissModalViewControllerAnimated: YES];
 }
 
-
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [richEditor release];
+    [resaveDate release];
+    [htmlFileURL release];
+    [scrollableToolView release];
+    
+    [filePathToSave release];
+    [doc release];
+    
+    [regularFiles release];
+    
+    [insertImagePath release];
+    [htmlPath release];
+    [shareButton release];
+    [deleteButton release];
+    [saveButton release];
+    [editButton release];
+    [addButton release];
+    [cancleButton release];
+    
+    [innerHtmlAtStart release];
+    [entity release];
+    [imagePickerController release];
+    [rightItems release];
+    [toolbar release];
+    [super dealloc];
+}
 @end

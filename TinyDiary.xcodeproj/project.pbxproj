@@ -126,6 +126,9 @@
 		36CEAF281658558400C33018 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CEAF261658558400C33018 /* SystemSettingViewController.m */; };
 		36CEAF291658558400C33018 /* SystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36CEAF271658558400C33018 /* SystemSettingViewController.xib */; };
 		36D25AB2166E347A00BFC041 /* DiaryDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D25AB1166E347A00BFC041 /* DiaryDescription.m */; };
+		36D4AC20173AB3B200B7C03B /* HideBK@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36D4AC1E173AB3B200B7C03B /* HideBK@2x.png */; };
+		36D4AC21173AB3B200B7C03B /* HideBK.png in Resources */ = {isa = PBXBuildFile; fileRef = 36D4AC1F173AB3B200B7C03B /* HideBK.png */; };
+		36D4AC23173AB87A00B7C03B /* method.js in Sources */ = {isa = PBXBuildFile; fileRef = 36D4AC22173AB87A00B7C03B /* method.js */; };
 		36F1F8BF16F72CEB004EDB60 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F1F8BD16F72CEA004EDB60 /* AboutViewController.m */; };
 		36F1F8C016F72CEB004EDB60 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F1F8BE16F72CEA004EDB60 /* AboutViewController.xib */; };
 		36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36F1F8C916F7631E004EDB60 /* MessageUI.framework */; };
@@ -291,6 +294,9 @@
 		36D25AB1166E347A00BFC041 /* DiaryDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryDescription.m; sourceTree = "<group>"; };
 		36D3714A16D69820003B5555 /* DSActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
 		36D3714B16D69820003B5555 /* DSActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
+		36D4AC1E173AB3B200B7C03B /* HideBK@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HideBK@2x.png"; sourceTree = "<group>"; };
+		36D4AC1F173AB3B200B7C03B /* HideBK.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HideBK.png; sourceTree = "<group>"; };
+		36D4AC22173AB87A00B7C03B /* method.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = method.js; sourceTree = SOURCE_ROOT; };
 		36DF378F172704A8007B59AE /* TTSocial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTSocial.h; sourceTree = "<group>"; };
 		36DF3790172704A8007B59AE /* TTSocial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTSocial.m; sourceTree = "<group>"; };
 		36F1F8BC16F72CEA004EDB60 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = ../AboutViewController.h; sourceTree = "<group>"; };
@@ -423,6 +429,7 @@
 			isa = PBXGroup;
 			children = (
 				360E02B0165714AC0089E505 /* index.html */,
+				36D4AC22173AB87A00B7C03B /* method.js */,
 				3697E6501739446100588380 /* image */,
 				36976A8F1653CC8E0039F4B0 /* Resource */,
 				360625AC16528B35006D7075 /* TinyDiary-Info.plist */,
@@ -495,6 +502,8 @@
 				3697E6571739446100588380 /* bar@2x2.png */,
 				3697E6591739446100588380 /* bold.png */,
 				3697E65B1739446100588380 /* bold@2x.png */,
+				36D4AC1E173AB3B200B7C03B /* HideBK@2x.png */,
+				36D4AC1F173AB3B200B7C03B /* HideBK.png */,
 				3697E65C1739446100588380 /* delete.png */,
 				3697E65D1739446100588380 /* delete@2x.png */,
 				3697E65E1739446100588380 /* diary.png */,
@@ -730,6 +739,8 @@
 				3697E70A1739570E00588380 /* cellBk.png in Resources */,
 				3697E70D1739595000588380 /* add.png in Resources */,
 				3697E70E1739595000588380 /* add@2x.png in Resources */,
+				36D4AC20173AB3B200B7C03B /* HideBK@2x.png in Resources */,
+				36D4AC21173AB3B200B7C03B /* HideBK.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +785,7 @@
 				FA0C569416D0F2B400F3BCDC /* Settings.m in Sources */,
 				3697DCDC16EE2E7E00C0B431 /* NoCaretTextField.m in Sources */,
 				36F1F8BF16F72CEB004EDB60 /* AboutViewController.m in Sources */,
+				36D4AC23173AB87A00B7C03B /* method.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
