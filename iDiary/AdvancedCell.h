@@ -13,26 +13,32 @@
 @interface AdvancedCell : UITableViewCell
 {  
     IBOutlet UILabel *contentLabel;
-    IBOutlet UILabel *dateLabel;
     IBOutlet UIImageView *thumbImageView;
-    NSString *dateText;
-    NSString *detailText;
+    IBOutlet UILabel  *day;
+    IBOutlet UILabel  *week;
+    IBOutlet UILabel *time;
+    IBOutlet UILabel  *title;
+    
     UIImage *thumbnail;
     
     BOOL opened;
-    UIView *contentFrontView;
-    UIView *optionButtonView;
     
     id<AdvancedCellDelegate> delegate;
 }
 @property (nonatomic, assign)id<AdvancedCellDelegate> delegate;
-@property (nonatomic, assign)BOOL opened;
-@property (nonatomic, copy)NSString *dateText;
-@property (nonatomic, copy)NSString *detailText;
 @property (nonatomic, retain)UIImage *thumbnail;
 
+@property (nonatomic, retain)IBOutlet UILabel *contentLabel;
+@property (nonatomic, retain)IBOutlet UIImageView *thumbImageView;
+@property (nonatomic, retain)IBOutlet UILabel  *day;
+@property (nonatomic, retain)IBOutlet UILabel  *week;
+@property (nonatomic, retain)IBOutlet UILabel  *title;
+@property (nonatomic, retain) IBOutlet UILabel *time;
+
 - (void)setBackgroundImageName:(NSString *)imagePath;
-- (void)slideCell:(BOOL)open;
+- (void)setData:(NSDate *)date;
+- (void)setTitleStr:(NSString *)text;
+- (void)setcontent:(NSString *)text;
 @end
 
 

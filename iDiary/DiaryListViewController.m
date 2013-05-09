@@ -94,7 +94,7 @@ NSString *const HTMLExtentsion = @".html";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.mTableView.rowHeight = 100;
+    self.mTableView.rowHeight = 80;
     self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     fileCount = 0;
     
@@ -475,13 +475,13 @@ NSString *const HTMLExtentsion = @".html";
 {
     // 这个方法不要调用tableView reloadData的方法，会造成死循环
     NSDate *date = [FilePath timeFromURL:entity.docURL];
-    cell.dateText = [date mediumString];
-    
+    [cell setData:date];
     if (entity.metadata != nil)
     {
         if (entity.metadata.detailText != nil)
         {
-            cell.detailText = entity.metadata.detailText;
+            [cell setcontent:entity.metadata.detailText];
+            [cell setTitleStr:@"无标题"];
         }
         
         if (entity.metadata.thumbnailImage != nil)
