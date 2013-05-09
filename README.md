@@ -1,4 +1,0 @@
-TinyDiary
-=========
-
-Tiny Diary
