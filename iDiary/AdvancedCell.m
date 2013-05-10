@@ -51,8 +51,8 @@ const CGFloat kRightMargin = 70;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     time.font = [UIFont systemFontOfSize:10];
-    week.font = [UIFont systemFontOfSize:12];
-    day.font = [UIFont systemFontOfSize:28];
+    week.font = [UIFont systemFontOfSize:11];
+    day.font = [UIFont boldSystemFontOfSize:35];
     time.textColor = HEXCOLOR(Time_light_gray, 1);
     week.textColor = HEXCOLOR(Time_light_gray, 1);
     day.textColor = HEXCOLOR(Day_Color, 1);
@@ -60,7 +60,7 @@ const CGFloat kRightMargin = 70;
     contentLabel.font = [UIFont systemFontOfSize:11];
     contentLabel.textColor = HEXCOLOR(Time_light_gray, 1);
     title.numberOfLines = 0;
-    title.font = [UIFont boldSystemFontOfSize:15];
+    title.font = [UIFont boldSystemFontOfSize:14];
     title.textColor = HEXCOLOR(Title_Color, 1);
     
     thumbImageView.layer.masksToBounds = YES;
