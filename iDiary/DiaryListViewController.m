@@ -588,7 +588,6 @@ NSString *const HTMLExtentsion = @".html";
                                                                                                      bundle:nil];
     contentViewController.hidesBottomBarWhenPushed = YES;
     contentViewController.htmlFileURL = url;
-    contentViewController.doc = document;
     contentViewController.newFile = newFile;
     contentViewController.entity = entity;
     contentViewController.listViewController = self;
@@ -818,4 +817,38 @@ NSString *const HTMLExtentsion = @".html";
     [self loadImagesForOnscreenRows];
 }
 
+// 前一篇
+- (DocEntity *)preUrl:(DocEntity *)entry
+{
+    NSInteger index = [entityArray indexOfObject:entry];
+    index--;
+    if (index < 0)
+    {
+        return nil;
+    }
+    
+    return [entityArray objectAtIndex:index];
+}
+
+//后一篇日记
+- (DocEntity *)nextUrl:(DocEntity *)entry
+{
+    NSInteger index = [entityArray indexOfObject:entry];
+    index++;
+    if (index >= [entityArray count])
+    {
+        return nil;
+    }
+    return [entityArray objectAtIndex:index];
+}
+
+- (NSInteger)indexForEntry:(DocEntity *)entry
+{
+    return [entityArray indexOfObject:entry];
+}
+
+- (NSInteger)totalCount
+{
+    return [entityArray count];
+}
 @end

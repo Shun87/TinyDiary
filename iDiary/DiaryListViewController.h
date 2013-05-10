@@ -12,6 +12,9 @@
 #import "DocEntity.h"
 #import "TTSocial.h"
 
+extern NSString *const TDDocumentsDirectoryName;
+extern NSString *const HTMLExtentsion;
+
 @interface DiaryListViewController : UIViewController
 <UITableViewDataSource, UITableViewDelegate, AdvancedCellDelegate,
 DocumentsAccessDelegate, UIActionSheetDelegate>
@@ -54,4 +57,9 @@ DocumentsAccessDelegate, UIActionSheetDelegate>
 
 - (void)showDiaryContent:(DocEntity *)entity newFile:(BOOL)newFile;
 - (void)deleteFile:(NSURL *)url;
+
+- (DocEntity *)preUrl:(DocEntity *)entry;
+- (DocEntity *)nextUrl:(DocEntity *)entry;
+- (NSInteger)indexForEntry:(DocEntity *)entry;
+- (NSInteger)totalCount;
 @end

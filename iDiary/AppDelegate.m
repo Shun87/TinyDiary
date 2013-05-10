@@ -101,17 +101,6 @@
     
     [[UINavigationBar appearance] setTintColor:HEXCOLOR(0xb33e2d, 1)];
     
-    NSString*dateTime=@"2013-01-24 18:30 PM";
-    //dateTime=@"2013-01-24 06:30 AM";
-    NSDateFormatter *dtFormatter=[[NSDateFormatter alloc]init];
-    [dtFormatter setDateFormat:@"yyyy-MM-dd HH:mm a"];
-    NSDate *AptDate=[NSDate date];
-    [dtFormatter setDateFormat:@"MMM dd,yyyy hh:mm a"];
-    NSString *strDate=[dtFormatter stringFromDate:AptDate];
-    
-    NSLog(@"===> %@",AptDate);
-    NSLog(@"===> %@",strDate);
-    
     return YES;
 }
 //#pragma mark GADRequest generation

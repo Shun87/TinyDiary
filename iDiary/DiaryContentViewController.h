@@ -35,6 +35,8 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate>
     UIButton *editButton;
     UIBarButtonItem *cancleButton;
     UIBarButtonItem *addButton;
+    UIButton *preButton;
+    UIButton *nextButton;
     
     UIImagePickerController *imagePickerController;
     
@@ -52,15 +54,18 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate>
 @property (nonatomic, retain) UIImagePickerController *imagePickerController;
 @property (nonatomic, retain)DocEntity *entity;
 @property (nonatomic, copy)NSString *innerHtmlAtStart;
-@property (nonatomic, retain)IBOutlet UIBarButtonItem *saveButton;
+
 @property (nonatomic, retain) UIButton *editButton;
+@property (nonatomic, retain)IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain)IBOutlet UIBarButtonItem *shareButton;
 @property (nonatomic, retain)IBOutlet UIBarButtonItem *deleteButton;
 @property (nonatomic, retain)IBOutlet UIBarButtonItem *addButton;
 @property (nonatomic, retain)IBOutlet UIBarButtonItem *cancleButton;
+@property (nonatomic, retain)IBOutlet UIButton *preButton;
+@property (nonatomic, retain)IBOutlet UIButton *nextButton;
 
 @property (nonatomic, assign)BOOL newFile;
-@property (nonatomic, retain)NoteDocument *doc;
+
 @property(nonatomic, retain)NSDate *resaveDate;
 @property (nonatomic, copy)NSString *filePathToSave;
 @property (nonatomic, retain)NSURL *htmlFileURL;
@@ -72,4 +77,6 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate>
 - (IBAction)deleteAction:(id)sender;
 - (IBAction)addAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
+- (IBAction)loadNextContent:(id)sender;
+- (IBAction)loadPreContent:(id)sender;
 @end

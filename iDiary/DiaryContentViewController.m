@@ -70,6 +70,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
 @property (nonatomic, copy)NSString *insertImagePath;
 @property (nonatomic, copy)NSString *htmlPath;
 @property (nonatomic, retain)ScrollableToolView *scrollableToolView;
+@property (nonatomic, retain)NoteDocument *doc;
 - (void)saveDocument:(BOOL)close;
 - (void)removeBar;
 - (void)getMedia:(UIImagePickerControllerSourceType)sourceType media:(CFStringRef)mediaType;
@@ -87,7 +88,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
 @synthesize entity;
 @synthesize imagePickerController;
 @synthesize toolbar;
-@synthesize listViewController;
+@synthesize listViewController, preButton, nextButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -174,32 +175,6 @@ const NSInteger kActionSheetPickPhoto = 1000;
     | UIViewAutoresizingFlexibleWidth;
     self.richEditor.delegate = self;
     [self.view addSubview:self.richEditor];
-    
-    [self.richEditor loadHtmlPath:htmlFileURL];
-   
-    NSURL *docURL = [self.htmlFileURL URLByDeletingLastPathComponent];
-    NoteDocument *document = [[NoteDocument alloc] initWithFileURL:docURL];
-    self.doc = document;
-    [document release];
-    
-    // 查询存储的文件, 需要打开以查询文件夹已经包含的文件,便于编辑
-    if (!newFile)
-    {
-        [self.doc openWithCompletionHandler:^(BOOL success){
-            
-            opened = success;
-            
-            if (!success)
-            {
-                NSLog(@"failed to open file %@", docURL);
-            }
-            else
-            {
-                [self.doc closeWithCompletionHandler:^(BOOL closeSuccess){}];
-            }
-        }];
-    }
-
 
     NSArray *images = [NSArray arrayWithObjects:@"bold.png", @"italic", @"underline",@"fontp", @"fontj", @"pic.png", @"indent.png", @"outdent.png", @"list.png",
                        @"list123.png",@"justLeft",@"justCenter",@"justRight",@"HideKey.png", nil];
@@ -229,6 +204,65 @@ const NSInteger kActionSheetPickPhoto = 1000;
                                                object:nil];
     
     headView.backgroundColor = [UIColor redColor];
+    
+    [self loadContent];
+}
+
+- (void)loadContent
+{
+    NSInteger total = [(DiaryListViewController *)self.listViewController totalCount];
+    NSInteger curIndex = [(DiaryListViewController *)self.listViewController indexForEntry:self.entity];
+    if (total == 1)
+    {
+        self.preButton.enabled = NO;
+        self.nextButton.enabled = NO;
+    }
+    else
+    {
+        if (curIndex > 0)
+        {
+            self.preButton.enabled = YES;
+        }
+        else
+        {
+            self.preButton.enabled = NO;
+        }
+        
+        if (curIndex < total - 1)
+        {
+            self.nextButton.enabled = YES;
+        }
+        else
+        {
+            self.nextButton.enabled = NO;
+        }
+    }
+
+    [self.richEditor loadHtmlPath:htmlFileURL];
+    
+    NSURL *docURL = [self.htmlFileURL URLByDeletingLastPathComponent];
+    NoteDocument *document = [[NoteDocument alloc] initWithFileURL:docURL];
+    self.doc = document;
+    [document release];
+    
+    // 查询存储的文件, 需要打开以查询文件夹已经包含的文件,便于编辑
+    if (!newFile)
+    {
+        [self.doc openWithCompletionHandler:^(BOOL success){
+            
+            opened = success;
+            
+            if (!success)
+            {
+                NSLog(@"failed to open file %@", docURL);
+            }
+            else
+            {
+                [self.doc closeWithCompletionHandler:^(BOOL closeSuccess){}];
+            }
+        }];
+    }
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -403,6 +437,49 @@ const NSInteger kActionSheetPickPhoto = 1000;
             }
         });
     }];
+}
+
+- (void)loadOtherContent:(DocEntity *)entry direction:(BOOL)pre
+{
+    UIViewAnimationOptions options = pre ? UIViewAnimationOptionTransitionCurlDown : UIViewAnimationOptionTransitionCurlUp;
+    [UIView transitionWithView:self.view
+                      duration:0.65
+                       options:options
+                    animations:nil
+                    completion:^(BOOL complete){
+                        
+                        if (entry != nil)
+                        {
+                            NSString *htmlName = [[[entry.docURL lastPathComponent] stringByDeletingPathExtension] stringByAppendingFormat:HTMLExtentsion];
+                            NSURL *url = [entry.docURL URLByAppendingPathComponent:htmlName];
+                            NSLog(@"%@", [url path]);
+                            self.htmlFileURL = url;
+                            self.newFile = NO;
+                            self.entity = entry;
+                            
+                            [self loadContent];
+                        }
+                        
+                    }];
+
+}
+
+- (IBAction)loadNextContent:(id)sender
+{
+    DocEntity *entry = [(DiaryListViewController *)self.listViewController nextUrl:self.entity];
+    if (entry != nil)
+    {
+        [self loadOtherContent:entry direction:NO];
+    }
+}
+
+- (IBAction)loadPreContent:(id)sender
+{
+    DocEntity *entry = [(DiaryListViewController *)self.listViewController preUrl:self.entity];
+    if (entry != nil)
+    {
+        [self loadOtherContent:entry direction:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -750,6 +827,9 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [imagePickerController release];
     [rightItems release];
     [toolbar release];
+    
+    [preButton release];
+    [nextButton release];
     [super dealloc];
 }
 @end

@@ -4,11 +4,11 @@
 <dict>
 	<key>com.apple.developer.ubiquity-container-identifiers</key>
 	<array>
-		<string>$(TeamIdentifierPrefix)com.cshun.tinyDiary</string>
+		<string>$(TeamIdentifierPrefix)com.cshun.TinyNotePro</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)com.cshun.tinyDiary</string>
+		<string>$(AppIdentifierPrefix)com.cshun.TinyNotePro</string>
 	</array>
 </dict>
 </plist>

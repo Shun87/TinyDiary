@@ -34,7 +34,6 @@
 		3697DCDC16EE2E7E00C0B431 /* NoCaretTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3697DCDB16EE2E7D00C0B431 /* NoCaretTextField.m */; };
 		36998CC31656C7F8001C1793 /* DiaryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36998CC11656C7F8001C1793 /* DiaryListViewController.m */; };
 		36998CC41656C7F8001C1793 /* DiaryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36998CC21656C7F8001C1793 /* DiaryListViewController.xib */; };
-		369A1B7A173BCECA00C8FB9A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369A1B79173BCECA00C8FB9A /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		369A1B7F173BFE0000C8FB9A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369A1B7B173BFE0000C8FB9A /* Icon@2x.png */; };
 		369A1B80173BFE0000C8FB9A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 369A1B7C173BFE0000C8FB9A /* Icon.png */; };
 		369A1B81173BFE0000C8FB9A /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369A1B7D173BFE0000C8FB9A /* Icon-Small@2x.png */; };
@@ -65,6 +64,7 @@
 		36F1F8CD16F7692E004EDB60 /* TTSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F1F8CC16F7692D004EDB60 /* TTSocial.m */; };
 		36FAAE841661ECA40060FBD8 /* CommmonMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FAAE831661ECA40060FBD8 /* CommmonMethods.m */; };
 		FA0C569416D0F2B400F3BCDC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C569316D0F2B300F3BCDC /* Settings.m */; };
+		FA104E13173CA376002060F6 /* TinyNotePro.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = FA104E12173CA376002060F6 /* TinyNotePro.entitlements */; };
 		FA20EDE8173B724E00CFA1F7 /* method.js in Sources */ = {isa = PBXBuildFile; fileRef = FA20EDE7173B724E00CFA1F7 /* method.js */; };
 		FA20EDED173B728F00CFA1F7 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA20EDEB173B728F00CFA1F7 /* AboutViewController.m */; };
 		FA20EDEE173B728F00CFA1F7 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA20EDEC173B728F00CFA1F7 /* AboutViewController.xib */; };
@@ -143,14 +143,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		360625A016528B35006D7075 /* TinyDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		360625A016528B35006D7075 /* TinyNotePro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyNotePro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		360625A416528B35006D7075 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		360625A616528B35006D7075 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		360625A816528B35006D7075 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		360625AC16528B35006D7075 /* iDiary-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iDiary-Info.plist"; sourceTree = "<group>"; };
+		360625AC16528B35006D7075 /* TinyNotePro-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TinyNotePro-Info.plist"; sourceTree = "<group>"; };
 		360625AE16528B35006D7075 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		360625B016528B35006D7075 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		360625B216528B35006D7075 /* iDiary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iDiary-Prefix.pch"; sourceTree = "<group>"; };
+		360625B216528B35006D7075 /* TinyNotePro-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TinyNotePro-Prefix.pch"; sourceTree = "<group>"; };
 		360625B316528B35006D7075 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		360625B416528B35006D7075 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		360625B616528B35006D7075 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -167,7 +167,6 @@
 		364C79F61656994C00769E36 /* DiaryContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryContentViewController.m; sourceTree = "<group>"; };
 		364C79F71656994C00769E36 /* DiaryContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiaryContentViewController.xib; sourceTree = "<group>"; };
 		364F2C5016BC107700437F84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		3678338516F9FFB80015AE3E /* tinyDiary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = tinyDiary.entitlements; sourceTree = "<group>"; };
 		3694F171166FAD8F000AB615 /* AdvancedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvancedCell.xib; sourceTree = "<group>"; };
 		369628C41699DB2600EEFAFF /* NoteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDocument.h; sourceTree = "<group>"; };
 		369628C51699DB2600EEFAFF /* NoteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDocument.m; sourceTree = "<group>"; };
@@ -183,7 +182,6 @@
 		36998CC01656C7F8001C1793 /* DiaryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryListViewController.h; sourceTree = "<group>"; };
 		36998CC11656C7F8001C1793 /* DiaryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryListViewController.m; sourceTree = "<group>"; };
 		36998CC21656C7F8001C1793 /* DiaryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiaryListViewController.xib; sourceTree = "<group>"; };
-		369A1B79173BCECA00C8FB9A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		369A1B7B173BFE0000C8FB9A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		369A1B7C173BFE0000C8FB9A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		369A1B7D173BFE0000C8FB9A /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
@@ -239,6 +237,7 @@
 		36FAAE831661ECA40060FBD8 /* CommmonMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommmonMethods.m; sourceTree = "<group>"; };
 		FA0C569216D0F2B300F3BCDC /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		FA0C569316D0F2B300F3BCDC /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		FA104E12173CA376002060F6 /* TinyNotePro.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TinyNotePro.entitlements; path = iDiary/TinyNotePro.entitlements; sourceTree = "<group>"; };
 		FA20EDE7173B724E00CFA1F7 /* method.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = method.js; sourceTree = SOURCE_ROOT; };
 		FA20EDEA173B728F00CFA1F7 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		FA20EDEB173B728F00CFA1F7 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
@@ -325,7 +324,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				369A1B7A173BCECA00C8FB9A /* Social.framework in Frameworks */,
 				FA693EC2170AD644005A0B66 /* CoreTelephony.framework in Frameworks */,
 				36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */,
 				369D176616E900BF004F9BFB /* AudioToolbox.framework in Frameworks */,
@@ -343,7 +341,7 @@
 		3606259516528B35006D7075 = {
 			isa = PBXGroup;
 			children = (
-				369A1B79173BCECA00C8FB9A /* Social.framework */,
+				FA104E12173CA376002060F6 /* TinyNotePro.entitlements */,
 				FA693EC1170AD644005A0B66 /* CoreTelephony.framework */,
 				36F1F8C916F7631E004EDB60 /* MessageUI.framework */,
 				369D176516E900BF004F9BFB /* AudioToolbox.framework */,
@@ -358,7 +356,7 @@
 		360625A116528B35006D7075 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				360625A016528B35006D7075 /* TinyDiary.app */,
+				360625A016528B35006D7075 /* TinyNotePro.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -376,7 +374,6 @@
 		360625AA16528B35006D7075 /* iDiary */ = {
 			isa = PBXGroup;
 			children = (
-				3678338516F9FFB80015AE3E /* tinyDiary.entitlements */,
 				36D3714916D697EA003B5555 /* Views */,
 				36B7B83F169CBBE300806C4C /* kal */,
 				369628C71699DC5900EEFAFF /* NSDate+FormattedStrings */,
@@ -432,11 +429,11 @@
 				FA20EDE7173B724E00CFA1F7 /* method.js */,
 				FA20EDEF173B72CF00CFA1F7 /* image */,
 				36976A8F1653CC8E0039F4B0 /* Resource */,
-				360625AC16528B35006D7075 /* iDiary-Info.plist */,
+				360625AC16528B35006D7075 /* TinyNotePro-Info.plist */,
 				360625AD16528B35006D7075 /* InfoPlist.strings */,
 				36A94448165E8818001A291E /* Localizable.strings */,
 				360625B016528B35006D7075 /* main.m */,
-				360625B216528B35006D7075 /* iDiary-Prefix.pch */,
+				360625B216528B35006D7075 /* TinyNotePro-Prefix.pch */,
 				360625B616528B35006D7075 /* Default.png */,
 				360625B816528B35006D7075 /* Default@2x.png */,
 				360625BA16528B35006D7075 /* Default-568h@2x.png */,
@@ -611,9 +608,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3606259F16528B35006D7075 /* iDiary */ = {
+		3606259F16528B35006D7075 /* TinyNotePro */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 360625D216528B35006D7075 /* Build configuration list for PBXNativeTarget "iDiary" */;
+			buildConfigurationList = 360625D216528B35006D7075 /* Build configuration list for PBXNativeTarget "TinyNotePro" */;
 			buildPhases = (
 				3606259C16528B35006D7075 /* Sources */,
 				3606259D16528B35006D7075 /* Frameworks */,
@@ -623,9 +620,9 @@
 			);
 			dependencies = (
 			);
-			name = iDiary;
+			name = TinyNotePro;
 			productName = iDiary;
-			productReference = 360625A016528B35006D7075 /* TinyDiary.app */;
+			productReference = 360625A016528B35006D7075 /* TinyNotePro.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -637,7 +634,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = ChenShun;
 			};
-			buildConfigurationList = 3606259A16528B35006D7075 /* Build configuration list for PBXProject "iDiary" */;
+			buildConfigurationList = 3606259A16528B35006D7075 /* Build configuration list for PBXProject "TinyNotePro" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -650,7 +647,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3606259F16528B35006D7075 /* iDiary */,
+				3606259F16528B35006D7075 /* TinyNotePro */,
 			);
 		};
 /* End PBXProject section */
@@ -749,6 +746,7 @@
 				369A1B80173BFE0000C8FB9A /* Icon.png in Resources */,
 				369A1B81173BFE0000C8FB9A /* Icon-Small@2x.png in Resources */,
 				369A1B82173BFE0000C8FB9A /* Icon-Small.png in Resources */,
+				FA104E13173CA376002060F6 /* TinyNotePro.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,7 +846,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1078D1E5-D97D-489C-BB8C-C66415A0F788";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E59700D8-2768-41B8-83A0-2110C4EF86E0";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -881,17 +879,17 @@
 		360625D316528B35006D7075 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = iDiary/tinyDiary.entitlements;
+				CODE_SIGN_ENTITLEMENTS = iDiary/TinyNotePro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Gao YuanBiao (K3B6V3NMMW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chen Shun (Y62CH6PVF9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iDiary/iDiary-Prefix.pch";
+				GCC_PREFIX_HEADER = "iDiary/TinyNotePro-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "iDiary/iDiary-Info.plist";
+				INFOPLIST_FILE = "iDiary/TinyNotePro-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = TinyDiary;
+				PRODUCT_NAME = TinyNotePro;
 				PROVISIONING_PROFILE = "0C3F60F6-2975-4F93-A5EE-2CAF4C1E8FE5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1078D1E5-D97D-489C-BB8C-C66415A0F788";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E59700D8-2768-41B8-83A0-2110C4EF86E0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -899,14 +897,14 @@
 		360625D416528B35006D7075 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = iDiary/tinyDiary.entitlements;
+				CODE_SIGN_ENTITLEMENTS = iDiary/TinyNotePro.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHEN SHUN";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iDiary/iDiary-Prefix.pch";
+				GCC_PREFIX_HEADER = "iDiary/TinyNotePro-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "iDiary/iDiary-Info.plist";
+				INFOPLIST_FILE = "iDiary/TinyNotePro-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = TinyDiary;
+				PRODUCT_NAME = TinyNotePro;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F597AC75-97B2-4959-8E2B-6249D0F6EC4F";
 				WRAPPER_EXTENSION = app;
 			};
@@ -915,7 +913,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3606259A16528B35006D7075 /* Build configuration list for PBXProject "iDiary" */ = {
+		3606259A16528B35006D7075 /* Build configuration list for PBXProject "TinyNotePro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				360625D016528B35006D7075 /* Debug */,
@@ -924,7 +922,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		360625D216528B35006D7075 /* Build configuration list for PBXNativeTarget "iDiary" */ = {
+		360625D216528B35006D7075 /* Build configuration list for PBXNativeTarget "TinyNotePro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				360625D316528B35006D7075 /* Debug */,
