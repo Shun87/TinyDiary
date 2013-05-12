@@ -44,6 +44,8 @@
 		36A610D4165D71B300848153 /* AdvancedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A610D3165D71B300848153 /* AdvancedCell.m */; };
 		36A610D7165D71B300848153 /* DiaryGeneralContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A610D6165D71B300848153 /* DiaryGeneralContentCell.xib */; };
 		36A94446165E8818001A291E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36A94448165E8818001A291E /* Localizable.strings */; };
+		36AF73D9173D4C9A00460079 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36AF73D8173D4C9A00460079 /* Social.framework */; };
+		36AF73DA173D4CA900460079 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 365E55EB173D42E300D3BBA3 /* MBProgressHUD.m */; };
 		36B7B857169CBBE300806C4C /* Kal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 36B7B840169CBBE300806C4C /* Kal.bundle */; };
 		36B7B858169CBBE300806C4C /* KalDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B7B843169CBBE300806C4C /* KalDataSource.m */; };
 		36B7B859169CBBE300806C4C /* KalDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B7B845169CBBE300806C4C /* KalDate.m */; };
@@ -167,6 +169,8 @@
 		364C79F61656994C00769E36 /* DiaryContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryContentViewController.m; sourceTree = "<group>"; };
 		364C79F71656994C00769E36 /* DiaryContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiaryContentViewController.xib; sourceTree = "<group>"; };
 		364F2C5016BC107700437F84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		365E55EA173D42E300D3BBA3 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		365E55EB173D42E300D3BBA3 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3694F171166FAD8F000AB615 /* AdvancedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvancedCell.xib; sourceTree = "<group>"; };
 		369628C41699DB2600EEFAFF /* NoteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDocument.h; sourceTree = "<group>"; };
 		369628C51699DB2600EEFAFF /* NoteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDocument.m; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 		36A610D6165D71B300848153 /* DiaryGeneralContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiaryGeneralContentCell.xib; sourceTree = "<group>"; };
 		36A94447165E8818001A291E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		36A94449165E8828001A291E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		36AF73D8173D4C9A00460079 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		36B7B840169CBBE300806C4C /* Kal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Kal.bundle; sourceTree = "<group>"; };
 		36B7B841169CBBE300806C4C /* Kal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kal.h; sourceTree = "<group>"; };
 		36B7B842169CBBE300806C4C /* KalDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalDataSource.h; sourceTree = "<group>"; };
@@ -324,6 +329,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36AF73D9173D4C9A00460079 /* Social.framework in Frameworks */,
 				FA693EC2170AD644005A0B66 /* CoreTelephony.framework in Frameworks */,
 				36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */,
 				369D176616E900BF004F9BFB /* AudioToolbox.framework in Frameworks */,
@@ -341,6 +347,7 @@
 		3606259516528B35006D7075 = {
 			isa = PBXGroup;
 			children = (
+				36AF73D8173D4C9A00460079 /* Social.framework */,
 				FA104E12173CA376002060F6 /* TinyNotePro.entitlements */,
 				FA693EC1170AD644005A0B66 /* CoreTelephony.framework */,
 				36F1F8C916F7631E004EDB60 /* MessageUI.framework */,
@@ -381,6 +388,8 @@
 				369628C31699DAEE00EEFAFF /* documents */,
 				36B7B867169CBBE300806C4C /* FilePath.h */,
 				36B7B868169CBBE300806C4C /* FilePath.m */,
+				365E55EA173D42E300D3BBA3 /* MBProgressHUD.h */,
+				365E55EB173D42E300D3BBA3 /* MBProgressHUD.m */,
 				360625B316528B35006D7075 /* AppDelegate.h */,
 				360625B416528B35006D7075 /* AppDelegate.m */,
 				36A2E84E16D50606009144E3 /* DocumentsAccess.h */,
@@ -770,6 +779,7 @@
 				36D25AB2166E347A00BFC041 /* DiaryDescription.m in Sources */,
 				369628C61699DB2600EEFAFF /* NoteDocument.m in Sources */,
 				369628CD1699DC5900EEFAFF /* NSDate+FormattedStrings.m in Sources */,
+				36AF73DA173D4CA900460079 /* MBProgressHUD.m in Sources */,
 				369628CE1699DC5900EEFAFF /* UIImageExtras.m in Sources */,
 				369628D41699DE0500EEFAFF /* RegularFile.m in Sources */,
 				36B7B858169CBBE300806C4C /* KalDataSource.m in Sources */,
@@ -846,7 +856,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E59700D8-2768-41B8-83A0-2110C4EF86E0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BDB90C12-8D8F-411F-8EEA-99E86DA3965D";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -880,7 +890,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = iDiary/TinyNotePro.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gao YuanBiao (K3B6V3NMMW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chen Shun (Y62CH6PVF9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chen Shun (Y62CH6PVF9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iDiary/TinyNotePro-Prefix.pch";
@@ -888,8 +898,8 @@
 				INFOPLIST_FILE = "iDiary/TinyNotePro-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = TinyNotePro;
-				PROVISIONING_PROFILE = "0C3F60F6-2975-4F93-A5EE-2CAF4C1E8FE5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E59700D8-2768-41B8-83A0-2110C4EF86E0";
+				PROVISIONING_PROFILE = "BDB90C12-8D8F-411F-8EEA-99E86DA3965D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BDB90C12-8D8F-411F-8EEA-99E86DA3965D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

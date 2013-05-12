@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Settings.h"
 //#import "GADBannerView.h"
+#import "MBProgressHUD.h"
 
 @class PasswordViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, MBProgressHUDDelegate>
 {
     UIWindow *window;
     UITabBarController *tabBarController;
@@ -20,8 +21,10 @@
     UINavigationController *navigationController;
     PasswordViewController *passwordViewController;
    // GADBannerView *banner;
+    
+    MBProgressHUD *hud;
 }
-
+@property (nonatomic, retain)MBProgressHUD *hud;
 //@property (nonatomic, retain) GADBannerView *banner;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic)UINavigationController *navigationController;

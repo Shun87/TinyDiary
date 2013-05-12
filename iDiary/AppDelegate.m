@@ -20,10 +20,12 @@
 @synthesize tabBarController;
 @synthesize navigationController;
 @synthesize passwordViewController;
+@synthesize hud;
 //@synthesize banner;
 
 - (void)dealloc
 {
+    [hud release];
     [window release];
     [tabBarController release];
     [navigationController release];
@@ -101,6 +103,9 @@
     
     [[UINavigationBar appearance] setTintColor:HEXCOLOR(0xb33e2d, 1)];
     
+    hud = [[MBProgressHUD alloc] initWithView:self.window];
+
+    
     return YES;
 }
 //#pragma mark GADRequest generation
@@ -132,6 +137,15 @@
 + (AppDelegate *)app
 {
     return (AppDelegate *)[UIApplication sharedApplication].delegate;
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud
+{
+	// Remove HUD from screen when the HUD was hidded
+	[hud removeFromSuperview];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

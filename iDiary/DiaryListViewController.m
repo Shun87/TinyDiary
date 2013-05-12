@@ -256,6 +256,11 @@ NSString *const HTMLExtentsion = @".html";
         docAccess = [[DocumentsAccess alloc] initWithDelegate:self];
     }
     
+    MBProgressHUD *hud = [AppDelegate app].hud;
+    [self.view.window addSubview:hud];
+	hud.labelText = @"Loading";
+	[hud show:YES];
+    
     [docAccess initializeiDocAccess:^(BOOL available){
     
         if (available)
@@ -726,6 +731,10 @@ NSString *const HTMLExtentsion = @".html";
     
     // 排序
     [FilePath sortUsingDescending:entityArray];
+    
+    MBProgressHUD *hud = [AppDelegate app].hud;
+	[hud hide:YES];
+    
     [self.mTableView reloadData];
 }
 
