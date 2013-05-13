@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Tiny Diary Pro</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -17,7 +17,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.cshun.TinyNotePro</string>
+				<string>com.cshun.TinyDiary</string>
 			</array>
 			<key>LSTypeIsPackage</key>
 			<true/>
@@ -33,7 +33,7 @@
 		<string>Icon-Small@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.cshun.${PRODUCT_NAME}</string>
+	<string>com.cshun.tinyDiary</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -76,7 +76,7 @@
 			<key>UTTypeDescription</key>
 			<string>Diary Doc</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.cshun.TinyNotePro</string>
+			<string>com.cshun.TinyDiary</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
