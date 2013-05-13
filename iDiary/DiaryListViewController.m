@@ -831,7 +831,7 @@ NSString *const HTMLExtentsion = @".html";
 {
     NSInteger index = [entityArray indexOfObject:entry];
     index--;
-    if (index < 0)
+    if (index < 0 || index >= [entityArray count])
     {
         return nil;
     }

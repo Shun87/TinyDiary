@@ -203,6 +203,12 @@ const NSInteger kActionSheetPickPhoto = 1000;
                                                  name:UIKeyboardWillChangeFrameNotification
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(enterBackgroud:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    
+    
     headView.backgroundColor = [UIColor redColor];
     
     [self loadContent];
@@ -268,11 +274,12 @@ const NSInteger kActionSheetPickPhoto = 1000;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self saveDocument:YES];
+    //[self saveDocument:YES];
 }
 
 - (void)exitAction:(id)sender
 {
+    [self saveDocument:YES];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -798,6 +805,11 @@ const NSInteger kActionSheetPickPhoto = 1000;
     }
     
     [self dismissModalViewControllerAnimated: YES];
+}
+
+- (void)enterBackgroud:(NSNotification *)notification
+{
+    [self exitAction:nil];
 }
 
 - (void)dealloc
