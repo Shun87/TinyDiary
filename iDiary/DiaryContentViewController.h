@@ -77,6 +77,9 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate>
 - (IBAction)deleteAction:(id)sender;
 - (IBAction)addAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
+
 - (IBAction)loadNextContent:(id)sender;
 - (IBAction)loadPreContent:(id)sender;
+- (IBAction)diaryInfoView:(id)sender;
+- (IBAction)outGoing:(id)sender;
 @end

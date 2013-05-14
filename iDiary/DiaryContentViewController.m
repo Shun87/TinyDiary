@@ -15,6 +15,8 @@
 #import "DocEntity.h"
 #import "AppDelegate.h"
 #import "DiaryListViewController.h"
+#import "FilePath.h"
+#import "DiaryInfoViewController.h"
 
 typedef enum
 {
@@ -152,8 +154,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
     UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     lable.backgroundColor = [UIColor clearColor];
     lable.textAlignment = UITextAlignmentCenter;
-    lable.text = @"Nov.17";
-    lable.font = [UIFont boldSystemFontOfSize:20];
+    lable.text = @"Tesef";
+    lable.font = [UIFont boldSystemFontOfSize:22];
     lable.textColor = [UIColor grayColor];
     self.navigationItem.titleView = lable;
     [lable release];
@@ -274,7 +276,6 @@ const NSInteger kActionSheetPickPhoto = 1000;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    //[self saveDocument:YES];
 }
 
 - (void)exitAction:(id)sender
@@ -487,6 +488,19 @@ const NSInteger kActionSheetPickPhoto = 1000;
     {
         [self loadOtherContent:entry direction:YES];
     }
+}
+
+- (IBAction)diaryInfoView:(id)sender
+{
+    DiaryInfoViewController *infoViewController = [[DiaryInfoViewController  alloc] initWithNibName:@"DiaryInfoViewController"
+                                                                                             bundle:nil];
+    [self.navigationController pushViewController:infoViewController animated:YES];
+    [infoViewController release];
+}
+
+- (IBAction)outGoing:(id)sender
+{
+    
 }
 
 - (void)didReceiveMemoryWarning

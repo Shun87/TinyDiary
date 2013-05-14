@@ -59,7 +59,7 @@ NSString *const HTMLExtentsion = @".html";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Diary", @"");
+        self.title = NSLocalizedString(@"Timeline", @"");
     }
     return self;
 }
@@ -144,6 +144,12 @@ NSString *const HTMLExtentsion = @".html";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(storageLocationChanged:)
                                                  name:@"StorageLocationChanged" object:nil];
+    
+    UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //titleButton.titleLabel.numberOfLines = 0;
+    titleButton.frame = CGRectMake(0, 0, 200, 44);
+    [titleButton setTitle:@"UIButtonujj" forState:UIControlStateNormal];
+    self.navigationItem.titleView = titleButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated

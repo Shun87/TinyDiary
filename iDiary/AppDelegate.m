@@ -15,6 +15,9 @@
 #import "NSDate+FormattedStrings.h"
 #import "AboutViewController.h"
 
+#import "CalendarViewController.h"
+#import "TagsViewController.h"
+
 @implementation AppDelegate
 @synthesize window ;
 @synthesize tabBarController;
@@ -68,10 +71,22 @@
     UINavigationController *aNavigationController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
     self.navigationController = aNavigationController;
     
+    UIViewController *settingController = [[[SystemSettingViewController alloc] initWithNibName:@"SystemSettingViewController" bundle:nil] autorelease];
+    UINavigationController *nav2 = [[[UINavigationController alloc] initWithRootViewController:settingController] autorelease];
+
+    UIViewController *calendarController = [[[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil] autorelease];
+    UINavigationController *nav3 = [[[UINavigationController alloc] initWithRootViewController:calendarController] autorelease];
+    
+    UIViewController *tagController = [[[TagsViewController alloc] initWithNibName:@"TagsViewController" bundle:nil] autorelease];
+    UINavigationController *nav4 = [[[UINavigationController alloc] initWithRootViewController:tagController] autorelease];
+    
+    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+    [self.tabBarController setViewControllers:[NSArray arrayWithObjects:aNavigationController, nav3, nav4, nav2, nil]];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
    
     [[UINavigationBar appearance] setTintColor:HEXCOLOR(0x282626, 1.0)];
-     self.window.rootViewController = self.navigationController;
+    self.window.rootViewController = self.tabBarController;
     
     // Initialize the banner at the bottom of the screen.
 //    CGPoint origin = CGPointMake(0.0,

@@ -139,6 +139,13 @@
 		FA3CAB3A16CA707500D2D705 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3CAB3816CA707500D2D705 /* PasswordViewController.m */; };
 		FA3CAB3B16CA707500D2D705 /* PasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3CAB3916CA707500D2D705 /* PasswordViewController.xib */; };
 		FA693EC2170AD644005A0B66 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA693EC1170AD644005A0B66 /* CoreTelephony.framework */; };
+		FA79CF211742540500A81003 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA79CF1F1742540500A81003 /* CalendarViewController.m */; };
+		FA79CF221742540500A81003 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA79CF201742540500A81003 /* CalendarViewController.xib */; };
+		FA79CF261742546D00A81003 /* TagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA79CF241742546D00A81003 /* TagsViewController.m */; };
+		FA79CF271742546D00A81003 /* TagsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA79CF251742546D00A81003 /* TagsViewController.xib */; };
+		FA79CF2F1742634900A81003 /* DiaryInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA79CF2D1742634600A81003 /* DiaryInfoViewController.m */; };
+		FA79CF301742634900A81003 /* DiaryInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA79CF2E1742634800A81003 /* DiaryInfoViewController.xib */; };
+		FA79CF371742656000A81003 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA79CF361742655F00A81003 /* UIColor+HexColor.m */; };
 		FAD1D8C31664BEBC00D71865 /* CancelTouchesScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD1D8C21664BEBC00D71865 /* CancelTouchesScrollView.m */; };
 		FAD1D8C71664C06100D71865 /* ScrollableToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD1D8C61664C06100D71865 /* ScrollableToolView.m */; };
 /* End PBXBuildFile section */
@@ -316,6 +323,17 @@
 		FA3CAB3816CA707500D2D705 /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordViewController.m; path = iDiary/PasswordViewController.m; sourceTree = SOURCE_ROOT; };
 		FA3CAB3916CA707500D2D705 /* PasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PasswordViewController.xib; path = iDiary/PasswordViewController.xib; sourceTree = SOURCE_ROOT; };
 		FA693EC1170AD644005A0B66 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		FA79CF1E1742540400A81003 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		FA79CF1F1742540500A81003 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		FA79CF201742540500A81003 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		FA79CF231742546D00A81003 /* TagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsViewController.h; sourceTree = "<group>"; };
+		FA79CF241742546D00A81003 /* TagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsViewController.m; sourceTree = "<group>"; };
+		FA79CF251742546D00A81003 /* TagsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TagsViewController.xib; sourceTree = "<group>"; };
+		FA79CF2C1742634500A81003 /* DiaryInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryInfoViewController.h; sourceTree = "<group>"; };
+		FA79CF2D1742634600A81003 /* DiaryInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryInfoViewController.m; sourceTree = "<group>"; };
+		FA79CF2E1742634800A81003 /* DiaryInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiaryInfoViewController.xib; sourceTree = "<group>"; };
+		FA79CF351742655F00A81003 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
+		FA79CF361742655F00A81003 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		FAD1D8C11664BEBC00D71865 /* CancelTouchesScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelTouchesScrollView.h; sourceTree = "<group>"; };
 		FAD1D8C21664BEBC00D71865 /* CancelTouchesScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelTouchesScrollView.m; sourceTree = "<group>"; };
 		FAD1D8C51664C06100D71865 /* ScrollableToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollableToolView.h; sourceTree = "<group>"; };
@@ -388,6 +406,10 @@
 				365E55EB173D42E300D3BBA3 /* MBProgressHUD.m */,
 				360625B316528B35006D7075 /* AppDelegate.h */,
 				360625B416528B35006D7075 /* AppDelegate.m */,
+				FA79CF231742546D00A81003 /* TagsViewController.h */,
+				FA79CF241742546D00A81003 /* TagsViewController.m */,
+				FA79CF1E1742540400A81003 /* CalendarViewController.h */,
+				FA79CF1F1742540500A81003 /* CalendarViewController.m */,
 				36A2E84E16D50606009144E3 /* DocumentsAccess.h */,
 				36A2E84F16D50606009144E3 /* DocumentsAccess.m */,
 				36998CC01656C7F8001C1793 /* DiaryListViewController.h */,
@@ -400,6 +422,10 @@
 				36D25AB1166E347A00BFC041 /* DiaryDescription.m */,
 				364C79F51656994C00769E36 /* DiaryContentViewController.h */,
 				364C79F61656994C00769E36 /* DiaryContentViewController.m */,
+				FA79CF2C1742634500A81003 /* DiaryInfoViewController.h */,
+				FA79CF2D1742634600A81003 /* DiaryInfoViewController.m */,
+				FA79CF351742655F00A81003 /* UIColor+HexColor.h */,
+				FA79CF361742655F00A81003 /* UIColor+HexColor.m */,
 				369CE6881665757E00AD70D0 /* RichEditView.h */,
 				369CE6891665757E00AD70D0 /* RichEditView.m */,
 				FAD1D8C11664BEBC00D71865 /* CancelTouchesScrollView.h */,
@@ -416,12 +442,10 @@
 				36FAAE831661ECA40060FBD8 /* CommmonMethods.m */,
 				FA3CAB3716CA707500D2D705 /* PasswordViewController.h */,
 				FA3CAB3816CA707500D2D705 /* PasswordViewController.m */,
-				FA3CAB3916CA707500D2D705 /* PasswordViewController.xib */,
 				3697DCDA16EE2E7D00C0B431 /* NoCaretTextField.h */,
 				3697DCDB16EE2E7D00C0B431 /* NoCaretTextField.m */,
 				FA20EDEA173B728F00CFA1F7 /* AboutViewController.h */,
 				FA20EDEB173B728F00CFA1F7 /* AboutViewController.m */,
-				FA20EDEC173B728F00CFA1F7 /* AboutViewController.xib */,
 				360625AB16528B35006D7075 /* Supporting Files */,
 			);
 			name = TinyDiaryPro;
@@ -481,6 +505,11 @@
 		36976A8F1653CC8E0039F4B0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FA79CF251742546D00A81003 /* TagsViewController.xib */,
+				FA79CF2E1742634800A81003 /* DiaryInfoViewController.xib */,
+				FA3CAB3916CA707500D2D705 /* PasswordViewController.xib */,
+				FA20EDEC173B728F00CFA1F7 /* AboutViewController.xib */,
+				FA79CF201742540500A81003 /* CalendarViewController.xib */,
 				3694F171166FAD8F000AB615 /* AdvancedCell.xib */,
 				36A610D6165D71B300848153 /* DiaryGeneralContentCell.xib */,
 				36CEAF271658558400C33018 /* SystemSettingViewController.xib */,
@@ -753,6 +782,9 @@
 				369A1B81173BFE0000C8FB9A /* Icon-Small@2x.png in Resources */,
 				369A1B82173BFE0000C8FB9A /* Icon-Small.png in Resources */,
 				FA104E13173CA376002060F6 /* TinyDiaryPro.entitlements in Resources */,
+				FA79CF221742540500A81003 /* CalendarViewController.xib in Resources */,
+				FA79CF271742546D00A81003 /* TagsViewController.xib in Resources */,
+				FA79CF301742634900A81003 /* DiaryInfoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -799,6 +831,10 @@
 				36F1F8CD16F7692E004EDB60 /* TTSocial.m in Sources */,
 				FA20EDE8173B724E00CFA1F7 /* method.js in Sources */,
 				FA20EDED173B728F00CFA1F7 /* AboutViewController.m in Sources */,
+				FA79CF211742540500A81003 /* CalendarViewController.m in Sources */,
+				FA79CF261742546D00A81003 /* TagsViewController.m in Sources */,
+				FA79CF2F1742634900A81003 /* DiaryInfoViewController.m in Sources */,
+				FA79CF371742656000A81003 /* UIColor+HexColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

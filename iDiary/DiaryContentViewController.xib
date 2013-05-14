@@ -158,7 +158,6 @@
 								<string key="NSFrame">{{278, 6}, {30, 33}}</string>
 								<reference key="NSSuperview" ref="307341875"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -265,7 +264,7 @@
 				<int key="IBUISystemItemIdentifier">1</int>
 			</object>
 			<object class="IBUIView" id="407376055">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUITextField" id="866902633">
@@ -273,7 +272,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{9, 0}, {301, 30}}</string>
 						<reference key="NSSuperview" ref="407376055"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1051772264"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -306,8 +304,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{9, 38}, {206, 36}}</string>
 						<reference key="NSSuperview" ref="407376055"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -333,8 +329,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 109}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="866902633"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -449,12 +443,30 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">outGoing:</string>
+						<reference key="source" ref="64916582"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">104</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">deleteAction:</string>
 						<reference key="source" ref="674838574"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">96</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">diaryInfoView:</string>
+						<reference key="source" ref="375204847"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">105</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -662,7 +674,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">103</int>
+			<int key="maxID">105</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -673,9 +685,11 @@
 						<string key="addAction:">id</string>
 						<string key="cancelAction:">id</string>
 						<string key="deleteAction:">id</string>
+						<string key="diaryInfoView:">id</string>
 						<string key="editAction:">id</string>
 						<string key="loadNextContent:">id</string>
 						<string key="loadPreContent:">id</string>
+						<string key="outGoing:">id</string>
 						<string key="saveAction:">id</string>
 						<string key="shareAction:">id</string>
 					</dictionary>
@@ -692,6 +706,10 @@
 							<string key="name">deleteAction:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="diaryInfoView:">
+							<string key="name">diaryInfoView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="editAction:">
 							<string key="name">editAction:</string>
 							<string key="candidateClassName">id</string>
@@ -702,6 +720,10 @@
 						</object>
 						<object class="IBActionInfo" key="loadPreContent:">
 							<string key="name">loadPreContent:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="outGoing:">
+							<string key="name">outGoing:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="saveAction:">
