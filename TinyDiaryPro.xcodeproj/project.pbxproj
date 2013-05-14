@@ -21,6 +21,7 @@
 		360625C716528B35006D7075 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 360625C616528B35006D7075 /* second.png */; };
 		360625C916528B35006D7075 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360625C816528B35006D7075 /* second@2x.png */; };
 		360E02B1165714AC0089E505 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 360E02B0165714AC0089E505 /* index.html */; };
+		361547BA17427A5B00085636 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 361547B917427A5B00085636 /* Social.framework */; };
 		361FA24716A2AB680026A3C6 /* Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 361FA24616A2AB680026A3C6 /* Metadata.m */; };
 		364C79F81656994C00769E36 /* DiaryContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 364C79F61656994C00769E36 /* DiaryContentViewController.m */; };
 		364C79F91656994C00769E36 /* DiaryContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 364C79F71656994C00769E36 /* DiaryContentViewController.xib */; };
@@ -169,6 +170,7 @@
 		360625C616528B35006D7075 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		360625C816528B35006D7075 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		360E02B0165714AC0089E505 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = SOURCE_ROOT; };
+		361547B917427A5B00085636 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		361FA24516A2AB680026A3C6 /* Metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Metadata.h; sourceTree = "<group>"; };
 		361FA24616A2AB680026A3C6 /* Metadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Metadata.m; sourceTree = "<group>"; };
 		364C79F51656994C00769E36 /* DiaryContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryContentViewController.h; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				361547BA17427A5B00085636 /* Social.framework in Frameworks */,
 				FA693EC2170AD644005A0B66 /* CoreTelephony.framework in Frameworks */,
 				36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */,
 				369D176616E900BF004F9BFB /* AudioToolbox.framework in Frameworks */,
@@ -362,6 +365,7 @@
 		3606259516528B35006D7075 = {
 			isa = PBXGroup;
 			children = (
+				361547B917427A5B00085636 /* Social.framework */,
 				FA104E12173CA376002060F6 /* TinyDiaryPro.entitlements */,
 				FA693EC1170AD644005A0B66 /* CoreTelephony.framework */,
 				36F1F8C916F7631E004EDB60 /* MessageUI.framework */,
@@ -889,7 +893,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5E93DE4-4443-4A45-8B30-C8164C022CE5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1078D1E5-D97D-489C-BB8C-C66415A0F788";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -932,7 +936,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "Tiny Diary Pro";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5E93DE4-4443-4A45-8B30-C8164C022CE5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1078D1E5-D97D-489C-BB8C-C66415A0F788";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

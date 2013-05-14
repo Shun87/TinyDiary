@@ -12,8 +12,10 @@
 #define BlueNavigationBar 0x1a7cc5
 
 #define LightGray 0xe3e3e3
+#define Light_blue 0x455e7e
 
 @interface UIColor (HexColor)
 
 + (UIColor *)colorFromHex:(NSInteger) value;
+
 @end

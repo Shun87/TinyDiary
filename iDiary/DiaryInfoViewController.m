@@ -8,8 +8,11 @@
 
 #import "DiaryInfoViewController.h"
 #import "UIColor+HexColor.h"
+#import "NSDate+FormattedStrings.h"
+#import "FilePath.h"
 
 @implementation DiaryInfoViewController
+@synthesize entity;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -49,11 +52,12 @@
     UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     lable.backgroundColor = [UIColor clearColor];
     lable.textAlignment = UITextAlignmentCenter;
-    lable.text =  NSLocalizedString(@"Diary Information", nil);
-    lable.font = [UIFont boldSystemFontOfSize:20];
+    lable.text =  NSLocalizedString(@"Diary info", nil);
+    lable.font = [UIFont boldSystemFontOfSize:18];
     lable.textColor = [UIColor darkGrayColor];
     self.navigationItem.titleView = lable;
     [lable release];
+
 }
 
 - (IBAction)exitAction:(id)sender
@@ -94,6 +98,12 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)exitEdit:(id)sender
+{
+    UITextField *textField = (UITextField *)sender;
+    [textField resignFirstResponder];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -126,6 +136,45 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        
+        if ([indexPath section] == 0 && [indexPath row] == 0)
+        {
+            UITextField *textFeild = [[[UITextField alloc] initWithFrame:CGRectMake(100, 12, 180, 45)] autorelease];
+            textFeild.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
+            [cell.contentView addSubview:textFeild];
+            textFeild.tag = 1001;
+            textFeild.textAlignment = UITextAlignmentRight;
+            [textFeild addTarget:self action:@selector(exitEdit:) forControlEvents:UIControlEventEditingDidEndOnExit];
+            textFeild.returnKeyType = UIReturnKeyDone;
+            textFeild.textColor = [UIColor colorFromHex:Light_blue];
+            textFeild.font = [UIFont systemFontOfSize:16];
+        }
+        else
+        {
+            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(150, 2, 130, 45)] autorelease];
+            label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
+            [cell.contentView addSubview:label];
+            label.tag = 1002;
+            label.backgroundColor = [UIColor clearColor];
+            label.textColor = [UIColor colorFromHex:Light_blue];
+            label.textAlignment = UITextAlignmentRight;
+            label.lineBreakMode = UILineBreakModeCharacterWrap;
+            label.font = [UIFont systemFontOfSize:16];
+        }
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UITextField *textFeild = (UITextField *)[cell.contentView viewWithTag:1001];
+    if (textFeild != nil)
+    {
+        textFeild.text = nil;
+    }
+    
+    UILabel *label = (UILabel *)[cell.contentView viewWithTag:1002];
+    if (label != nil)
+    {
+        label.text = nil;
     }
     
     NSString *text = nil;
@@ -137,6 +186,7 @@
         if (row == 0)
         {
             text = NSLocalizedString(@"Title", nil);
+            textFeild.text = @"标题";
         }
         else
         {
@@ -147,15 +197,27 @@
     {
         if (row == 0)
         {
-            text = NSLocalizedString(@"Modified date", nil);
+            text = NSLocalizedString(@"Modified", nil);
+            if (self.entity != nil)
+            {
+                NSDate *date = nil;
+                [self.entity.docURL getResourceValue:&date forKey:NSURLContentModificationDateKey error:nil];
+                label.text = [date mediumString];
+            }
         }
         else if (row == 1)
         {
-            text = NSLocalizedString(@"Created date", nil);
+            text = NSLocalizedString(@"Created", nil);
+            if (self.entity != nil)
+            {
+                NSDate *date = [FilePath timeFromURL:self.entity.docURL];
+               label.text = [date mediumString];
+            }
         }
     }
     
     cell.textLabel.text = text;
+    cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.imageView.image = image;
     
     return cell;
@@ -212,6 +274,11 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+}
+
+- (void)dealloc
+{
+    [super dealloc];
 }
 
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DocEntity.h"
 
 @interface DiaryInfoViewController : UITableViewController
-
+{
+    DocEntity *entity;
+}
+@property (nonatomic, retain)DocEntity *entity;
 @end

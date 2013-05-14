@@ -20,6 +20,7 @@ const CGFloat kRightMargin = 70;
 #define Day_Color   0x4c5a65
 #define Title_Color 0x3b3b3b
 
+
 @implementation AdvancedCell
 @synthesize thumbnail;
 @synthesize delegate;

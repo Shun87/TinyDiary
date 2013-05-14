@@ -155,8 +155,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
     lable.backgroundColor = [UIColor clearColor];
     lable.textAlignment = UITextAlignmentCenter;
     lable.text = @"Tesef";
-    lable.font = [UIFont boldSystemFontOfSize:22];
-    lable.textColor = [UIColor grayColor];
+    lable.font = [UIFont boldSystemFontOfSize:18];
+    lable.textColor = [UIColor darkGrayColor];
     self.navigationItem.titleView = lable;
     [lable release];
     
@@ -494,6 +494,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
 {
     DiaryInfoViewController *infoViewController = [[DiaryInfoViewController  alloc] initWithNibName:@"DiaryInfoViewController"
                                                                                              bundle:nil];
+    infoViewController.entity = self.entity;
     [self.navigationController pushViewController:infoViewController animated:YES];
     [infoViewController release];
 }

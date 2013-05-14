@@ -34,3 +34,8 @@
 "notice" = "提示";
 "downloading" = "此日期的笔记正在下载,请等会再尝试";
 "sendFeedback" = "用户反馈";
+"Diary info" = "日记信息";
+"Title" = "标题";
+"Tags" = "标签";
+"Modified" = "修改日期";
+"Created" = "创建日期";
