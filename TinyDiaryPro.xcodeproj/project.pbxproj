@@ -486,10 +486,10 @@
 				369628D31699DE0500EEFAFF /* RegularFile.m */,
 				369628C41699DB2600EEFAFF /* NoteDocument.h */,
 				369628C51699DB2600EEFAFF /* NoteDocument.m */,
-				FA0AFD4D174318EF00815DF2 /* PlistDocument.h */,
-				FA0AFD4E174318EF00815DF2 /* PlistDocument.m */,
 				FA0AFD7C1743767600815DF2 /* DiaryInfo.h */,
 				FA0AFD7D1743767600815DF2 /* DiaryInfo.m */,
+				FA0AFD4D174318EF00815DF2 /* PlistDocument.h */,
+				FA0AFD4E174318EF00815DF2 /* PlistDocument.m */,
 			);
 			name = documents;
 			sourceTree = "<group>";

@@ -17,6 +17,7 @@
 #import "DiaryListViewController.h"
 #import "FilePath.h"
 #import "DiaryInfoViewController.h"
+#import "PlistDocument.h"
 
 typedef enum
 {
@@ -280,39 +281,46 @@ const NSInteger kActionSheetPickPhoto = 1000;
 
 - (void)exitAction:(id)sender
 {
-//    NSURL *plistUrl = [[[htmlFileURL URLByDeletingLastPathComponent] URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"Diarypl"];
-//
-//    NSLog(@"%@", plistUrl)
-//    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"",  wrapperURL, nil] 
-//                                                           forKeys:[NSArray arrayWithObjects:@"Tags", @"WrapperURL", nil]];
-//    PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
-//    
-//    if ([[NSFileManager defaultManager] fileExistsAtPath:[plistUrl path]])
-//    {
-//        // 如果存在就先打开
-//        [plistDoc openWithCompletionHandler:^(BOOL success){
-//            
-//            if (success)
-//            {
-//                [plistDoc addItem:dictionary forName:[[wrapperURL lastPathComponent] stringByDeletingPathExtension]];
-//                [plistDoc closeWithCompletionHandler:nil];
-//            }
-//        }];
-//    }
-//    else
-//    {
-//        [plistDoc addItem:dictionary forName:[[wrapperURL lastPathComponent] stringByDeletingPathExtension]];
-//        [plistDoc saveToURL:plistUrl forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
-//            
-//            if (success)
-//            {
-//                [plistDoc closeWithCompletionHandler:nil];
-//            }
-//        }];
-//    }
+    NSURL *plistUrl = [[self.doc.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"DiaryInfoLog"];
+    DiaryInfo *info = [[DiaryInfo alloc] init];
+    info.url = [self.doc.fileURL path];
+    info.title = @"草模拟阿明3333比888";
+    info.tags = nil;
+    info.creatTime = @""; 
+    PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[plistUrl path]])
+    {
+        // 如果存在就先打开
+        [plistDoc openWithCompletionHandler:^(BOOL success){
+            
+            if (success)
+            {
+                [plistDoc saveDiaryInfo:info];
+                [plistDoc closeWithCompletionHandler:nil];
+                
+                 [self dismissModalViewControllerAnimated:YES];
+            }
+            
+            [info release];
+        }];
+    }
+    else
+    {
+        [plistDoc saveDiaryInfo:info];
+        [plistDoc saveToURL:plistUrl forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
+            
+            if (success)
+            {
+                [plistDoc closeWithCompletionHandler:nil];
+            }
+            
+            [info release];
+        }];
+    }
 
     [self saveDocument:YES];
-    [self dismissModalViewControllerAnimated:YES];
+   
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -15,6 +15,8 @@
 @synthesize version = _version;
 @synthesize indexPath = _indexPath;
 @synthesize downloadSuccess = _downloadSuccess;
+@synthesize tags = _tags;
+@synthesize title = _title;
 
 - (id)initWithFileURL:(NSURL *)fileURL metadata:(Metadata *)metadata state:(UIDocumentState)state version:(NSFileVersion *)version {
     
@@ -26,7 +28,6 @@
         self.downloadSuccess = NO;
     }
     return self;
-    
 }
 
 - (NSString *)name {
@@ -38,6 +39,8 @@
     [_docURL release];
     [_metadata release];
     [_indexPath release];
+    [_tags release];
+    [_title release];
     [super dealloc];
 }
 @end

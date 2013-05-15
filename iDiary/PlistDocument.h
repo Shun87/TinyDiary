@@ -7,12 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DiaryInfo.h"
+
+#define DiaryInfoLog @"DiaryInfoLog"
 
 @interface PlistDocument : UIDocument
 {
     NSMutableDictionary *plistDic;
+    
+    DiaryUnit *diaryUnit;
 }
 @property (nonatomic, retain)NSMutableDictionary *plistDic;
+@property (nonatomic, retain)DiaryUnit *diaryUnit;
 
-- (void)addItem:(NSDictionary *)dictionary forName:(NSString *)name;
+- (void)saveDiaryInfo:(DiaryInfo *)info;
+- (NSArray *)units;
 @end

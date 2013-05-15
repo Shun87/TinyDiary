@@ -8,16 +8,29 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DiaryInfo : NSObject <NSCoding>
+#define DIC_KEY_TITLE @"Title"
+#define DIC_CREAT_TIME @"CreatTime"
+#define DIC_TAG @"Tag"
+
+@interface DiaryInfo : NSObject
 {
     NSString *url;
+    NSString *title;
     NSString *creatTime;
     NSMutableArray *tags;
 }
+@property (nonatomic, copy)NSString *title;
+@property (nonatomic, copy)NSString *url;
+@property (nonatomic, copy)NSString *creatTime;
+@property (nonatomic, retain)NSMutableArray *tags;
 
-@property (nonatomic, readonly)NSString *url;
-@property (nonatomic, readonly)NSString *creatTime;
-@property (nonatomic, readonly)NSMutableArray *tags;
+@end
 
-- (void)initWithObject:(id<NSCoding>)obj;
+@interface DiaryUnit : NSObject
+{
+    NSMutableArray *diaryArray;
+}
+@property (nonatomic, retain)NSMutableArray *diaryArray;
+
+- (id)initWithDic:(NSMutableDictionary *)mutableDictionary;
 @end

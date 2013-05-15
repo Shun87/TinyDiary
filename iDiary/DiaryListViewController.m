@@ -39,11 +39,6 @@ NSString *const HTMLExtentsion = @".html";
 @property (nonatomic, retain) NoteDocument *document;
 - (void)reloadNotes:(BOOL)needReload;
 - (void)loadLocalNotes;
-- (void)addOrUpdateEntryWithURL:(NSURL *)fileURL
-                       metadata:(Metadata *)metadata
-                          state:(UIDocumentState)state
-                        version:(NSFileVersion *)version
-                     needReload:(BOOL)reload;
 - (int)indexOfEntryWithFileURL:(NSURL *)fileURL;
 @end
 
@@ -315,7 +310,7 @@ NSString *const HTMLExtentsion = @".html";
             
             if ([docAccess iCloudOn] && needReload)
             {
-                NSString * filePattern = [NSString stringWithFormat:@"*"];
+                NSString * filePattern = [NSString stringWithFormat:DiaryInfoLog];
                 [docAccess startQueryForPattern:filePattern];
             }
 
@@ -350,22 +345,41 @@ NSString *const HTMLExtentsion = @".html";
 {
     [entityArray removeAllObjects];
     NSURL *localDocURL = [FilePath localDocumentsDirectoryURL];
-    NSArray * localDocuments = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:localDocURL
-                                                             includingPropertiesForKeys:nil 
-                                                                                options:0 
-                                                                                  error:nil];
-    fileCount = [localDocuments count];
-    for (int i=0; i < fileCount; i++)
+    NSURL *infoURL = [localDocURL URLByAppendingPathComponent:DiaryInfoLog];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[infoURL path]])
     {
-        NSURL * fileURL = [localDocuments objectAtIndex:i];
-
+        PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:infoURL];
+        [plistDoc openWithCompletionHandler:^(BOOL success){
         
-        if ([[fileURL pathExtension] isEqualToString:kNotePacketExtension])
-        {
-            [self addOrUpdateEntryWithURL:fileURL metadata:nil state:UIDocumentStateNormal version:nil needReload:NO];
-        }
+            if (success)
+            {
+                NSArray *units = [plistDoc units];
+                for (int i=0; i<[units count]; i++)
+                {
+                    DiaryInfo *info = [units objectAtIndex:i];
+                    NSURL *url = [NSURL fileURLWithPath:info.url];
+                    [self addOrUpdateEntryWithURL:url metadata:nil state:UIDocumentStateNormal version:nil needReload:NO];
+                }
+            }
+        }];
     }
     
+//    NSArray * localDocuments = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:localDocURL
+//                                                             includingPropertiesForKeys:nil 
+//                                                                                options:0 
+//                                                                                  error:nil];
+//    fileCount = [localDocuments count];
+//    for (int i=0; i < fileCount; i++)
+//    {
+//        NSURL * fileURL = [localDocuments objectAtIndex:i];
+//
+//        
+//        if ([[fileURL pathExtension] isEqualToString:kNotePacketExtension])
+//        {
+//            [self addOrUpdateEntryWithURL:fileURL metadata:nil state:UIDocumentStateNormal version:nil needReload:NO];
+//        }
+//    }
+//    
     [FilePath sortUsingDescending:entityArray];
     [self.mTableView reloadData];
 }
@@ -387,12 +401,15 @@ NSString *const HTMLExtentsion = @".html";
                           state:(UIDocumentState)state
                         version:(NSFileVersion *)version
                      needReload:(BOOL)reload
+diaryInfo:(DiaryInfo *)info
 {
     DocEntity *entity = nil;
     int index = [self indexOfEntryWithFileURL:fileURL];
     if (index >= 0)
     {
         entity = [entityArray objectAtIndex:index];
+        entity.title = info.title;
+        [entity.tags addObjectsFromArray:info.tags];
         entity.metadata = metadata;
         entity.state = state;
         entity.version = version;
@@ -409,6 +426,8 @@ NSString *const HTMLExtentsion = @".html";
                                                       metadata:metadata
                                                          state:state
                                                        version:version] autorelease];
+        entity.title = info.title;
+        [entity.tags addObjectsFromArray:info.tags];
         [entityArray insertObject:entity atIndex:0];
         if (reload)
         {
@@ -477,40 +496,11 @@ NSString *const HTMLExtentsion = @".html";
                         // 数据源的添加放在消息接受中处理, 这样可以避免在push页面时看到tableView的添加动画
                         
                     });
+                    
                 }
             }];
         }
     }];
-    
-    NSURL *plistUrl = [[wrapperURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"DiaryInfoLog"];
-
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"",  wrapperURL, nil] 
-                                                           forKeys:[NSArray arrayWithObjects:@"Tags", @"WrapperURL", nil]];
-    PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[plistUrl path]])
-    {
-        // 如果存在就先打开
-        [plistDoc openWithCompletionHandler:^(BOOL success){
-            
-            if (success)
-            {
-                [plistDoc addItem:dictionary forName:[[wrapperURL lastPathComponent] stringByDeletingPathExtension]];
-                [plistDoc closeWithCompletionHandler:nil];
-            }
-        }];
-    }
-    else
-    {
-        [plistDoc addItem:dictionary forName:[[wrapperURL lastPathComponent] stringByDeletingPathExtension]];
-        [plistDoc saveToURL:plistUrl forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
-            
-            if (success)
-            {
-                [plistDoc closeWithCompletionHandler:nil];
-            }
-        }];
-    }
 }
 
 - (void)fillCell:(AdvancedCell *)cell withEntity:(DocEntity *)entity
@@ -523,13 +513,22 @@ NSString *const HTMLExtentsion = @".html";
         if (entity.metadata.detailText != nil)
         {
             [cell setcontent:entity.metadata.detailText];
-            [cell setTitleStr:@"无标题"];
         }
+        
         
         if (entity.metadata.thumbnailImage != nil)
         {
             cell.thumbnail = entity.metadata.thumbnailImage;
         }
+    }
+    
+    if (entity.title == nil)
+    {
+        [cell setTitleStr:NSLocalizedString(@"No title", nil)];
+    }
+    else
+    {
+        [cell setTitleStr:entity.title];
     }
 }
 
@@ -760,19 +759,36 @@ NSString *const HTMLExtentsion = @".html";
         
         // Don't include hidden files
         [fileURL getResourceValue:&hide forKey:NSURLIsHiddenKey error:nil];
-        if (hide && ![hide boolValue] && ![[fileURL lastPathComponent] isEqualToString:@"DiaryInfoLog"])
+        if (hide && ![hide boolValue] && [[fileURL lastPathComponent] isEqualToString:DiaryInfoLog])
         {
-            [self addOrUpdateEntryWithURL:fileURL metadata:nil state:UIDocumentStateNormal version:nil needReload:NO];
+            PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:fileURL];
+            [plistDoc openWithCompletionHandler:^(BOOL success){
+                
+                if (success)
+                {
+                    NSArray *units = [plistDoc units];
+                    for (int i=0; i<[units count]; i++)
+                    {
+                        DiaryInfo *info = [units objectAtIndex:i];
+                        NSURL *url = [NSURL fileURLWithPath:info.url];
+                        [self addOrUpdateEntryWithURL:url metadata:nil state:UIDocumentStateNormal version:nil needReload:NO
+                         diaryInfo:info];
+                    }
+                    
+                    // 排序
+                    [FilePath sortUsingDescending:entityArray];
+                    
+                    MBProgressHUD *hud = [AppDelegate app].hud;
+                    [hud hide:YES];
+                    
+                    [self.mTableView reloadData];
+                }
+                
+                [plistDoc release];
+            }];
+
         }
     }
-    
-    // 排序
-    [FilePath sortUsingDescending:entityArray];
-    
-    MBProgressHUD *hud = [AppDelegate app].hud;
-	[hud hide:YES];
-    
-    [self.mTableView reloadData];
 }
 
 
