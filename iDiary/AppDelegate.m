@@ -120,7 +120,6 @@
     
     hud = [[MBProgressHUD alloc] initWithView:self.window];
 
-    
     return YES;
 }
 //#pragma mark GADRequest generation

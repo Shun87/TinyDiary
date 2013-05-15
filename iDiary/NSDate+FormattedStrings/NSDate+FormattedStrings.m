@@ -14,7 +14,7 @@
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDoesRelativeDateFormatting:YES];
-    [dateFormatter setTimeStyle:kCFDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:kCFDateFormatterShortStyle];
     [dateFormatter setDateStyle:kCFDateFormatterMediumStyle];
     return [dateFormatter stringFromDate:self];
 }

@@ -18,6 +18,7 @@
 #import "PasswordViewController.h"
 #import "NSDate+FormattedStrings.h"
 #import "AppDelegate.h"
+#import "PlistDocument.h"
 
 NSString *const TDDocumentsDirectoryName = @"Documents";
 NSString *const HTMLExtentsion = @".html";
@@ -146,9 +147,9 @@ NSString *const HTMLExtentsion = @".html";
                                                  name:@"StorageLocationChanged" object:nil];
     
     UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    //titleButton.titleLabel.numberOfLines = 0;
     titleButton.frame = CGRectMake(0, 0, 200, 44);
-    [titleButton setTitle:@"UIButtonujj" forState:UIControlStateNormal];
+    titleButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    [titleButton setTitle:NSLocalizedString(@"Timeline", nil) forState:UIControlStateNormal];
     self.navigationItem.titleView = titleButton;
 }
 
@@ -430,9 +431,9 @@ NSString *const HTMLExtentsion = @".html";
     NSString *wrapperName = [FilePath generateFileNameBy:[NSDate date] extension:kNotePacketExtension];
     NSURL *wrapperURL = nil;
 
+    NSURL *cloudRootURL = [docAccess.ubiquityURL URLByAppendingPathComponent:TDDocumentsDirectoryName isDirectory:YES];
     if (docAccess.iCloudAvailable && [docAccess iCloudOn])
     {
-        NSURL *cloudRootURL = [docAccess.ubiquityURL URLByAppendingPathComponent:TDDocumentsDirectoryName isDirectory:YES];
         wrapperURL = [cloudRootURL URLByAppendingPathComponent:wrapperName];
     }
     else
@@ -480,6 +481,36 @@ NSString *const HTMLExtentsion = @".html";
             }];
         }
     }];
+    
+    NSURL *plistUrl = [[wrapperURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"Diarypl"];
+
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"",  wrapperURL, nil] 
+                                                           forKeys:[NSArray arrayWithObjects:@"Tags", @"WrapperURL", nil]];
+    PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[plistUrl path]])
+    {
+        // 如果存在就先打开
+        [plistDoc openWithCompletionHandler:^(BOOL success){
+            
+            if (success)
+            {
+                [plistDoc addItem:dictionary forName:[[wrapperURL lastPathComponent] stringByDeletingPathExtension]];
+                [plistDoc closeWithCompletionHandler:nil];
+            }
+        }];
+    }
+    else
+    {
+        [plistDoc addItem:dictionary forName:[[wrapperURL lastPathComponent] stringByDeletingPathExtension]];
+        [plistDoc saveToURL:plistUrl forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
+            
+            if (success)
+            {
+                [plistDoc closeWithCompletionHandler:nil];
+            }
+        }];
+    }
 }
 
 - (void)fillCell:(AdvancedCell *)cell withEntity:(DocEntity *)entity
