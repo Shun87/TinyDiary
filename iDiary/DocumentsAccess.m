@@ -68,7 +68,6 @@
         // Add a predicate for finding the documents
         [query setPredicate:[NSPredicate predicateWithFormat:@"%K LIKE %@",
                              NSMetadataItemFSNameKey, pattern]];
-        
         // 不要UPDATA吧 每次去QUERY
         // 再icloud和local中切换的时候， 发现NSMetadataQueryDidUpdateNotification和NSMetadataQueryDidFinishGatheringNotification查询的结果不一致。
 //        [[NSNotificationCenter defaultCenter] addObserver:self

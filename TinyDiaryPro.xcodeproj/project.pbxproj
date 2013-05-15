@@ -65,6 +65,7 @@
 		36F1F8CD16F7692E004EDB60 /* TTSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F1F8CC16F7692D004EDB60 /* TTSocial.m */; };
 		36FAAE841661ECA40060FBD8 /* CommmonMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FAAE831661ECA40060FBD8 /* CommmonMethods.m */; };
 		FA0AFD4F174318EF00815DF2 /* PlistDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AFD4E174318EF00815DF2 /* PlistDocument.m */; };
+		FA0AFD7E1743767600815DF2 /* DiaryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AFD7D1743767600815DF2 /* DiaryInfo.m */; };
 		FA0C569416D0F2B400F3BCDC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C569316D0F2B300F3BCDC /* Settings.m */; };
 		FA104E13173CA376002060F6 /* TinyDiaryPro.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = FA104E12173CA376002060F6 /* TinyDiaryPro.entitlements */; };
 		FA20EDE8173B724E00CFA1F7 /* method.js in Sources */ = {isa = PBXBuildFile; fileRef = FA20EDE7173B724E00CFA1F7 /* method.js */; };
@@ -248,6 +249,8 @@
 		36FAAE831661ECA40060FBD8 /* CommmonMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommmonMethods.m; sourceTree = "<group>"; };
 		FA0AFD4D174318EF00815DF2 /* PlistDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistDocument.h; sourceTree = "<group>"; };
 		FA0AFD4E174318EF00815DF2 /* PlistDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlistDocument.m; sourceTree = "<group>"; };
+		FA0AFD7C1743767600815DF2 /* DiaryInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryInfo.h; sourceTree = "<group>"; };
+		FA0AFD7D1743767600815DF2 /* DiaryInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryInfo.m; sourceTree = "<group>"; };
 		FA0C569216D0F2B300F3BCDC /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		FA0C569316D0F2B300F3BCDC /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		FA104E12173CA376002060F6 /* TinyDiaryPro.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TinyDiaryPro.entitlements; path = iDiary/TinyDiaryPro.entitlements; sourceTree = "<group>"; };
@@ -485,6 +488,8 @@
 				369628C51699DB2600EEFAFF /* NoteDocument.m */,
 				FA0AFD4D174318EF00815DF2 /* PlistDocument.h */,
 				FA0AFD4E174318EF00815DF2 /* PlistDocument.m */,
+				FA0AFD7C1743767600815DF2 /* DiaryInfo.h */,
+				FA0AFD7D1743767600815DF2 /* DiaryInfo.m */,
 			);
 			name = documents;
 			sourceTree = "<group>";
@@ -841,6 +846,7 @@
 				FA79CF2F1742634900A81003 /* DiaryInfoViewController.m in Sources */,
 				FA79CF371742656000A81003 /* UIColor+HexColor.m in Sources */,
 				FA0AFD4F174318EF00815DF2 /* PlistDocument.m in Sources */,
+				FA0AFD7E1743767600815DF2 /* DiaryInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,43 +20,14 @@
     [super dealloc];
 }
 
-- (void)addObject:(id)data
-       toWrappers:(NSMutableDictionary *)wrappers
-preferredFileName:(NSString *)preferredFileName
-{
-    NSFileWrapper *childFile = [[NSFileWrapper alloc] initRegularFileWithContents:data];
-    [wrappers setObject:childFile forKey:preferredFileName];
-    [childFile release];
-}
-
 - (id)contentsForType:(NSString *)typeName error:(NSError **)outError
 {
-    NSMutableDictionary * wrappers = [NSMutableDictionary dictionary];
-  
-    NSMutableData *data = [NSMutableData data];
-    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:self.plistDic forKey:kPlistData];
-
-    [archiver finishEncoding];
-    [self addObject:data toWrappers:wrappers preferredFileName:DiaryInfo];
-    [archiver release];
-
-    return [[[NSFileWrapper alloc] initDirectoryWithFileWrappers:wrappers] autorelease];
+    return [NSKeyedArchiver archivedDataWithRootObject:self.plistDic];
 }
 
 - (BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError **)outError
 {
-    NSFileWrapper *wrapper = contents;
-    
-    NSFileWrapper *metaWrapper = [wrapper.fileWrappers objectForKey:DiaryInfo];
-    if (metaWrapper != nil)
-    {
-        NSData * data = [metaWrapper regularFileContents];
-        NSKeyedUnarchiver * unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-        
-        self.plistDic = [unarchiver decodeObjectForKey:kPlistData];
-        [unarchiver release];
-    }
+    self.plistDic = [NSKeyedUnarchiver unarchiveObjectWithData:(NSData *)contents];
 
     return YES;
 }

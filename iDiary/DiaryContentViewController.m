@@ -280,6 +280,37 @@ const NSInteger kActionSheetPickPhoto = 1000;
 
 - (void)exitAction:(id)sender
 {
+//    NSURL *plistUrl = [[[htmlFileURL URLByDeletingLastPathComponent] URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"Diarypl"];
+//
+//    NSLog(@"%@", plistUrl)
+//    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"",  wrapperURL, nil] 
+//                                                           forKeys:[NSArray arrayWithObjects:@"Tags", @"WrapperURL", nil]];
+//    PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
+//    
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:[plistUrl path]])
+//    {
+//        // 如果存在就先打开
+//        [plistDoc openWithCompletionHandler:^(BOOL success){
+//            
+//            if (success)
+//            {
+//                [plistDoc addItem:dictionary forName:[[wrapperURL lastPathComponent] stringByDeletingPathExtension]];
+//                [plistDoc closeWithCompletionHandler:nil];
+//            }
+//        }];
+//    }
+//    else
+//    {
+//        [plistDoc addItem:dictionary forName:[[wrapperURL lastPathComponent] stringByDeletingPathExtension]];
+//        [plistDoc saveToURL:plistUrl forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
+//            
+//            if (success)
+//            {
+//                [plistDoc closeWithCompletionHandler:nil];
+//            }
+//        }];
+//    }
+
     [self saveDocument:YES];
     [self dismissModalViewControllerAnimated:YES];
 }

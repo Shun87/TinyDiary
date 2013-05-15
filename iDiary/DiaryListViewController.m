@@ -315,7 +315,7 @@ NSString *const HTMLExtentsion = @".html";
             
             if ([docAccess iCloudOn] && needReload)
             {
-                NSString * filePattern = [NSString stringWithFormat:@"*.%@", kNotePacketExtension];
+                NSString * filePattern = [NSString stringWithFormat:@"*"];
                 [docAccess startQueryForPattern:filePattern];
             }
 
@@ -482,7 +482,7 @@ NSString *const HTMLExtentsion = @".html";
         }
     }];
     
-    NSURL *plistUrl = [[wrapperURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"Diarypl"];
+    NSURL *plistUrl = [[wrapperURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"DiaryInfoLog"];
 
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"",  wrapperURL, nil] 
                                                            forKeys:[NSArray arrayWithObjects:@"Tags", @"WrapperURL", nil]];
@@ -757,10 +757,10 @@ NSString *const HTMLExtentsion = @".html";
     {
         NSURL *fileURL = [item valueForAttribute:NSMetadataItemURLKey];
         NSNumber *hide = nil;
-  
+        
         // Don't include hidden files
         [fileURL getResourceValue:&hide forKey:NSURLIsHiddenKey error:nil];
-        if (hide && ![hide boolValue])
+        if (hide && ![hide boolValue] && ![[fileURL lastPathComponent] isEqualToString:@"DiaryInfoLog"])
         {
             [self addOrUpdateEntryWithURL:fileURL metadata:nil state:UIDocumentStateNormal version:nil needReload:NO];
         }

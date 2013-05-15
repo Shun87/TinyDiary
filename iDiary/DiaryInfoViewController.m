@@ -10,6 +10,7 @@
 #import "UIColor+HexColor.h"
 #import "NSDate+FormattedStrings.h"
 #import "FilePath.h"
+#import "PlistDocument.h"
 
 @implementation DiaryInfoViewController
 @synthesize entity;
