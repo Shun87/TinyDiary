@@ -121,22 +121,18 @@
 // icloud的一些操作
     docAccess = [[DocumentsAccess alloc] initWithDelegate:self];
     hud = [[MBProgressHUD alloc] initWithView:self.window];
-    [self.window addSubview:hud];
-	hud.labelText = @"Loading";
-	[hud show:YES];
 
-    [self reloadNotes:YES];
-    
+
     return YES;
 }
 
 #pragma mark -
 #pragma mark MBProgressHUDDelegate methods
 
-- (void)hudWasHidden:(MBProgressHUD *)hud
+- (void)hudWasHidden:(MBProgressHUD *)ahud
 {
 	// Remove HUD from screen when the HUD was hidded
-	[hud removeFromSuperview];
+	[ahud removeFromSuperview];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -166,17 +162,18 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [self reloadNotes:YES];
+    [self reloadNotes];
 }
 
-- (void)reloadNotes:(BOOL)needReload
+- (void)reloadNotes
 {
-    if (needReload)
-    {
-        [diaryInfoArray removeAllObjects];
-        [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
-                                                            object:self.diaryInfoArray];
-    }
+    [self.window addSubview:hud];
+	hud.labelText = @"Loading";
+	[hud show:YES];
+    
+    [diaryInfoArray removeAllObjects];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
+                                                        object:self.diaryInfoArray];
 
     [docAccess initializeiDocAccess:^(BOOL available){
         
@@ -195,7 +192,7 @@
                 //                alertView.tag = 1;
                 //                [alertView show];
                 [docAccess setiCloudOn:YES];
-                [self reloadNotes:YES];
+                [self reloadNotes];
             }
             
             // move iCloud docs to local
@@ -223,7 +220,7 @@
                 
             }
             
-            if ([docAccess iCloudOn] && needReload)
+            if ([docAccess iCloudOn])
             {
                 NSString * filePattern = [NSString stringWithFormat:DiaryInfoLog];
                 [docAccess startQueryForPattern:filePattern];
@@ -249,7 +246,7 @@
         }
         
         // 查询本地
-        if (![docAccess iCloudOn] && needReload)
+        if (![docAccess iCloudOn])
         {
             [self loadLocalNotes];
         }
@@ -281,9 +278,13 @@
                 
                 if (success)
                 {
-                    [self.diaryInfoArray addObjectsFromArray:[plistDoc units] ];
+                    [self.diaryInfoArray addObjectsFromArray:[plistDoc units]];
                     [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
                                                                         object:self.diaryInfoArray];
+                }
+                else
+                {
+                    [self.hud hide:YES];
                 }
                 
                 [plistDoc release];

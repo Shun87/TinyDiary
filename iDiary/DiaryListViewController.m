@@ -116,7 +116,7 @@ NSString *const HTMLExtentsion = @".html";
     
     self.mTableView.allowsSelectionDuringEditing = YES;
     
-    [self reloadNotes:YES];
+    //[self reloadNotes:YES];
     
     mySocial = [[TTSocial alloc] init];
     mySocial.viewController = self;
@@ -125,15 +125,19 @@ NSString *const HTMLExtentsion = @".html";
                                              selector:@selector(documentStateChange:)
                                                  name:UIDocumentStateChangedNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadDiaryList:)
+                                                 name:ReloadDiaryInfoUnits
+                                               object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didBecomeActive:)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didResignActive:)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(didBecomeActive:)
+//                                                 name:UIApplicationDidBecomeActiveNotification
+//                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(didResignActive:)
+//                                                 name:UIApplicationWillResignActiveNotification
+//                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(dataSourceChanged:)
                                                  name:@"DataSourceChanged" object:nil];
@@ -154,27 +158,55 @@ NSString *const HTMLExtentsion = @".html";
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigaionBarRed.png"] forBarMetrics:UIBarMetricsDefault];
 }
 
-- (void)didBecomeActive:(NSNotification *)notification
+- (void)reloadFromDiaryInfoArray:(NSMutableArray *)array
 {
-    if (docAccess != nil)
+    for (int i=0; i<[array count]; i++)
     {
-        if ([docAccess iCloudOn])
-        {
-            [self reloadNotes:YES];
-        }
+        DiaryInfo *info = [array objectAtIndex:i];
+        NSURL *url = [NSURL fileURLWithPath:info.url];
+        [self addOrUpdateEntryWithURL:url metadata:nil state:UIDocumentStateNormal version:nil needReload:NO
+                            diaryInfo:info];
     }
+    
+    // 排序
+    [FilePath sortUsingDescending:entityArray];
+    
+    MBProgressHUD *hud = [AppDelegate app].hud;
+    [hud hide:YES];
+    
+    [self.mTableView reloadData];
 }
 
-- (void)didResignActive:(NSNotification *)notification
+- (void)reloadDiaryList:(NSNotification *)notification
 {
-    if (docAccess != nil)
-    {
-        if ([docAccess iCloudOn])
-        {
-            [docAccess stopQuery];
-        }
-    }
+    [entityArray removeAllObjects];
+    
+    NSMutableArray *diaryList = (NSMutableArray *)[notification object];
+    
+    [self reloadFromDiaryInfoArray:diaryList];
 }
+
+//- (void)didBecomeActive:(NSNotification *)notification
+//{
+//    if (docAccess != nil)
+//    {
+//        if ([docAccess iCloudOn])
+//        {
+//            [self reloadNotes:YES];
+//        }
+//    }
+//}
+//
+//- (void)didResignActive:(NSNotification *)notification
+//{
+//    if (docAccess != nil)
+//    {
+//        if ([docAccess iCloudOn])
+//        {
+//            [docAccess stopQuery];
+//        }
+//    }
+//}
 
 - (void)resolveConfict:(NSURL *)url
 {
@@ -780,6 +812,10 @@ diaryInfo:(DiaryInfo *)info
                     [hud hide:YES];
                     
                     [self.mTableView reloadData];
+                }
+                else
+                {
+                    
                 }
                 
                 [plistDoc release];

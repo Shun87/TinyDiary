@@ -9,6 +9,7 @@
 #import "TagsViewController.h"
 #import "AppDelegate.h"
 #import "UIColor+HexColor.h"
+#import "DiaryListViewController.h"
 
 @implementation DiaryTag
 @synthesize tagName, diaryInfoArray;
@@ -184,6 +185,16 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor whiteColor];
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    DiaryTag *tag = [tagArray objectAtIndex:[indexPath row]];
+    
 }
 
 - (void)viewDidUnload

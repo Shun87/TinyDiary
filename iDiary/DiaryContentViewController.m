@@ -305,7 +305,6 @@ const NSInteger kActionSheetPickPhoto = 1000;
                 [plistDoc saveDiaryInfo:info];
                 [plistDoc saveToURL:plistUrl forSaveOperation:UIDocumentSaveForOverwriting completionHandler:nil];
                 [plistDoc closeWithCompletionHandler:nil];
-                
                 [self dismissModalViewControllerAnimated:YES];
             }
             
@@ -327,6 +326,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
     }
 
     [self saveDocument:YES];
+    
+    [self dismissModalViewControllerAnimated:YES];
     
     // 重新ReloadData
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DataSourceChanged" object:entity];

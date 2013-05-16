@@ -60,6 +60,8 @@ DocumentsAccessDelegate, UIActionSheetDelegate>
 - (void)showDiaryContent:(DocEntity *)entity newFile:(BOOL)newFile;
 - (void)deleteFile:(NSURL *)url;
 
+- (void)reloadFromDiaryInfoArray:(NSMutableArray *)array;
+
 - (DocEntity *)preUrl:(DocEntity *)entry;
 - (DocEntity *)nextUrl:(DocEntity *)entry;
 - (NSInteger)indexForEntry:(DocEntity *)entry;

@@ -45,7 +45,7 @@
     NSString *tag = info.tags;
     if (tag == nil)
     {
-        info.tags = @"";
+        tag = @"";
     }
     
     NSString *creatTime = @"";
@@ -69,4 +69,10 @@
     return self.diaryUnit.diaryArray;
 }
 
+- (void)handleError:(NSError *)error userInteractionPermitted:(BOOL)userInteractionPermitted
+{
+    NSLog(@"Error: %@  reason = %@, localizedRecoverySuggestion = %@, userInfo=%@", error.localizedDescription, error.localizedFailureReason, error.localizedRecoverySuggestion,
+          error.userInfo);
+    [super handleError:error userInteractionPermitted:userInteractionPermitted];
+}
 @end
