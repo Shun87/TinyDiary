@@ -18,12 +18,13 @@
 #import "CalendarViewController.h"
 #import "TagsViewController.h"
 
+
 @implementation AppDelegate
 @synthesize window ;
 @synthesize tabBarController;
 @synthesize navigationController;
 @synthesize passwordViewController;
-@synthesize hud;
+@synthesize hud, diaryInfoArray;
 //@synthesize banner;
 
 - (void)dealloc
@@ -33,6 +34,7 @@
     [tabBarController release];
     [navigationController release];
     [passwordViewController release];
+    [diaryInfoArray release];
     [super dealloc];
 }
 
@@ -67,6 +69,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
+    diaryInfoArray = [[NSMutableArray alloc] init];
+    
     UIViewController *viewController = [[[DiaryListViewController alloc] initWithNibName:@"DiaryListViewController" bundle:nil] autorelease];
     UINavigationController *aNavigationController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
     self.navigationController = aNavigationController;
@@ -82,10 +86,8 @@
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     [self.tabBarController setViewControllers:[NSArray arrayWithObjects:aNavigationController, nav3, nav4, nav2, nil]];
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-   
-    [[UINavigationBar appearance] setTintColor:HEXCOLOR(0x282626, 1.0)];
+    [[UINavigationBar appearance] setTintColor:HEXCOLOR(0xb33e2d, 1)];
     self.window.rootViewController = self.tabBarController;
     
     // Initialize the banner at the bottom of the screen.
@@ -116,41 +118,16 @@
         [self showPsdView];
     }
     
-    [[UINavigationBar appearance] setTintColor:HEXCOLOR(0xb33e2d, 1)];
-    
+// icloud的一些操作
+    docAccess = [[DocumentsAccess alloc] initWithDelegate:self];
     hud = [[MBProgressHUD alloc] initWithView:self.window];
+    [self.window addSubview:hud];
+	hud.labelText = @"Loading";
+	[hud show:YES];
 
+    [self reloadNotes:YES];
+    
     return YES;
-}
-//#pragma mark GADRequest generation
-//
-//// Here we're creating a simple GADRequest and whitelisting the application
-//// for test ads. You should request test ads during development to avoid
-//// generating invalid impressions and clicks.
-//- (GADRequest *)createRequest {
-//    GADRequest *request = [GADRequest request];
-//    
-//#if DEBUG
-//    request.testDevices = [NSArray arrayWithObjects:GAD_SIMULATOR_ID, nil];
-//#endif
-//    return request;
-//}
-//
-//#pragma mark GADBannerViewDelegate impl
-//
-//// We've received an ad successfully.
-//- (void)adViewDidReceiveAd:(GADBannerView *)adView {
-//    NSLog(@"Received ad successfully");
-//}
-//
-//- (void)adView:(GADBannerView *)view
-//didFailToReceiveAdWithError:(GADRequestError *)error {
-//    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
-//}
-
-+ (AppDelegate *)app
-{
-    return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 #pragma mark -
@@ -189,26 +166,160 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-
+    [self reloadNotes:YES];
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
+- (void)reloadNotes:(BOOL)needReload
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    if (needReload)
+    {
+        [diaryInfoArray removeAllObjects];
+        [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
+                                                            object:self.diaryInfoArray];
+    }
+
+    [docAccess initializeiDocAccess:^(BOOL available){
+        
+        if (available)
+        {
+            // 询问是否把数据存入ICLOUD, 并且是在没有提示过的情况下,如果提示过了下次就不再提示
+            if (![docAccess iCloudOn] && ![docAccess iCloudPrompted])
+            {
+                // 设置为提示过
+                [docAccess setiCloudPrompted:YES];
+                //                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"iCloud is Available" 
+                //                                                                     message:@"Automatically store your documents in the cloud to keep them up-to-date across all your devices and the web." 
+                //                                                                    delegate:self 
+                //                                                           cancelButtonTitle:@"Later" 
+                //                                                           otherButtonTitles:@"Use iCloud", nil];
+                //                alertView.tag = 1;
+                //                [alertView show];
+                [docAccess setiCloudOn:YES];
+                [self reloadNotes:YES];
+            }
+            
+            // move iCloud docs to local
+            if (![docAccess iCloudOn] && [docAccess iCloudWasOn])
+            {
+//                [docAccess iCloudToLocal:kNotePacketExtension completion:^(NSArray *fileArray){
+//                    
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        
+//                        [self loadLocalNotes];
+//                    });
+//                }];
+            }
+            
+            // move local docs to iCloud
+            if ([docAccess iCloudOn] && ![docAccess iCloudWasOn])
+            {
+//                [docAccess localToiCloud:kNotePacketExtension completion:^(NSArray *fileArray){
+//                    
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        
+//                        [self updataDataSource:fileArray];
+//                    });
+//                }]; 
+                
+            }
+            
+            if ([docAccess iCloudOn] && needReload)
+            {
+                NSString * filePattern = [NSString stringWithFormat:DiaryInfoLog];
+                [docAccess startQueryForPattern:filePattern];
+            }
+            
+            // No matter what, refresh with current value of iCloudOn
+            [docAccess setiCloudWasOn:[docAccess iCloudOn]];
+        }
+        else
+        {
+            // If iCloud isn't available, set promoted to no (so we can ask them next time it becomes available)
+            [docAccess setiCloudPrompted:NO];
+            
+            // If iCloud was toggled on previously, warn user that the docs will be loaded locally
+            if ([docAccess iCloudWasOn]) {
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"You're Not Using iCloud" message:@"Your documents were removed from this iPhone but remain stored in iCloud." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                [alertView show];
+            }
+            
+            // No matter what, iCloud isn't available so switch it to off.
+            [docAccess setiCloudOn:NO]; 
+            [docAccess setiCloudWasOn:NO];
+        }
+        
+        // 查询本地
+        if (![docAccess iCloudOn] && needReload)
+        {
+            [self loadLocalNotes];
+        }
+    }];
 }
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+#pragma mark - iCloudAvailableDelegate
+
+- (void)queryDidFinished:(NSArray *)array
 {
+    if (![docAccess iCloudOn])
+    {
+        return;
+    }
+    
+    [diaryInfoArray removeAllObjects];
+    
+    for (NSMetadataItem *item in array)
+    {
+        NSURL *fileURL = [item valueForAttribute:NSMetadataItemURLKey];
+        NSNumber *hide = nil;
+        
+        // Don't include hidden files
+        [fileURL getResourceValue:&hide forKey:NSURLIsHiddenKey error:nil];
+        if (hide && ![hide boolValue] && [[fileURL lastPathComponent] isEqualToString:DiaryInfoLog])
+        {
+            PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:fileURL];
+            [plistDoc openWithCompletionHandler:^(BOOL success){
+                
+                if (success)
+                {
+                    [self.diaryInfoArray addObjectsFromArray:[plistDoc units] ];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
+                                                                        object:self.diaryInfoArray];
+                }
+                
+                [plistDoc release];
+            }];
+        }
+    }
 }
-*/
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
++ (AppDelegate *)app
 {
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
-*/
 
+//#pragma mark GADRequest generation
+//
+//// Here we're creating a simple GADRequest and whitelisting the application
+//// for test ads. You should request test ads during development to avoid
+//// generating invalid impressions and clicks.
+//- (GADRequest *)createRequest {
+//    GADRequest *request = [GADRequest request];
+//    
+//#if DEBUG
+//    request.testDevices = [NSArray arrayWithObjects:GAD_SIMULATOR_ID, nil];
+//#endif
+//    return request;
+//}
+//
+//#pragma mark GADBannerViewDelegate impl
+//
+//// We've received an ad successfully.
+//- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+//    NSLog(@"Received ad successfully");
+//}
+//
+//- (void)adView:(GADBannerView *)view
+//didFailToReceiveAdWithError:(GADRequestError *)error {
+//    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
+//}
 @end

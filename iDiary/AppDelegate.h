@@ -10,10 +10,15 @@
 #import "Settings.h"
 //#import "GADBannerView.h"
 #import "MBProgressHUD.h"
+#import "DocumentsAccess.h"
+#import "PlistDocument.h"
 
 @class PasswordViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, MBProgressHUDDelegate>
+#define ReloadDiaryInfoUnits @"ReloadDiaryInfoUnits"
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, 
+MBProgressHUDDelegate, DocumentsAccessDelegate>
 {
     UIWindow *window;
     UITabBarController *tabBarController;
@@ -23,7 +28,11 @@
    // GADBannerView *banner;
     
     MBProgressHUD *hud;
+    
+    NSMutableArray *diaryInfoArray;
+    DocumentsAccess *docAccess;
 }
+@property (nonatomic, retain)NSMutableArray *diaryInfoArray;
 @property (nonatomic, retain)MBProgressHUD *hud;
 //@property (nonatomic, retain) GADBannerView *banner;
 @property (strong, nonatomic) UIWindow *window;

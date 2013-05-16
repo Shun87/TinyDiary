@@ -15,7 +15,6 @@
 {
     if (self = [super init])
     {
-        self.tags = [NSMutableArray array];
     }
     
     return self;
@@ -49,10 +48,8 @@
             DiaryInfo *diary = [[DiaryInfo alloc] init];
             diary.url = key;
             diary.title = [dictionary objectForKey:DIC_KEY_TITLE];
-            NSLog(@"%@", diary.title);
             diary.creatTime = [dictionary objectForKey:DIC_CREAT_TIME];
-            NSString *strTag = [dictionary objectForKey:DIC_CREAT_TIME];
-            [diary.tags addObject:[strTag componentsSeparatedByString:@"|"]];
+            diary.tags = [dictionary objectForKey:DIC_CREAT_TIME];
             
             [diaryArray addObject:diary];
             

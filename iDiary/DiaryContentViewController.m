@@ -92,6 +92,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
 @synthesize imagePickerController;
 @synthesize toolbar;
 @synthesize listViewController, preButton, nextButton;
+@synthesize title, tagStr, creatTime, modifyTime;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -284,10 +285,15 @@ const NSInteger kActionSheetPickPhoto = 1000;
     NSURL *plistUrl = [[self.doc.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"DiaryInfoLog"];
     DiaryInfo *info = [[DiaryInfo alloc] init];
     info.url = [self.doc.fileURL path];
-    info.title = @"草模拟阿明3333比888";
-    info.tags = nil;
-    info.creatTime = @""; 
+    info.title = self.title;
+    info.tags = self.tagStr;
+    info.creatTime = self.creatTime; 
+    
     PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
+    
+    entity.title = self.title;
+    [entity.tags addObjectsFromArray:[self.tagStr componentsSeparatedByString:@"|"]];
+    entity.creatTime = info.creatTime;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[plistUrl path]])
     {
@@ -297,9 +303,10 @@ const NSInteger kActionSheetPickPhoto = 1000;
             if (success)
             {
                 [plistDoc saveDiaryInfo:info];
+                [plistDoc saveToURL:plistUrl forSaveOperation:UIDocumentSaveForOverwriting completionHandler:nil];
                 [plistDoc closeWithCompletionHandler:nil];
                 
-                 [self dismissModalViewControllerAnimated:YES];
+                [self dismissModalViewControllerAnimated:YES];
             }
             
             [info release];
@@ -320,7 +327,9 @@ const NSInteger kActionSheetPickPhoto = 1000;
     }
 
     [self saveDocument:YES];
-   
+    
+    // 重新ReloadData
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DataSourceChanged" object:entity];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -445,14 +454,14 @@ const NSInteger kActionSheetPickPhoto = 1000;
         // UIImagePNGRepresentation不知道为什么会使得图片的大小加倍,但是由于iCloud存储这样用了,为了统一,所以这里也去
         // UIImagePNGRepresentation一下.
         NSData *pngData = UIImagePNGRepresentation(thumbnail);
+        
+        // 设置entiry后就发消息出去更新UI
         entity.metadata.thumbnailImage = [UIImage imageWithData:pngData];
     }
     
     NSString *detailText = [self.richEditor getGeneralText];
     [self.doc setDetailText:detailText];
     entity.metadata.detailText = detailText;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DataSourceChanged" object:entity];
     
     NSString *htmlString = [self.richEditor outerHtml];
     NSData *data = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
@@ -863,7 +872,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
 
 - (void)enterBackgroud:(NSNotification *)notification
 {
-    [self exitAction:nil];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)dealloc
@@ -896,6 +905,11 @@ const NSInteger kActionSheetPickPhoto = 1000;
     
     [preButton release];
     [nextButton release];
+    
+    [tagStr release];
+    [title release];
+    [creatTime release];
+    [modifyTime release];
     [super dealloc];
 }
 @end

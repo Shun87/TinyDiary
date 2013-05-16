@@ -42,17 +42,10 @@
         title = @"";
     }
     
-    NSString *tag = @"";
-    for (int i=0; i<[info.tags count]; i++)
+    NSString *tag = info.tags;
+    if (tag == nil)
     {
-        if (i == 0)
-        {
-            tag = [info.tags objectAtIndex:i];
-        }
-        else
-        {
-            tag = [tag stringByAppendingFormat:[NSString stringWithFormat:@"|%@", [info.tags objectAtIndex:i]]];
-        }
+        info.tags = @"";
     }
     
     NSString *creatTime = @"";
@@ -69,9 +62,6 @@
         self.plistDic = [NSMutableDictionary dictionary];
     }
     [self.plistDic setObject:dic forKey:info.url];
-    
-//    [self.undoManager setActionName:@"Item Change"];
-//    [self.undoManager registerUndoWithTarget:self selector:@selector(modify:) object:info];
 }
 
 - (NSArray *)units

@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, retain)NSMutableArray *tags;
 @property (nonatomic, copy)NSString *title;
+@property (nonatomic, copy)NSString *creatTime;
 
 - (id)initWithFileURL:(NSURL *)fileURL metadata:(Metadata *)metadata state:(UIDocumentState)state version:(NSFileVersion *)version;
 - (NSString *)name;

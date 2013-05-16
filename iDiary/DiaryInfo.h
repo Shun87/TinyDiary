@@ -17,12 +17,12 @@
     NSString *url;
     NSString *title;
     NSString *creatTime;
-    NSMutableArray *tags;
+    NSString *tags;
 }
 @property (nonatomic, copy)NSString *title;
 @property (nonatomic, copy)NSString *url;
 @property (nonatomic, copy)NSString *creatTime;
-@property (nonatomic, retain)NSMutableArray *tags;
+@property (nonatomic, copy)NSString *tags;
 
 @end
 

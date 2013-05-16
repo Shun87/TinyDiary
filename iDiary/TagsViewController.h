@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TagsViewController : UIViewController
+@interface DiaryTag : NSObject
+{
+    NSString *tagName;
+    NSMutableArray *diaryInfoArray;
+}
+@property (nonatomic, copy)NSString *tagName;
+@property (nonatomic, retain)NSMutableArray *diaryInfoArray;
+@end
 
+@interface TagsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+{
+    NSMutableArray *tagArray;
+    UITableView *mTableView;
+}
+@property (nonatomic, retain)IBOutlet UITableView *mTableView;
+@property (nonatomic, retain) NSMutableArray *tagArray;
 @end

@@ -137,7 +137,7 @@
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 	picker.mailComposeDelegate = self;
 	
-	[picker setSubject:@"TinyNote"];
+	[picker setSubject:@"TinyDiary"];
     NSArray *toRecipients = [NSArray arrayWithObject:@"chenshun87@126.com"];
     [picker setToRecipients:toRecipients];
     [viewController presentModalViewController:picker animated:YES];

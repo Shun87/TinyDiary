@@ -48,6 +48,11 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate>
     UIToolbar *toolbar;
     
     UIViewController *listViewController;
+    
+    NSString *title;
+    NSString *creatTime;
+    NSString *modifyTime;
+    NSString *tagStr;
 }
 @property (nonatomic, assign)UIViewController *listViewController;
 @property (nonatomic, retain)IBOutlet  UIToolbar *toolbar;
@@ -70,6 +75,11 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate>
 @property (nonatomic, copy)NSString *filePathToSave;
 @property (nonatomic, retain)NSURL *htmlFileURL;
 @property (nonatomic, retain)RichEditView *richEditor;
+
+@property (nonatomic, copy)NSString *title;
+@property (nonatomic, copy)NSString *creatTime;
+@property (nonatomic, copy)NSString *tagStr;
+@property (nonatomic, copy) NSString *modifyTime;
 
 - (IBAction)editAction:(id)sender;
 - (IBAction)saveAction:(id)sender;

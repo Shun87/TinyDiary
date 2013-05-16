@@ -66,6 +66,16 @@ const CGFloat kRightMargin = 70;
     
     thumbImageView.layer.masksToBounds = YES;
     thumbImageView.layer.cornerRadius = 4.0;
+    
+    CGRect rect = title.frame;
+    rect.origin.x = kLeftMargin;
+    rect.size.width = self.bounds.size.width - kRightMargin - rect.origin.x;
+    title.frame = rect;
+    
+    rect = contentLabel.frame;
+    rect.origin.x = kLeftMargin;
+    rect.size.width = self.bounds.size.width - kRightMargin - rect.origin.x;
+    contentLabel.frame = rect;
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
@@ -100,19 +110,11 @@ const CGFloat kRightMargin = 70;
 - (void)setTitleStr:(NSString *)text
 {
     title.text = text;
-    CGRect rect = title.frame;
-    rect.origin.x = kLeftMargin;
-    rect.size.width = self.bounds.size.width - kRightMargin - rect.origin.x;
-    title.frame = rect;
 }
 
 - (void)setcontent:(NSString *)text
 {
     contentLabel.text = text;
-    CGRect rect = contentLabel.frame;
-    rect.origin.x = kLeftMargin;
-    rect.size.width = self.bounds.size.width - kRightMargin - rect.origin.x;
-    contentLabel.frame = rect;
 }
 
 - (void)setThumbnail:(UIImage *)image

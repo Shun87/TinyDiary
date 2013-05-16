@@ -17,6 +17,7 @@
 @synthesize downloadSuccess = _downloadSuccess;
 @synthesize tags = _tags;
 @synthesize title = _title;
+@synthesize creatTime = _creatTime;
 
 - (id)initWithFileURL:(NSURL *)fileURL metadata:(Metadata *)metadata state:(UIDocumentState)state version:(NSFileVersion *)version {
     
@@ -26,6 +27,7 @@
         self.state = state;
         self.version = version;
         self.downloadSuccess = NO;
+        self.tags = [NSMutableArray array];
     }
     return self;
 }
@@ -41,6 +43,7 @@
     [_indexPath release];
     [_tags release];
     [_title release];
+    [_creatTime release];
     [super dealloc];
 }
 @end

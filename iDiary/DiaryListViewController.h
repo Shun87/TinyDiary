@@ -36,6 +36,8 @@ DocumentsAccessDelegate, UIActionSheetDelegate>
     TTSocial *mySocial;
     
     DocumentsAccess *docAccess;
+    
+    
 }
 @property (nonatomic, retain)IBOutlet UITableView *mTableView;
 @property (nonatomic, readonly)DocumentsAccess *docAccess;

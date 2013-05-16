@@ -409,7 +409,7 @@ diaryInfo:(DiaryInfo *)info
     {
         entity = [entityArray objectAtIndex:index];
         entity.title = info.title;
-        [entity.tags addObjectsFromArray:info.tags];
+        [entity.tags addObjectsFromArray:[info.tags componentsSeparatedByString:@"|"]];
         entity.metadata = metadata;
         entity.state = state;
         entity.version = version;
@@ -427,7 +427,7 @@ diaryInfo:(DiaryInfo *)info
                                                          state:state
                                                        version:version] autorelease];
         entity.title = info.title;
-        [entity.tags addObjectsFromArray:info.tags];
+        [entity.tags addObjectsFromArray:[info.tags componentsSeparatedByString:@"|"]];
         [entityArray insertObject:entity atIndex:0];
         if (reload)
         {
@@ -514,15 +514,14 @@ diaryInfo:(DiaryInfo *)info
         {
             [cell setcontent:entity.metadata.detailText];
         }
-        
-        
+    
         if (entity.metadata.thumbnailImage != nil)
         {
             cell.thumbnail = entity.metadata.thumbnailImage;
         }
     }
     
-    if (entity.title == nil)
+    if ([entity.title length] == 0)
     {
         [cell setTitleStr:NSLocalizedString(@"No title", nil)];
     }
@@ -672,7 +671,6 @@ diaryInfo:(DiaryInfo *)info
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (void)shareText:(NSString *)text index:(NSInteger)index
 {
