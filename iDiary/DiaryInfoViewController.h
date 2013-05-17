@@ -12,6 +12,7 @@
 @interface DiaryInfoViewController : UITableViewController
 {
     DocEntity *entity;
+    UITextField *atextField;
 }
 @property (nonatomic, retain)DocEntity *entity;
 @end

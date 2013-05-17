@@ -64,6 +64,11 @@
     [self.plistDic setObject:dic forKey:info.url];
 }
 
+- (void)removeKey:(NSString *)key
+{
+    [self.plistDic removeObjectForKey:key];
+}
+
 - (NSArray *)units
 {
     return self.diaryUnit.diaryArray;

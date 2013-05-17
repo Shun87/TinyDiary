@@ -32,6 +32,7 @@ MBProgressHUDDelegate, DocumentsAccessDelegate>
     NSMutableArray *diaryInfoArray;
     DocumentsAccess *docAccess;
 }
+@property (nonatomic, readonly)DocumentsAccess *docAccess;
 @property (nonatomic, retain)NSMutableArray *diaryInfoArray;
 @property (nonatomic, retain)MBProgressHUD *hud;
 //@property (nonatomic, retain) GADBannerView *banner;

@@ -285,15 +285,21 @@ const NSInteger kActionSheetPickPhoto = 1000;
     NSURL *plistUrl = [[self.doc.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"DiaryInfoLog"];
     DiaryInfo *info = [[DiaryInfo alloc] init];
     info.url = [self.doc.fileURL path];
-    info.title = self.title;
-    info.tags = self.tagStr;
-    info.creatTime = self.creatTime; 
+    info.title = entity.title;
+    for (int i=0; i<[entity.tags count]; i++)
+    {
+        if (i == 0)
+        {
+            info.tags = [entity.tags objectAtIndex:0];
+        }
+        else
+        {
+            [info.tags stringByAppendingFormat:@"|%@", [entity.tags objectAtIndex:i]];
+        }
+    }
+    info.creatTime = entity.creatTime; 
     
     PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
-    
-    entity.title = self.title;
-    [entity.tags addObjectsFromArray:[self.tagStr componentsSeparatedByString:@"|"]];
-    entity.creatTime = info.creatTime;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[plistUrl path]])
     {
@@ -305,7 +311,6 @@ const NSInteger kActionSheetPickPhoto = 1000;
                 [plistDoc saveDiaryInfo:info];
                 [plistDoc saveToURL:plistUrl forSaveOperation:UIDocumentSaveForOverwriting completionHandler:nil];
                 [plistDoc closeWithCompletionHandler:nil];
-                [self dismissModalViewControllerAnimated:YES];
             }
             
             [info release];
@@ -327,10 +332,10 @@ const NSInteger kActionSheetPickPhoto = 1000;
 
     [self saveDocument:YES];
     
+    // 重新ReloadData 刷新资源列表
+    NSLog(@"NSNotificationCenter %@", entity.title);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DataSourceChanged" object:self.entity];
     [self dismissModalViewControllerAnimated:YES];
-    
-    // 重新ReloadData
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DataSourceChanged" object:entity];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -668,6 +673,21 @@ const NSInteger kActionSheetPickPhoto = 1000;
 
 - (void)deleteFile
 {
+    NSURL *plistUrl = [[self.doc.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"DiaryInfoLog"];    
+    PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
+    [plistDoc openWithCompletionHandler:^(BOOL success){
+        
+        if (success)
+        {
+            [plistDoc removeKey:[self.doc.fileURL path]];
+            [plistDoc saveToURL:plistUrl forSaveOperation:UIDocumentSaveForOverwriting completionHandler:nil];
+            [plistDoc closeWithCompletionHandler:nil];
+        }
+        
+        [plistDoc release];
+    }];
+
+
     [(DiaryListViewController *)listViewController deleteFile:self.doc.fileURL];
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -677,7 +697,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
 - (void)richEditor:(RichEditView *)aRichEditor shouldStartLoadWithRequest:(NSURLRequest *)request
 {
     NSString *string = [[request URL] absoluteString];
-    //NSLog(@"%@", string);
+
     NSArray *array = [string componentsSeparatedByString:@":"];
     if ([array count] > 0)
     {

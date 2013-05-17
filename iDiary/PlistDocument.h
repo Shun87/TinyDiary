@@ -21,5 +21,6 @@
 @property (nonatomic, retain)DiaryUnit *diaryUnit;
 
 - (void)saveDiaryInfo:(DiaryInfo *)info;
+- (void)removeKey:(NSString *)key;
 - (NSArray *)units;
 @end

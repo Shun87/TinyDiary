@@ -10,7 +10,7 @@
 #import "UIColor+HexColor.h"
 #import "NSDate+FormattedStrings.h"
 #import "FilePath.h"
-#import "PlistDocument.h"
+#import "DiaryContentViewController.h"
 
 @implementation DiaryInfoViewController
 @synthesize entity;
@@ -63,6 +63,8 @@
 
 - (IBAction)exitAction:(id)sender
 {
+    entity.title = atextField.text;
+    [atextField resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -102,6 +104,7 @@
 - (IBAction)exitEdit:(id)sender
 {
     UITextField *textField = (UITextField *)sender;
+    entity.title = textField.text;
     [textField resignFirstResponder];
 }
 
@@ -140,19 +143,20 @@
         
         if ([indexPath section] == 0 && [indexPath row] == 0)
         {
-            UITextField *textFeild = [[[UITextField alloc] initWithFrame:CGRectMake(100, 12, 180, 45)] autorelease];
-            textFeild.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
-            [cell.contentView addSubview:textFeild];
-            textFeild.tag = 1001;
-            textFeild.textAlignment = UITextAlignmentRight;
-            [textFeild addTarget:self action:@selector(exitEdit:) forControlEvents:UIControlEventEditingDidEndOnExit];
-            textFeild.returnKeyType = UIReturnKeyDone;
-            textFeild.textColor = [UIColor colorFromHex:Light_blue];
-            textFeild.font = [UIFont systemFontOfSize:16];
+            atextField = [[UITextField alloc] initWithFrame:CGRectMake(100, 12, 190, 45)];
+            atextField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
+            [cell.contentView addSubview:atextField];
+            atextField.tag = 1001;
+            atextField.textAlignment = UITextAlignmentRight;
+            [atextField addTarget:self action:@selector(exitEdit:) forControlEvents:UIControlEventEditingDidEndOnExit];
+            atextField.returnKeyType = UIReturnKeyDone;
+            atextField.textColor = [UIColor colorFromHex:Light_blue];
+            atextField.font = [UIFont systemFontOfSize:16];
+            atextField.backgroundColor = [UIColor clearColor];
         }
         else
         {
-            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(150, 2, 130, 45)] autorelease];
+            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(150, 2, 140, 45)] autorelease];
             label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
             [cell.contentView addSubview:label];
             label.tag = 1002;
@@ -192,6 +196,7 @@
         else
         {
             text = NSLocalizedString(@"Tags", nil);
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
     else if (section == 1)
@@ -224,57 +229,21 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath section] == 0 && [indexPath row] == 0)
+    {
+        return nil;
+    }
+    
+    return indexPath;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    
 }
 
 - (void)dealloc

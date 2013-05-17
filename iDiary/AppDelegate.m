@@ -24,7 +24,7 @@
 @synthesize tabBarController;
 @synthesize navigationController;
 @synthesize passwordViewController;
-@synthesize hud, diaryInfoArray;
+@synthesize hud, diaryInfoArray, docAccess;
 //@synthesize banner;
 
 - (void)dealloc
@@ -35,6 +35,7 @@
     [navigationController release];
     [passwordViewController release];
     [diaryInfoArray release];
+    [docAccess release];
     [super dealloc];
 }
 
@@ -125,7 +126,7 @@
 	hud.labelText = @"Loading";
 	[hud show:YES];
 
-    [self reloadNotes:YES];
+    //[self reloadNotes:YES];
     
     return YES;
 }
@@ -267,6 +268,11 @@
     
     [diaryInfoArray removeAllObjects];
     
+    if ([array count] == 0)
+    {
+        [hud hide:YES];
+    }
+    
     for (NSMetadataItem *item in array)
     {
         NSURL *fileURL = [item valueForAttribute:NSMetadataItemURLKey];
@@ -285,7 +291,8 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
                                                                         object:self.diaryInfoArray];
                 }
-                
+                [hud hide:YES];
+                [plistDoc closeWithCompletionHandler:nil];
                 [plistDoc release];
             }];
         }

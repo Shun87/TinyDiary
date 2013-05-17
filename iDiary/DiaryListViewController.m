@@ -8,14 +8,12 @@
 
 #import "DiaryListViewController.h"
 #import "DiaryContentViewController.h"
-#import "SystemSettingViewController.h"
 #import "CommmonMethods.h"
 #import "DiaryDescription.h"
 #import "NoteDocument.h"
 
 #import "NSDateAdditions.h"
 #import "FilePath.h"
-#import "PasswordViewController.h"
 #import "NSDate+FormattedStrings.h"
 #import "AppDelegate.h"
 #import "PlistDocument.h"
@@ -49,7 +47,6 @@ NSString *const HTMLExtentsion = @".html";
 @synthesize iCloudRoot;
 @synthesize document;
 @synthesize indexPathToDel, indexPathToShare;
-@synthesize docAccess;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,7 +74,6 @@ NSString *const HTMLExtentsion = @".html";
     [settingsButton release];
     
     [iCloudRoot release];
-    [docAccess release];
     [document release];
     [indexPathToDel release];
     [indexPathToShare release];
@@ -115,8 +111,11 @@ NSString *const HTMLExtentsion = @".html";
     entityArray = [[NSMutableArray alloc] init];
     
     self.mTableView.allowsSelectionDuringEditing = YES;
-    
-    [self reloadNotes:YES];
+    UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    titleButton.frame = CGRectMake(0, 0, 200, 44);
+    titleButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    [titleButton setTitle:NSLocalizedString(@"Timeline", nil) forState:UIControlStateNormal];
+    self.navigationItem.titleView = titleButton;
     
     mySocial = [[TTSocial alloc] init];
     mySocial.viewController = self;
@@ -125,15 +124,7 @@ NSString *const HTMLExtentsion = @".html";
                                              selector:@selector(documentStateChange:)
                                                  name:UIDocumentStateChangedNotification
                                                object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didBecomeActive:)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didResignActive:)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(dataSourceChanged:)
                                                  name:@"DataSourceChanged" object:nil];
@@ -141,39 +132,36 @@ NSString *const HTMLExtentsion = @".html";
                                              selector:@selector(storageLocationChanged:)
                                                  name:@"StorageLocationChanged" object:nil];
     
-    UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    titleButton.frame = CGRectMake(0, 0, 200, 44);
-    titleButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
-    [titleButton setTitle:NSLocalizedString(@"Timeline", nil) forState:UIControlStateNormal];
-    self.navigationItem.titleView = titleButton;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadSource:) 
+                                                 name:ReloadDiaryInfoUnits object:nil];
+}
+
+- (void)reloadDataFromArray:(NSArray *)units
+{
+    [entityArray removeAllObjects];
+    
+    for (int i=0; i<[units count]; i++)
+    {
+        DiaryInfo *info = [units objectAtIndex:i];
+        NSURL *url = [NSURL fileURLWithPath:info.url];
+        [self addOrUpdateEntryWithURL:url metadata:nil state:UIDocumentStateNormal version:nil needReload:NO
+                            diaryInfo:info];
+    }
+    
+    [FilePath sortUsingDescending:entityArray];
+    [self.mTableView reloadData];
+}
+
+- (void)reloadSource:(NSNotification *)notification
+{
+    [self reloadDataFromArray:(NSArray *)[notification object]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigaionBarRed.png"] forBarMetrics:UIBarMetricsDefault];
-}
-
-- (void)didBecomeActive:(NSNotification *)notification
-{
-    if (docAccess != nil)
-    {
-        if ([docAccess iCloudOn])
-        {
-            [self reloadNotes:YES];
-        }
-    }
-}
-
-- (void)didResignActive:(NSNotification *)notification
-{
-    if (docAccess != nil)
-    {
-        if ([docAccess iCloudOn])
-        {
-            [docAccess stopQuery];
-        }
-    }
 }
 
 - (void)resolveConfict:(NSURL *)url
@@ -199,9 +187,11 @@ NSString *const HTMLExtentsion = @".html";
     }
 }
 
+// 添加修改数据源的时候发送的消息处理函数
 - (void)dataSourceChanged:(NSNotification *)notification
 {
     DocEntity *entity = (DocEntity *)[notification object];
+    
     if (entity != nil)
     {
         int index = [self indexOfEntryWithFileURL:entity.docURL];
@@ -222,7 +212,7 @@ NSString *const HTMLExtentsion = @".html";
 
 - (void)updataDataSource:(NSArray *)urlArray
 {
-    NSURL *iCloudDocURL = [docAccess iCloudDocURL];
+    NSURL *iCloudDocURL = [[AppDelegate app].docAccess iCloudDocURL];
     int nCount = [entityArray count];
     [entityArray enumerateObjectsUsingBlock:^(DocEntity * entry, NSUInteger idx, BOOL *stop) 
     {
@@ -243,102 +233,6 @@ NSString *const HTMLExtentsion = @".html";
 - (void)storageLocationChanged:(NSNotification *)notification
 {
     [self reloadNotes:YES];
-}
-
-- (void)reloadNotes:(BOOL)needReload
-{
-    if (needReload)
-    {
-        [entityArray removeAllObjects];
-        [self.mTableView reloadData];
-    }
-    
-    if (docAccess == nil)
-    {
-        docAccess = [[DocumentsAccess alloc] initWithDelegate:self];
-    }
-    
-    MBProgressHUD *hud = [AppDelegate app].hud;
-    [self.view.window addSubview:hud];
-	hud.labelText = @"Loading";
-	[hud show:YES];
-    
-    [docAccess initializeiDocAccess:^(BOOL available){
-    
-        if (available)
-        {
-            // 询问是否把数据存入ICLOUD, 并且是在没有提示过的情况下,如果提示过了下次就不再提示
-            if (![docAccess iCloudOn] && ![docAccess iCloudPrompted])
-            {
-                // 设置为提示过
-                [docAccess setiCloudPrompted:YES];
-//                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"iCloud is Available" 
-//                                                                     message:@"Automatically store your documents in the cloud to keep them up-to-date across all your devices and the web." 
-//                                                                    delegate:self 
-//                                                           cancelButtonTitle:@"Later" 
-//                                                           otherButtonTitles:@"Use iCloud", nil];
-//                alertView.tag = 1;
-//                [alertView show];
-                [docAccess setiCloudOn:YES];
-                [self reloadNotes:YES];
-            }
-            
-            // move iCloud docs to local
-            if (![docAccess iCloudOn] && [docAccess iCloudWasOn])
-            {
-                [docAccess iCloudToLocal:kNotePacketExtension completion:^(NSArray *fileArray){
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self loadLocalNotes];
-                    });
-                }];
-            }
-            
-            // move local docs to iCloud
-            if ([docAccess iCloudOn] && ![docAccess iCloudWasOn])
-            {
-                [docAccess localToiCloud:kNotePacketExtension completion:^(NSArray *fileArray){
-                     
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self updataDataSource:fileArray];
-                    });
-                }]; 
-               
-            }
-            
-            if ([docAccess iCloudOn] && needReload)
-            {
-                NSString * filePattern = [NSString stringWithFormat:DiaryInfoLog];
-                [docAccess startQueryForPattern:filePattern];
-            }
-
-            // No matter what, refresh with current value of iCloudOn
-            [docAccess setiCloudWasOn:[docAccess iCloudOn]];
-        }
-        else
-        {
-            // If iCloud isn't available, set promoted to no (so we can ask them next time it becomes available)
-            [docAccess setiCloudPrompted:NO];
-            
-            // If iCloud was toggled on previously, warn user that the docs will be loaded locally
-            if ([docAccess iCloudWasOn]) {
-                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"You're Not Using iCloud" message:@"Your documents were removed from this iPhone but remain stored in iCloud." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                [alertView show];
-            }
-            
-            // No matter what, iCloud isn't available so switch it to off.
-            [docAccess setiCloudOn:NO]; 
-            [docAccess setiCloudWasOn:NO];
-        }
-        
-        // 查询本地
-        if (![docAccess iCloudOn] && needReload)
-        {
-            [self loadLocalNotes];
-        }
-    }];
 }
 
 - (void)loadLocalNotes
@@ -437,21 +331,13 @@ diaryInfo:(DiaryInfo *)info
     }
 }
 
-- (IBAction)systemSetting:(id)sender
-{
-    SystemSettingViewController *systemSettingViewController = [[SystemSettingViewController alloc] initWithNibName:@"SystemSettingViewController"
-                                                                                                             bundle:nil];
-    [self.navigationController pushViewController:systemSettingViewController animated:YES];
-    [systemSettingViewController release];
-}
-
 - (IBAction)addAction:(id)sender
 {
     NSString *wrapperName = [FilePath generateFileNameBy:[NSDate date] extension:kNotePacketExtension];
     NSURL *wrapperURL = nil;
 
-    NSURL *cloudRootURL = [docAccess.ubiquityURL URLByAppendingPathComponent:TDDocumentsDirectoryName isDirectory:YES];
-    if (docAccess.iCloudAvailable && [docAccess iCloudOn])
+    NSURL *cloudRootURL = [[AppDelegate app].docAccess.ubiquityURL URLByAppendingPathComponent:TDDocumentsDirectoryName isDirectory:YES];
+    if ([AppDelegate app].docAccess.iCloudAvailable && [[AppDelegate app].docAccess iCloudOn])
     {
         wrapperURL = [cloudRootURL URLByAppendingPathComponent:wrapperName];
     }
@@ -496,7 +382,6 @@ diaryInfo:(DiaryInfo *)info
                         // 数据源的添加放在消息接受中处理, 这样可以避免在push页面时看到tableView的添加动画
                         
                     });
-                    
                 }
             }];
         }
@@ -546,7 +431,6 @@ diaryInfo:(DiaryInfo *)info
 
 - (void)startLoadDoc:(DocEntity *)entity forIndexPath:(NSIndexPath *)indexPath
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NoteDocument *doc = [[NoteDocument alloc] initWithFileURL:entity.docURL];
     [doc openWithCompletionHandler:^(BOOL success){
         if (success)
@@ -568,7 +452,6 @@ diaryInfo:(DiaryInfo *)info
                  
                     [self metadataLoadSuccess:entity];
                     [doc release];
-                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                     
                 });
             }];
@@ -657,9 +540,9 @@ diaryInfo:(DiaryInfo *)info
     }
     
     DocEntity *entity = [entityArray objectAtIndex:index];
-    if (entity != nil && docAccess != nil)
+    if (entity != nil && [AppDelegate app].docAccess != nil)
     {
-        [docAccess deleteFile:entity.docURL];
+        [[AppDelegate app].docAccess deleteFile:entity.docURL];
     }
     [entityArray removeObject:entity];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -707,7 +590,7 @@ diaryInfo:(DiaryInfo *)info
     {
         if (buttonIndex == alertView.firstOtherButtonIndex) 
         {
-            [docAccess setiCloudOn:YES];            
+            [[AppDelegate app].docAccess setiCloudOn:YES];            
             [self reloadNotes:YES];
         }                
     } 
@@ -738,67 +621,6 @@ diaryInfo:(DiaryInfo *)info
 //        
 //    }
 }
-
-#pragma mark - iCloudAvailableDelegate
-
-- (void)queryDidFinished:(NSArray *)array
-{
-    if (![docAccess iCloudOn])
-    {
-        return;
-    }
-    
-    [entityArray removeAllObjects];
-    
-    if ([array count] == 0)
-    {
-        MBProgressHUD *hud = [AppDelegate app].hud;
-        [hud hide:YES];
-    }
-    
-    for (NSMetadataItem *item in array)
-    {
-        NSURL *fileURL = [item valueForAttribute:NSMetadataItemURLKey];
-        NSNumber *hide = nil;
-        
-        // Don't include hidden files
-        [fileURL getResourceValue:&hide forKey:NSURLIsHiddenKey error:nil];
-        if (hide && ![hide boolValue] && [[fileURL lastPathComponent] isEqualToString:DiaryInfoLog])
-        {
-            PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:fileURL];
-            [plistDoc openWithCompletionHandler:^(BOOL success){
-                
-                if (success)
-                {
-                    NSArray *units = [plistDoc units];
-                    for (int i=0; i<[units count]; i++)
-                    {
-                        DiaryInfo *info = [units objectAtIndex:i];
-                        NSURL *url = [NSURL fileURLWithPath:info.url];
-                        [self addOrUpdateEntryWithURL:url metadata:nil state:UIDocumentStateNormal version:nil needReload:NO
-                         diaryInfo:info];
-                    }
-                    
-                    // 排序
-                    [FilePath sortUsingDescending:entityArray];
-                    
-                    MBProgressHUD *hud = [AppDelegate app].hud;
-                    [hud hide:YES];
-                    
-                    [self.mTableView reloadData];
-                }
-                else
-                {
-                    [[AppDelegate app].hud hide:YES];
-                }
-                
-                [plistDoc release];
-            }];
-
-        }
-    }
-}
-
 
 #pragma mark - Table view data source
 

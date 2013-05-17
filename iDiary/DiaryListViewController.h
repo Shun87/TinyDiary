@@ -35,12 +35,8 @@ DocumentsAccessDelegate, UIActionSheetDelegate>
     
     TTSocial *mySocial;
     
-    DocumentsAccess *docAccess;
-    
-    
 }
 @property (nonatomic, retain)IBOutlet UITableView *mTableView;
-@property (nonatomic, readonly)DocumentsAccess *docAccess;
 @property (nonatomic, retain) IBOutlet AdvancedCell *tmpCell;
 @property (nonatomic, retain) UINib *cellNib;
 
@@ -59,6 +55,8 @@ DocumentsAccessDelegate, UIActionSheetDelegate>
 
 - (void)showDiaryContent:(DocEntity *)entity newFile:(BOOL)newFile;
 - (void)deleteFile:(NSURL *)url;
+
+- (void)reloadDataFromArray:(NSArray *)units;
 
 - (DocEntity *)preUrl:(DocEntity *)entry;
 - (DocEntity *)nextUrl:(DocEntity *)entry;
