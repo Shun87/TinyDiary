@@ -61,7 +61,6 @@
 		36CEAF281658558400C33018 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CEAF261658558400C33018 /* SystemSettingViewController.m */; };
 		36CEAF291658558400C33018 /* SystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36CEAF271658558400C33018 /* SystemSettingViewController.xib */; };
 		36D25AB2166E347A00BFC041 /* DiaryDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D25AB1166E347A00BFC041 /* DiaryDescription.m */; };
-		36D32B901745209E00016E5C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36D32B8F1745209E00016E5C /* Social.framework */; };
 		36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36F1F8C916F7631E004EDB60 /* MessageUI.framework */; };
 		36F1F8CD16F7692E004EDB60 /* TTSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F1F8CC16F7692D004EDB60 /* TTSocial.m */; };
 		36FAAE841661ECA40060FBD8 /* CommmonMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FAAE831661ECA40060FBD8 /* CommmonMethods.m */; };
@@ -241,7 +240,6 @@
 		36CEAF271658558400C33018 /* SystemSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SystemSettingViewController.xib; sourceTree = "<group>"; };
 		36D25AB0166E347A00BFC041 /* DiaryDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryDescription.h; sourceTree = "<group>"; };
 		36D25AB1166E347A00BFC041 /* DiaryDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryDescription.m; sourceTree = "<group>"; };
-		36D32B8F1745209E00016E5C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		36D3714A16D69820003B5555 /* DSActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
 		36D3714B16D69820003B5555 /* DSActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
 		36F1F8C916F7631E004EDB60 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -353,7 +351,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36D32B901745209E00016E5C /* Social.framework in Frameworks */,
 				FA693EC2170AD644005A0B66 /* CoreTelephony.framework in Frameworks */,
 				36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */,
 				369D176616E900BF004F9BFB /* AudioToolbox.framework in Frameworks */,
@@ -371,7 +368,6 @@
 		3606259516528B35006D7075 = {
 			isa = PBXGroup;
 			children = (
-				36D32B8F1745209E00016E5C /* Social.framework */,
 				FA104E12173CA376002060F6 /* TinyDiaryPro.entitlements */,
 				FA693EC1170AD644005A0B66 /* CoreTelephony.framework */,
 				36F1F8C916F7631E004EDB60 /* MessageUI.framework */,
@@ -905,7 +901,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E93961BC-D3CF-4CD3-8551-02AB44CDB17F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5E93DE4-4443-4A45-8B30-C8164C022CE5";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -948,7 +944,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "Tiny Diary Pro";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E93961BC-D3CF-4CD3-8551-02AB44CDB17F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5E93DE4-4443-4A45-8B30-C8164C022CE5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
