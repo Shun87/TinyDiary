@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "DocEntity.h"
-
-@interface DiaryInfoViewController : UITableViewController
+#import "TITokenField.h"
+@interface DiaryInfoViewController : UITableViewController<TITokenFieldDelegate>
 {
     DocEntity *entity;
     UITextField *atextField;
+    
+    float caretheight;
+    TITokenField *tokenField;
 }
 @property (nonatomic, retain)DocEntity *entity;
 @end

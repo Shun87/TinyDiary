@@ -49,7 +49,7 @@
             diary.url = key;
             diary.title = [dictionary objectForKey:DIC_KEY_TITLE];
             diary.creatTime = [dictionary objectForKey:DIC_CREAT_TIME];
-            diary.tags = [dictionary objectForKey:DIC_CREAT_TIME];
+            diary.tags = [dictionary objectForKey:DIC_TAG];
             
             [diaryArray addObject:diary];
             

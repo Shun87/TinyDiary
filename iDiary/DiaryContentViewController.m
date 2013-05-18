@@ -286,6 +286,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     DiaryInfo *info = [[DiaryInfo alloc] init];
     info.url = [self.doc.fileURL path];
     info.title = entity.title;
+
     for (int i=0; i<[entity.tags count]; i++)
     {
         if (i == 0)
@@ -294,9 +295,10 @@ const NSInteger kActionSheetPickPhoto = 1000;
         }
         else
         {
-            [info.tags stringByAppendingFormat:@"|%@", [entity.tags objectAtIndex:i]];
+            info.tags = [info.tags stringByAppendingFormat:@"|%@", [entity.tags objectAtIndex:i]];
         }
     }
+
     info.creatTime = entity.creatTime; 
     
     PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
@@ -333,7 +335,6 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [self saveDocument:YES];
     
     // 重新ReloadData 刷新资源列表
-    NSLog(@"NSNotificationCenter %@", entity.title);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DataSourceChanged" object:self.entity];
     [self dismissModalViewControllerAnimated:YES];
 }

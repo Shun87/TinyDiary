@@ -12,6 +12,14 @@
 #import "FilePath.h"
 #import "DiaryContentViewController.h"
 
+#define kTextFieldWidth	260.0
+#define kLeftMargin				20.0
+#define kTopMargin				20.0
+#define kRightMargin			20.0
+#define kTweenMargin			6.0
+
+#define kTextFieldHeight		30.0
+
 @implementation DiaryInfoViewController
 @synthesize entity;
 
@@ -58,13 +66,26 @@
     lable.textColor = [UIColor darkGrayColor];
     self.navigationItem.titleView = lable;
     [lable release];
-
+    
+    caretheight = 44;
+     CGRect frame = CGRectMake(50, 8.0, kTextFieldWidth, kTextFieldHeight);
+    tokenField = [[TITokenField alloc] initWithFrame:frame];
+    tokenField.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+    [tokenField addTarget:self action:@selector(tokenFieldFrameWillChange:) forControlEvents:TITokenFieldControlEventFrameWillChange];
+    tokenField.delegate = self;
+    for (int i=0; i<[entity.tags count]; i++)
+    {
+        [tokenField addTokenWithTitle:[entity.tags objectAtIndex:i]];
+    }
+    
+    [tokenField resignFirstResponder];
 }
 
 - (IBAction)exitAction:(id)sender
 {
-    entity.title = atextField.text;
     [atextField resignFirstResponder];
+    [entity.tags removeAllObjects];
+    [entity.tags addObjectsFromArray:tokenField.tokenTitles];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -108,6 +129,28 @@
     [textField resignFirstResponder];
 }
 
+- (IBAction)tokenFieldFrameWillChange:(id)sender
+{
+    caretheight = CGRectGetMaxY(tokenField.frame);
+    if (tokenField.editing)
+    {
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    caretheight = CGRectGetMaxY(tokenField.frame);
+    UITableViewCell *cell = (UITableViewCell *)[[textField superview] superview];
+    if (tokenField.frame.size.height > cell.frame.size.height)
+    {
+        caretheight = tokenField.frame.size.height;
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -128,6 +171,16 @@
     return 0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    float height = 44.0;
+    if ([indexPath section] == 0 && [indexPath row] == 1)
+    {
+        return caretheight;
+    }
+    return height;
+}
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor whiteColor];
@@ -145,13 +198,12 @@
         {
             atextField = [[UITextField alloc] initWithFrame:CGRectMake(100, 12, 190, 45)];
             atextField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
-            [cell.contentView addSubview:atextField];
             atextField.tag = 1001;
             atextField.textAlignment = UITextAlignmentRight;
             [atextField addTarget:self action:@selector(exitEdit:) forControlEvents:UIControlEventEditingDidEndOnExit];
             atextField.returnKeyType = UIReturnKeyDone;
             atextField.textColor = [UIColor colorFromHex:Light_blue];
-            atextField.font = [UIFont systemFontOfSize:16];
+            atextField.font = [UIFont systemFontOfSize:17];
             atextField.backgroundColor = [UIColor clearColor];
         }
         else
@@ -165,16 +217,30 @@
             label.textAlignment = UITextAlignmentRight;
             label.lineBreakMode = UILineBreakModeCharacterWrap;
             label.font = [UIFont systemFontOfSize:16];
+            
+            if ([indexPath section] == 0 && [indexPath row] == 1)
+            {
+                [cell.contentView addSubview:tokenField];
+
+            }
         }
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    UITextField *textFeild = (UITextField *)[cell.contentView viewWithTag:1001];
-    if (textFeild != nil)
+    // 将要显示创建日期的section时候，可能会复用第一列。 但是创建日期还没显示出来时tempIndexPath还是第一列，在此时久需要把textfield的text设为空
+    // 下次在近来的时候猜会进到[atextField removeFromSuperview];
+    UITextField *field = (UITextField *)[cell.contentView viewWithTag:1001];
+    if (field != nil)
     {
-        textFeild.text = nil;
+        field.text = nil;
     }
+    UITableViewCell *targetCell = (UITableViewCell *)[[atextField superview] superview];
+    NSIndexPath *tempIndexPath = [tableView indexPathForCell:targetCell];
+    if ([tempIndexPath section] != 0 || [tempIndexPath row] != 0)
+    {
+        [atextField removeFromSuperview];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     UILabel *label = (UILabel *)[cell.contentView viewWithTag:1002];
     if (label != nil)
@@ -191,12 +257,17 @@
         if (row == 0)
         {
             text = NSLocalizedString(@"Title", nil);
-            textFeild.text = @"标题";
+            if ([atextField superview] == nil)
+            {
+                [cell.contentView addSubview:atextField];
+            }
+            
+            atextField.text = entity.title;
         }
         else
         {
             text = NSLocalizedString(@"Tags", nil);
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
         }
     }
     else if (section == 1)
@@ -248,6 +319,9 @@
 
 - (void)dealloc
 {
+    [tokenField release];
+    [atextField release];
+    [entity release];
     [super dealloc];
 }
 

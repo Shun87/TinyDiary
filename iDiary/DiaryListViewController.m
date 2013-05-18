@@ -144,6 +144,7 @@ NSString *const HTMLExtentsion = @".html";
     for (int i=0; i<[units count]; i++)
     {
         DiaryInfo *info = [units objectAtIndex:i];
+        NSLog(@"reloadDataFromArray %@", info.tags);
         NSURL *url = [NSURL fileURLWithPath:info.url];
         [self addOrUpdateEntryWithURL:url metadata:nil state:UIDocumentStateNormal version:nil needReload:NO
                             diaryInfo:info];
@@ -653,7 +654,7 @@ diaryInfo:(DiaryInfo *)info
     {
         DocEntity *entity = [entityArray objectAtIndex:[indexPath row]];
         [self fillCell:cell withEntity:entity];
-        
+
         if (entity.metadata == nil)
         {
             // 如果为空则去加载填充
