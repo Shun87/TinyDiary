@@ -76,6 +76,11 @@ const CGFloat kRightMargin = 70;
     rect.origin.x = kLeftMargin;
     rect.size.width = self.bounds.size.width - kRightMargin - rect.origin.x;
     contentLabel.frame = rect;
+    
+    UIView *subView = [[[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)] autorelease];
+    [self.contentView addSubview:subView];
+    subView.backgroundColor = HEXCOLOR(0xe0e0e0, 1);
+    subView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
@@ -87,14 +92,15 @@ const CGFloat kRightMargin = 70;
 {
     if (!self.backgroundView)
     {
-        UIImage *backgroundImage = [[UIImage imageWithContentsOfFile:imagePath]
-                                    stretchableImageWithLeftCapWidth:0.0 topCapHeight:3.0];
-
-        UIImageView *contentImageView = [[UIImageView alloc] initWithImage:backgroundImage];
-        contentImageView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
-        contentImageView.frame = self.bounds;
-        self.backgroundView = contentImageView;
-        [contentImageView release];
+//        UIImage *backgroundImage = [[UIImage imageWithContentsOfFile:imagePath]
+//                                    stretchableImageWithLeftCapWidth:0.0 topCapHeight:3.0];
+//
+//        UIImageView *contentImageView = [[UIImageView alloc] initWithImage:backgroundImage];
+//        contentImageView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
+//        contentImageView.frame = self.bounds;
+//        self.backgroundView = contentImageView;
+//        [contentImageView release];
+        
     }
 }
 

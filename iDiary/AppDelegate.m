@@ -19,7 +19,7 @@
 #import "TagsViewController.h"
 #import "FilePath.h"
 #import "UIColor+HexColor.h"
-
+#import "Kal.h"
 @implementation AppDelegate
 @synthesize window ;
 @synthesize tabBarController;
@@ -80,9 +80,11 @@
     UIViewController *settingController = [[[SystemSettingViewController alloc] initWithNibName:@"SystemSettingViewController" bundle:nil] autorelease];
     UINavigationController *nav2 = [[[UINavigationController alloc] initWithRootViewController:settingController] autorelease];
 
-    UIViewController *calendarController = [[[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil] autorelease];
-    UINavigationController *nav3 = [[[UINavigationController alloc] initWithRootViewController:calendarController] autorelease];
-    
+    //UIViewController *calendarController = [[[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil] autorelease];
+   
+    KalViewController *kalViewController = [[KalViewController alloc] init];
+    UINavigationController *nav3 = [[[UINavigationController alloc] initWithRootViewController:kalViewController] autorelease];
+    //kalViewController.title = NSLocalizedString(@"", <#comment#>)
     UIViewController *tagController = [[[TagsViewController alloc] initWithNibName:@"TagsViewController" bundle:nil] autorelease];
     UINavigationController *nav4 = [[[UINavigationController alloc] initWithRootViewController:tagController] autorelease];
     

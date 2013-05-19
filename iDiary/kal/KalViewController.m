@@ -46,6 +46,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
     logic = [[KalLogic alloc] initForDate:date];
     self.initialDate = date;
     self.selectedDate = date;
+    self.title = NSLocalizedString(@"Calendar", nil);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(significantTimeChangeOccurred) name:UIApplicationSignificantTimeChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:KalDataSourceChangedNotification object:nil];
   }
@@ -182,7 +183,9 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 - (void)loadView
 {
   if (!self.title)
-    self.title = @"Calendar";
+  {
+    self.title = NSLocalizedString(@"Calendar", nil);
+  }
   KalView *kalView = [[[KalView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] delegate:self logic:logic] autorelease];
   self.view = kalView;
   tableView = kalView.tableView;
