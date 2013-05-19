@@ -35,7 +35,9 @@ DocumentsAccessDelegate, UIActionSheetDelegate>
     
     TTSocial *mySocial;
     
+    NSString *tagName;
 }
+@property (nonatomic, copy)NSString *tagName;
 @property (nonatomic, retain)IBOutlet UITableView *mTableView;
 @property (nonatomic, retain) IBOutlet AdvancedCell *tmpCell;
 @property (nonatomic, retain) UINib *cellNib;

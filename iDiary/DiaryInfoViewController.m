@@ -73,6 +73,7 @@
     tokenField.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     [tokenField addTarget:self action:@selector(tokenFieldFrameWillChange:) forControlEvents:TITokenFieldControlEventFrameWillChange];
     tokenField.delegate = self;
+    [tokenField setRemovesTokensOnEndEditing:NO];
     for (int i=0; i<[entity.tags count]; i++)
     {
         NSString *tagName = [entity.tags objectAtIndex:i];
@@ -81,6 +82,8 @@
             [tokenField addTokenWithTitle:[entity.tags objectAtIndex:i]];
         }
     }
+    
+    caretheight = MAX(CGRectGetMaxY(tokenField.frame), 44);
     
     [tokenField resignFirstResponder];
 }
@@ -129,8 +132,11 @@
 - (IBAction)exitEdit:(id)sender
 {
     UITextField *textField = (UITextField *)sender;
-    entity.title = textField.text;
-    [textField resignFirstResponder];
+    if (textField == atextField)
+    {
+        entity.title = textField.text;
+        [textField resignFirstResponder];
+    }
 }
 
 - (IBAction)tokenFieldFrameWillChange:(id)sender
@@ -145,13 +151,24 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    caretheight = CGRectGetMaxY(tokenField.frame);
-    UITableViewCell *cell = (UITableViewCell *)[[textField superview] superview];
-    if (tokenField.frame.size.height > cell.frame.size.height)
+    if (textField == tokenField)
     {
-        caretheight = tokenField.frame.size.height;
-        [self.tableView beginUpdates];
-        [self.tableView endUpdates];
+        caretheight = CGRectGetMaxY(tokenField.frame);
+        UITableViewCell *cell = (UITableViewCell *)[[textField superview] superview];
+        if (tokenField.frame.size.height > cell.frame.size.height)
+        {
+            caretheight = tokenField.frame.size.height;
+            [self.tableView beginUpdates];
+            [self.tableView endUpdates];
+        }
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == atextField)
+    {
+        entity.title = textField.text;
     }
 }
 
@@ -209,6 +226,7 @@
             atextField.textColor = [UIColor colorFromHex:Light_blue];
             atextField.font = [UIFont systemFontOfSize:17];
             atextField.backgroundColor = [UIColor clearColor];
+            atextField.delegate = self;
         }
         else
         {

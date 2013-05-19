@@ -110,7 +110,6 @@
                                                     reuseIdentifier:@"parameter"] autorelease];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-    cell.textLabel.textColor = HEXCOLOR(0x4a5364, 1);
     cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
     cell.backgroundColor = [UIColor clearColor];
     NSInteger row = [indexPath row];

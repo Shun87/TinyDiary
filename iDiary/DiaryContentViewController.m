@@ -283,7 +283,27 @@ const NSInteger kActionSheetPickPhoto = 1000;
 - (void)exitAction:(id)sender
 {
     NSURL *plistUrl = [[self.doc.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"DiaryInfoLog"];
-    DiaryInfo *info = [[DiaryInfo alloc] init];
+    
+    BOOL newDiary = NO;
+    DiaryInfo *info = nil;
+    NSArray *array = [AppDelegate app].diaryInfoArray;
+    for (int i=0; i<[array count]; i++)
+    {
+        DiaryInfo *tmpInfo = [array objectAtIndex:i];
+        if ([tmpInfo.url isEqualToString:[self.doc.fileURL path]])
+        {
+            info = tmpInfo;
+            break;
+        }
+    }
+    
+    if (info == nil)
+    {
+        newDiary = YES;
+        info = [[DiaryInfo alloc] init];
+        [[AppDelegate app].diaryInfoArray addObject:info];
+    }
+   
     info.url = [self.doc.fileURL path];
     info.title = entity.title;
     
@@ -315,7 +335,11 @@ const NSInteger kActionSheetPickPhoto = 1000;
                 [plistDoc closeWithCompletionHandler:nil];
             }
             
-            [info release];
+            if (newDiary)
+            {
+                [info release];
+            }
+            
         }];
     }
     else
@@ -328,7 +352,10 @@ const NSInteger kActionSheetPickPhoto = 1000;
                 [plistDoc closeWithCompletionHandler:nil];
             }
             
-            [info release];
+            if (newDiary)
+            {
+                [info release];
+            }
         }];
     }
 
@@ -674,7 +701,18 @@ const NSInteger kActionSheetPickPhoto = 1000;
 
 - (void)deleteFile
 {
-    NSURL *plistUrl = [[self.doc.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"DiaryInfoLog"];    
+    NSArray *array = [AppDelegate app].diaryInfoArray;
+    for (int i=0; i<[array count]; i++)
+    {
+        DiaryInfo *tmpInfo = [array objectAtIndex:i];
+        if ([tmpInfo.url isEqualToString:[self.doc.fileURL path]])
+        {
+            [[AppDelegate app].diaryInfoArray removeObject:tmpInfo];
+            break;
+        }
+    }
+    
+    NSURL *plistUrl = [[self.doc.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"DiaryInfoLog"];
     PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:plistUrl];
     [plistDoc openWithCompletionHandler:^(BOOL success){
         

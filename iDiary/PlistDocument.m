@@ -39,7 +39,7 @@
     NSString *title = info.title;
     if (title == nil)
     {
-        title = @"";
+        title = NSLocalizedString(@"No title", nil);
     }
     
     NSString *tag = info.tags;

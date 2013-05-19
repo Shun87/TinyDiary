@@ -50,9 +50,6 @@
         self.title = NSLocalizedString(@"Tags", nil);
         self.tabBarItem.image = [UIImage imageNamed:@"tag"];
         tagArray = [[NSMutableArray alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(reloadSource:)
-                                                     name:ReloadDiaryInfoUnits object:nil];
     }
     return self;
 }
@@ -74,13 +71,14 @@
     self.mTableView.backgroundView = nil;
     self.mTableView.backgroundColor = [UIColor clearColor];
     self.mTableView.separatorColor = [UIColor colorFromHex:SeperatorColor];
+    self.title = NSLocalizedString(@"Tags", nil);
 }
 
-- (void)reloadSource:(NSNotification *)notification
+- (void)reloadSource
 {
     [tagArray removeAllObjects];
     
-    NSArray *unitArray = (NSArray *)[notification object];
+    NSArray *unitArray = [AppDelegate app].diaryInfoArray;
     
     for (int i=0; i<[unitArray count]; i++)
     {
@@ -132,6 +130,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self reloadSource];
     [self.mTableView reloadData];
 }
 
@@ -205,9 +205,9 @@
     
     DiaryListViewController *diarylistController = [[DiaryListViewController alloc] initWithNibName:@"DiaryListViewController"
                                                                                              bundle:nil];
+    diarylistController.tagName = tag.tagName;
     [self.navigationController pushViewController:diarylistController animated:YES];
     [diarylistController reloadDataFromArray:tag.diaryInfoArray];
-    diarylistController.title = tag.tagName;
     [diarylistController release];
 }
 

@@ -18,6 +18,7 @@
 #import "CalendarViewController.h"
 #import "TagsViewController.h"
 #import "FilePath.h"
+#import "UIColor+HexColor.h"
 
 @implementation AppDelegate
 @synthesize window ;
@@ -88,10 +89,10 @@
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     [self.tabBarController setViewControllers:[NSArray arrayWithObjects:aNavigationController, nav3, nav4, nav2, nil]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    [[UINavigationBar appearance] setTintColor:HEXCOLOR(0x0f6ec0, 1)];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorFromHex:0x1a7cc5]];
     self.window.rootViewController = self.tabBarController;
     
-    // Initialize the banner at the bottom of the screen.
+    // Initialize the banner at the bottom of the screen.0
 //    CGPoint origin = CGPointMake(0.0,
 //                                 self.window.frame.size.height -
 //                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height);

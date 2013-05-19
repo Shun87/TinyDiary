@@ -12,9 +12,11 @@
 {
     NSString *tagName;
     NSMutableArray *diaryInfoArray;
+    
 }
 @property (nonatomic, copy)NSString *tagName;
 @property (nonatomic, retain)NSMutableArray *diaryInfoArray;
+
 @end
 
 @interface TagsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>

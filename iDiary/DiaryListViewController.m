@@ -47,6 +47,7 @@ NSString *const HTMLExtentsion = @".html";
 @synthesize iCloudRoot;
 @synthesize document;
 @synthesize indexPathToDel, indexPathToShare;
+@synthesize tagName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,6 +80,7 @@ NSString *const HTMLExtentsion = @".html";
     [document release];
     [indexPathToDel release];
     [indexPathToShare release];
+    [tagName release];
     [super dealloc];
 }
 
@@ -92,22 +94,37 @@ NSString *const HTMLExtentsion = @".html";
     self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     fileCount = 0;
     
-    //cell的背景颜色和tableview的一样
     self.mTableView.backgroundColor = HEXCOLOR(0xfdfdfd, 1.0);
     self.view.backgroundColor = HEXCOLOR(0xfdfdfd, 1.0);
     
     self.cellNib = [UINib nibWithNibName:@"AdvancedCell" bundle:nil];
-
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 40, 40)];
-    button.showsTouchWhenHighlighted = YES;
-    [button addTarget:self
-               action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = rightItem;
-    [rightItem release];
     
+    if ([tagName length] > 0)
+    {
+        // TAG页面
+         self.navigationItem.title = tagName;
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:[UIImage imageNamed:@"bakck_white.png"] forState:UIControlStateNormal];
+        [button setFrame:CGRectMake(0, 0, 40, 40)];
+        button.showsTouchWhenHighlighted = YES;
+        [button addTarget:self
+                   action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.navigationItem.leftBarButtonItem = rightItem;
+    }
+    else
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+        [button setFrame:CGRectMake(0, 0, 40, 40)];
+        button.showsTouchWhenHighlighted = YES;
+        [button addTarget:self
+                   action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.navigationItem.rightBarButtonItem = rightItem;
+        [rightItem release];
+    }
+   
     entityArray = [[NSMutableArray alloc] init];
     
     self.mTableView.allowsSelectionDuringEditing = YES;
@@ -130,6 +147,11 @@ NSString *const HTMLExtentsion = @".html";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadSource:) 
                                                  name:ReloadDiaryInfoUnits object:nil];
+}
+
+- (IBAction)goBack:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)reloadDataFromArray:(NSArray *)units
