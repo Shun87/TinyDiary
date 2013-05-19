@@ -234,8 +234,7 @@
         field.text = nil;
     }
     UITableViewCell *targetCell = (UITableViewCell *)[[atextField superview] superview];
-    NSIndexPath *tempIndexPath = [tableView indexPathForCell:targetCell];
-    if ([tempIndexPath section] != 0 || [tempIndexPath row] != 0)
+    if (targetCell == cell && ([indexPath section] != 0 || ([indexPath section] == 0 && [indexPath row] != 0) ) )
     {
         [atextField removeFromSuperview];
     }

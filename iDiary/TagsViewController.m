@@ -46,6 +46,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Tags", nil);
+        tagArray = [[NSMutableArray alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadSource:)
+                                                     name:ReloadDiaryInfoUnits object:nil];
     }
     return self;
 }
@@ -65,15 +69,14 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorFromHex:LightGray];
     self.mTableView.backgroundView = nil;
+    self.mTableView.backgroundColor = [UIColor clearColor];
     self.mTableView.separatorColor = [UIColor colorFromHex:SeperatorColor];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadSource:) 
-                                                 name:ReloadDiaryInfoUnits object:nil];
 }
 
 - (void)reloadSource:(NSNotification *)notification
 {
+    [tagArray removeAllObjects];
+    
     NSArray *unitArray = (NSArray *)[notification object];
     
     for (int i=0; i<[unitArray count]; i++)
@@ -89,6 +92,8 @@
                 DiaryTag *diaryTag = [[DiaryTag alloc] init];
                 diaryTag.tagName = subTag;
                 [diaryTag.diaryInfoArray addObject:info];
+                [tagArray addObject:diaryTag];
+                [diaryTag release];
             }
             else
             {
@@ -108,12 +113,18 @@
                         DiaryTag *diaryTag = [[DiaryTag alloc] init];
                         diaryTag.tagName = subTag;
                         [diaryTag.diaryInfoArray addObject:info];
+                        [tagArray addObject:diaryTag];
+                        [diaryTag release];
                     }
                 }];
             }
         }
     }
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self.mTableView reloadData];
 }
 
