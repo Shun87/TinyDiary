@@ -17,7 +17,7 @@
 
 #import "CalendarViewController.h"
 #import "TagsViewController.h"
-
+#import "FilePath.h"
 
 @implementation AppDelegate
 @synthesize window ;
@@ -88,7 +88,7 @@
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     [self.tabBarController setViewControllers:[NSArray arrayWithObjects:aNavigationController, nav3, nav4, nav2, nil]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    [[UINavigationBar appearance] setTintColor:HEXCOLOR(0xb33e2d, 1)];
+    [[UINavigationBar appearance] setTintColor:HEXCOLOR(0x0f6ec0, 1)];
     self.window.rootViewController = self.tabBarController;
     
     // Initialize the banner at the bottom of the screen.
@@ -255,6 +255,29 @@
             [self loadLocalNotes];
         }
     }];
+}
+
+- (void)loadLocalNotes
+{
+   [diaryInfoArray removeAllObjects];
+    NSURL *localDocURL = [FilePath localDocumentsDirectoryURL];
+    NSURL *infoURL = [localDocURL URLByAppendingPathComponent:DiaryInfoLog];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[infoURL path]])
+    {
+        PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:infoURL];
+        [plistDoc openWithCompletionHandler:^(BOOL success){
+            
+            if (success)
+            {
+                [self.diaryInfoArray addObjectsFromArray:[plistDoc units] ];
+                [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
+                                                                    object:self.diaryInfoArray];
+            }
+            [hud hide:YES];
+            [plistDoc closeWithCompletionHandler:nil];
+            [plistDoc release];
+        }];
+    }
 }
 
 #pragma mark - iCloudAvailableDelegate

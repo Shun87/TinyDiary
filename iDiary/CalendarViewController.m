@@ -15,6 +15,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Calendar", nil);
+        self.tabBarItem.image = [UIImage imageNamed:@"calendar"];
     }
     return self;
 }

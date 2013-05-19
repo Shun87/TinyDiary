@@ -28,6 +28,7 @@
         self.version = version;
         self.downloadSuccess = NO;
         self.tags = [NSMutableArray array];
+        self.title = NSLocalizedString(@"No title", nil);
     }
     return self;
 }

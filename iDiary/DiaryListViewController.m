@@ -53,6 +53,8 @@ NSString *const HTMLExtentsion = @".html";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Timeline", @"");
+        self.tabBarItem.image = [UIImage imageNamed:@"timeline"];
+        
     }
     return self;
 }
@@ -96,8 +98,6 @@ NSString *const HTMLExtentsion = @".html";
     
     self.cellNib = [UINib nibWithNibName:@"AdvancedCell" bundle:nil];
 
-    self.navigationItem.title = NSLocalizedString(@"Diary", nil);
-
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
     [button setFrame:CGRectMake(0, 0, 40, 40)];
@@ -111,12 +111,7 @@ NSString *const HTMLExtentsion = @".html";
     entityArray = [[NSMutableArray alloc] init];
     
     self.mTableView.allowsSelectionDuringEditing = YES;
-    UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    titleButton.frame = CGRectMake(0, 0, 200, 44);
-    titleButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
-    [titleButton setTitle:NSLocalizedString(@"Timeline", nil) forState:UIControlStateNormal];
-    self.navigationItem.titleView = titleButton;
-    
+
     mySocial = [[TTSocial alloc] init];
     mySocial.viewController = self;
     
@@ -144,7 +139,6 @@ NSString *const HTMLExtentsion = @".html";
     for (int i=0; i<[units count]; i++)
     {
         DiaryInfo *info = [units objectAtIndex:i];
-        NSLog(@"reloadDataFromArray %@", info.tags);
         NSURL *url = [NSURL fileURLWithPath:info.url];
         [self addOrUpdateEntryWithURL:url metadata:nil state:UIDocumentStateNormal version:nil needReload:NO
                             diaryInfo:info];
@@ -162,7 +156,7 @@ NSString *const HTMLExtentsion = @".html";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigaionBarRed.png"] forBarMetrics:UIBarMetricsDefault];
+   // [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigaionBarRed.png"] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)resolveConfict:(NSURL *)url

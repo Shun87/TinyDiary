@@ -61,7 +61,6 @@
 		36CEAF281658558400C33018 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CEAF261658558400C33018 /* SystemSettingViewController.m */; };
 		36CEAF291658558400C33018 /* SystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36CEAF271658558400C33018 /* SystemSettingViewController.xib */; };
 		36D25AB2166E347A00BFC041 /* DiaryDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D25AB1166E347A00BFC041 /* DiaryDescription.m */; };
-		36EEA2CF1746724000105D4B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36EEA2CE1746724000105D4B /* Social.framework */; };
 		36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36F1F8C916F7631E004EDB60 /* MessageUI.framework */; };
 		36F1F8CD16F7692E004EDB60 /* TTSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F1F8CC16F7692D004EDB60 /* TTSocial.m */; };
 		36FAAE841661ECA40060FBD8 /* CommmonMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FAAE831661ECA40060FBD8 /* CommmonMethods.m */; };
@@ -150,6 +149,15 @@
 		FA79CF2F1742634900A81003 /* DiaryInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA79CF2D1742634600A81003 /* DiaryInfoViewController.m */; };
 		FA79CF301742634900A81003 /* DiaryInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA79CF2E1742634800A81003 /* DiaryInfoViewController.xib */; };
 		FA79CF371742656000A81003 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA79CF361742655F00A81003 /* UIColor+HexColor.m */; };
+		FA88FB0A1748734800A41819 /* TDBadgedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA88FB091748734800A41819 /* TDBadgedCell.m */; };
+		FA88FB0F1748A85500A41819 /* tag.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB0B1748A85500A41819 /* tag.png */; };
+		FA88FB101748A85500A41819 /* tag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB0C1748A85500A41819 /* tag@2x.png */; };
+		FA88FB111748A85500A41819 /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB0D1748A85500A41819 /* Setting.png */; };
+		FA88FB121748A85500A41819 /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB0E1748A85500A41819 /* Setting@2x.png */; };
+		FA88FB171748AB7000A41819 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB131748AB7000A41819 /* calendar.png */; };
+		FA88FB181748AB7000A41819 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB141748AB7000A41819 /* calendar@2x.png */; };
+		FA88FB191748AB7000A41819 /* timeline.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB151748AB7000A41819 /* timeline.png */; };
+		FA88FB1A1748AB7000A41819 /* timeline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB161748AB7000A41819 /* timeline@2x.png */; };
 		FAD1D8C31664BEBC00D71865 /* CancelTouchesScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD1D8C21664BEBC00D71865 /* CancelTouchesScrollView.m */; };
 		FAD1D8C71664C06100D71865 /* ScrollableToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD1D8C61664C06100D71865 /* ScrollableToolView.m */; };
 /* End PBXBuildFile section */
@@ -244,7 +252,6 @@
 		36D25AB1166E347A00BFC041 /* DiaryDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryDescription.m; sourceTree = "<group>"; };
 		36D3714A16D69820003B5555 /* DSActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
 		36D3714B16D69820003B5555 /* DSActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
-		36EEA2CE1746724000105D4B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		36F1F8C916F7631E004EDB60 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		36F1F8CB16F7692D004EDB60 /* TTSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSocial.h; sourceTree = "<group>"; };
 		36F1F8CC16F7692D004EDB60 /* TTSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSocial.m; sourceTree = "<group>"; };
@@ -345,6 +352,16 @@
 		FA79CF2E1742634800A81003 /* DiaryInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiaryInfoViewController.xib; sourceTree = "<group>"; };
 		FA79CF351742655F00A81003 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		FA79CF361742655F00A81003 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
+		FA88FB081748734800A41819 /* TDBadgedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBadgedCell.h; sourceTree = "<group>"; };
+		FA88FB091748734800A41819 /* TDBadgedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBadgedCell.m; sourceTree = "<group>"; };
+		FA88FB0B1748A85500A41819 /* tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag.png; sourceTree = "<group>"; };
+		FA88FB0C1748A85500A41819 /* tag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tag@2x.png"; sourceTree = "<group>"; };
+		FA88FB0D1748A85500A41819 /* Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Setting.png; sourceTree = "<group>"; };
+		FA88FB0E1748A85500A41819 /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Setting@2x.png"; sourceTree = "<group>"; };
+		FA88FB131748AB7000A41819 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		FA88FB141748AB7000A41819 /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@2x.png"; sourceTree = "<group>"; };
+		FA88FB151748AB7000A41819 /* timeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline.png; sourceTree = "<group>"; };
+		FA88FB161748AB7000A41819 /* timeline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline@2x.png"; sourceTree = "<group>"; };
 		FAD1D8C11664BEBC00D71865 /* CancelTouchesScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelTouchesScrollView.h; sourceTree = "<group>"; };
 		FAD1D8C21664BEBC00D71865 /* CancelTouchesScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelTouchesScrollView.m; sourceTree = "<group>"; };
 		FAD1D8C51664C06100D71865 /* ScrollableToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollableToolView.h; sourceTree = "<group>"; };
@@ -356,7 +373,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36EEA2CF1746724000105D4B /* Social.framework in Frameworks */,
 				FA693EC2170AD644005A0B66 /* CoreTelephony.framework in Frameworks */,
 				36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */,
 				369D176616E900BF004F9BFB /* AudioToolbox.framework in Frameworks */,
@@ -374,7 +390,6 @@
 		3606259516528B35006D7075 = {
 			isa = PBXGroup;
 			children = (
-				36EEA2CE1746724000105D4B /* Social.framework */,
 				FA104E12173CA376002060F6 /* TinyDiaryPro.entitlements */,
 				FA693EC1170AD644005A0B66 /* CoreTelephony.framework */,
 				36F1F8C916F7631E004EDB60 /* MessageUI.framework */,
@@ -408,7 +423,7 @@
 		360625AA16528B35006D7075 /* TinyDiaryPro */ = {
 			isa = PBXGroup;
 			children = (
-				36FFFA9117472F58002B034D /* TokenField */,
+				FA88FB071748733B00A41819 /* UI */,
 				36D3714916D697EA003B5555 /* Views */,
 				36B7B83F169CBBE300806C4C /* kal */,
 				369628C71699DC5900EEFAFF /* NSDate+FormattedStrings */,
@@ -580,18 +595,17 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		36FFFA9117472F58002B034D /* TokenField */ = {
-			isa = PBXGroup;
-			children = (
-				36FFFA8F17472F50002B034D /* TITokenField.h */,
-				36FFFA9017472F50002B034D /* TITokenField.m */,
-			);
-			name = TokenField;
-			sourceTree = "<group>";
-		};
 		FA20EDEF173B72CF00CFA1F7 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				FA88FB131748AB7000A41819 /* calendar.png */,
+				FA88FB141748AB7000A41819 /* calendar@2x.png */,
+				FA88FB151748AB7000A41819 /* timeline.png */,
+				FA88FB161748AB7000A41819 /* timeline@2x.png */,
+				FA88FB0B1748A85500A41819 /* tag.png */,
+				FA88FB0C1748A85500A41819 /* tag@2x.png */,
+				FA88FB0D1748A85500A41819 /* Setting.png */,
+				FA88FB0E1748A85500A41819 /* Setting@2x.png */,
 				FA20EDF0173B72CF00CFA1F7 /* add.png */,
 				FA20EDF1173B72CF00CFA1F7 /* add@2x.png */,
 				FA20EDF2173B72CF00CFA1F7 /* back.png */,
@@ -666,6 +680,17 @@
 			);
 			path = image;
 			sourceTree = SOURCE_ROOT;
+		};
+		FA88FB071748733B00A41819 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				FA88FB081748734800A41819 /* TDBadgedCell.h */,
+				FA88FB091748734800A41819 /* TDBadgedCell.m */,
+				36FFFA8F17472F50002B034D /* TITokenField.h */,
+				36FFFA9017472F50002B034D /* TITokenField.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -812,6 +837,14 @@
 				FA79CF221742540500A81003 /* CalendarViewController.xib in Resources */,
 				FA79CF271742546D00A81003 /* TagsViewController.xib in Resources */,
 				FA79CF301742634900A81003 /* DiaryInfoViewController.xib in Resources */,
+				FA88FB0F1748A85500A41819 /* tag.png in Resources */,
+				FA88FB101748A85500A41819 /* tag@2x.png in Resources */,
+				FA88FB111748A85500A41819 /* Setting.png in Resources */,
+				FA88FB121748A85500A41819 /* Setting@2x.png in Resources */,
+				FA88FB171748AB7000A41819 /* calendar.png in Resources */,
+				FA88FB181748AB7000A41819 /* calendar@2x.png in Resources */,
+				FA88FB191748AB7000A41819 /* timeline.png in Resources */,
+				FA88FB1A1748AB7000A41819 /* timeline@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,6 +898,7 @@
 				FA79CF371742656000A81003 /* UIColor+HexColor.m in Sources */,
 				FA0AFD4F174318EF00815DF2 /* PlistDocument.m in Sources */,
 				FA0AFD7E1743767600815DF2 /* DiaryInfo.m in Sources */,
+				FA88FB0A1748734800A41819 /* TDBadgedCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,7 +953,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E93961BC-D3CF-4CD3-8551-02AB44CDB17F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5E93DE4-4443-4A45-8B30-C8164C022CE5";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -962,7 +996,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "Tiny Diary Pro";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E93961BC-D3CF-4CD3-8551-02AB44CDB17F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5E93DE4-4443-4A45-8B30-C8164C022CE5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

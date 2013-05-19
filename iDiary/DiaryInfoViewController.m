@@ -68,14 +68,18 @@
     [lable release];
     
     caretheight = 44;
-     CGRect frame = CGRectMake(50, 8.0, kTextFieldWidth, kTextFieldHeight);
+    CGRect frame = CGRectMake(50, 8.0, kTextFieldWidth, kTextFieldHeight);
     tokenField = [[TITokenField alloc] initWithFrame:frame];
     tokenField.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     [tokenField addTarget:self action:@selector(tokenFieldFrameWillChange:) forControlEvents:TITokenFieldControlEventFrameWillChange];
     tokenField.delegate = self;
     for (int i=0; i<[entity.tags count]; i++)
     {
-        [tokenField addTokenWithTitle:[entity.tags objectAtIndex:i]];
+        NSString *tagName = [entity.tags objectAtIndex:i];
+        if ([tagName length] > 0)
+        {
+            [tokenField addTokenWithTitle:[entity.tags objectAtIndex:i]];
+        }
     }
     
     [tokenField resignFirstResponder];

@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "UIColor+HexColor.h"
 #import "DiaryListViewController.h"
+#import "TDBadgedCell.h"
+#import "DiaryListViewController.h"
 
 @implementation DiaryTag
 @synthesize tagName, diaryInfoArray;
@@ -46,6 +48,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Tags", nil);
+        self.tabBarItem.image = [UIImage imageNamed:@"tag"];
         tagArray = [[NSMutableArray alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(reloadSource:)
@@ -86,6 +89,10 @@
         for (int j=0; j<[tags count]; j++)
         {
             NSString *subTag = [tags objectAtIndex:j];
+            if ([subTag length] == 0)
+            {
+                break;
+            }
             
             if ([tagArray count] == 0)
             {
@@ -97,26 +104,26 @@
             }
             else
             {
-                [tagArray enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop){
-                    
-                    DiaryTag *diaryTag = (DiaryTag *)obj;
+                int k = 0;
+                for (; k<[tagArray count]; k++)
+                {
+                    DiaryTag *diaryTag = [tagArray objectAtIndex:k];
                     if ([diaryTag.tagName isEqualToString:subTag])
                     {
                         [diaryTag.diaryInfoArray addObject:info];
-
-                        *stop = YES;
+                        break;
                     }
-                    
-                    // 没找到
-                    if (index == [tagArray count] - 1)
-                    {
-                        DiaryTag *diaryTag = [[DiaryTag alloc] init];
-                        diaryTag.tagName = subTag;
-                        [diaryTag.diaryInfoArray addObject:info];
-                        [tagArray addObject:diaryTag];
-                        [diaryTag release];
-                    }
-                }];
+                }
+                
+                // 到最后一个还没找到
+                if (k >= [tagArray count])
+                {
+                    DiaryTag *diaryTag = [[DiaryTag alloc] init];
+                    diaryTag.tagName = subTag;
+                    [diaryTag.diaryInfoArray addObject:info];
+                    [tagArray addObject:diaryTag];
+                    [diaryTag release];
+                }
             }
         }
     }
@@ -162,31 +169,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TDBadgedCell *cell = (TDBadgedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+        cell = [[[TDBadgedCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                                 reuseIdentifier:CellIdentifier] autorelease];
-        
-        CGRect rect = cell.frame;
-        rect.origin.x = cell.contentView.frame.size.width - 40;
-        rect.size.width = 40;
-        UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
-        label.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
-        label.backgroundColor = [UIColor clearColor];
-        label.tag = 100;
-        [cell.contentView addSubview:label];
-        label.font = [UIFont systemFontOfSize:17];
-        label.textColor = [UIColor colorFromHex:Light_blue];
-        
-        label.textAlignment = UITextAlignmentCenter;
     }
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	
     cell.textLabel.backgroundColor = [UIColor clearColor];
     DiaryTag *tag = [tagArray objectAtIndex:[indexPath row]];
-    UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
-    label.text = [NSString stringWithFormat:@"%d", [tag.diaryInfoArray count]];
+
+    cell.badgeString = [NSString stringWithFormat:@"%d", [tag.diaryInfoArray count]];
     cell.textLabel.text = tag.tagName;
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
     
     return cell;
 }
@@ -206,6 +203,12 @@
     
     DiaryTag *tag = [tagArray objectAtIndex:[indexPath row]];
     
+    DiaryListViewController *diarylistController = [[DiaryListViewController alloc] initWithNibName:@"DiaryListViewController"
+                                                                                             bundle:nil];
+    [self.navigationController pushViewController:diarylistController animated:YES];
+    [diarylistController reloadDataFromArray:tag.diaryInfoArray];
+    diarylistController.title = tag.tagName;
+    [diarylistController release];
 }
 
 - (void)viewDidUnload

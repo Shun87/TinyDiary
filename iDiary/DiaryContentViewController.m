@@ -286,7 +286,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     DiaryInfo *info = [[DiaryInfo alloc] init];
     info.url = [self.doc.fileURL path];
     info.title = entity.title;
-
+    
     for (int i=0; i<[entity.tags count]; i++)
     {
         if (i == 0)

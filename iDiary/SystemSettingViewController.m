@@ -10,6 +10,7 @@
 #import "CommmonMethods.h"
 #import "PasswordViewController.h"
 #import "TTSocial.h"
+#import "UIColor+HexColor.h"
 
 @interface SystemSettingViewController ()
 
@@ -22,7 +23,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Settings", @"");;
+        self.title = NSLocalizedString(@"Settings", @"");
+        self.tabBarItem.image = [UIImage imageNamed:@"Setting"];
     }
     return self;
 }
@@ -30,11 +32,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = HEXCOLOR(0xf0f7ff, 1);
-    mTableView.rowHeight = 50;
-    mTableView.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor colorFromHex:LightGray];
     mTableView.backgroundView = nil;
-    mTableView.separatorColor = HEXCOLOR(0xd2dbec, 1);
+    mTableView.backgroundColor = [UIColor clearColor];
+    mTableView.separatorColor = [UIColor colorFromHex:SeperatorColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -282,7 +283,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.backgroundColor = HEXCOLOR(0xf0f7fd, 1);
+    cell.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
