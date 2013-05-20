@@ -206,8 +206,8 @@ NSString *const HTMLExtentsion = @".html";
     {
         if (entry.indexPath != nil)
         {
-            [self.mTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:entry.indexPath, nil]
-                                   withRowAnimation:UITableViewRowAnimationAutomatic];
+//            [self.mTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:entry.indexPath, nil]
+//                                   withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         else
         {
@@ -224,9 +224,10 @@ NSString *const HTMLExtentsion = @".html";
                 MonthSort *monthSort = [[MonthSort alloc] init];
                 monthSort.monthAndYear = monthAndYear;
                 [monthSort.entryArray addObject:entry];
+                [monthAndYearArray addObject:monthSort];
             }
-            
-            [self.mTableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] 
+
+            [self.mTableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]
                                    withRowAnimation:UITableViewRowAnimationAutomatic];
     
         }
@@ -502,13 +503,29 @@ NSString *const HTMLExtentsion = @".html";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [monthAndYearArray count];
+    return  MAX([monthAndYearArray count], 1);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    MonthSort *monthSort = [monthAndYearArray objectAtIndex:section];
-    return [monthSort.entryArray count];
+    if ([monthAndYearArray count] > 0)
+    {
+        MonthSort *monthSort = [monthAndYearArray objectAtIndex:section];
+        return [monthSort.entryArray count];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if ([monthAndYearArray count] > 1)
+    {
+        return 24;
+    }
+    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -520,8 +537,12 @@ NSString *const HTMLExtentsion = @".html";
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = UITextAlignmentCenter;
     [imageView addSubview:label];
-    
-    MonthSort *monthSort = [monthAndYearArray objectAtIndex:section];
+    MonthSort *monthSort = nil;
+    if ([monthAndYearArray count] > 0)
+    {
+        monthSort = [monthAndYearArray objectAtIndex:section];
+    }
+
     label.text = monthSort.monthAndYear;
     label.textColor = [UIColor darkGrayColor];
     label.font = [UIFont boldSystemFontOfSize:15];

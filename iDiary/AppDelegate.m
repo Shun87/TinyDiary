@@ -274,11 +274,13 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
                                                                     object:self.diaryInfoArray];
             }
-            [hud hide:YES];
+
             [plistDoc closeWithCompletionHandler:nil];
             [plistDoc release];
         }];
     }
+    
+    [hud hide:YES];
 }
 
 #pragma mark - iCloudAvailableDelegate

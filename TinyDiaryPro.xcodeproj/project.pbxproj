@@ -61,6 +61,7 @@
 		36CEAF281658558400C33018 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CEAF261658558400C33018 /* SystemSettingViewController.m */; };
 		36CEAF291658558400C33018 /* SystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36CEAF271658558400C33018 /* SystemSettingViewController.xib */; };
 		36D25AB2166E347A00BFC041 /* DiaryDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D25AB1166E347A00BFC041 /* DiaryDescription.m */; };
+		36EA9220174A6DC000C3C895 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36EA921F174A6DC000C3C895 /* Social.framework */; };
 		36EBF8A21748DA510051EF21 /* bakck_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBF8A01748DA510051EF21 /* bakck_white@2x.png */; };
 		36EBF8A31748DA510051EF21 /* bakck_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBF8A11748DA510051EF21 /* bakck_white.png */; };
 		36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36F1F8C916F7631E004EDB60 /* MessageUI.framework */; };
@@ -265,6 +266,7 @@
 		36D25AB1166E347A00BFC041 /* DiaryDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryDescription.m; sourceTree = "<group>"; };
 		36D3714A16D69820003B5555 /* DSActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
 		36D3714B16D69820003B5555 /* DSActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
+		36EA921F174A6DC000C3C895 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		36EBF8A01748DA510051EF21 /* bakck_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bakck_white@2x.png"; sourceTree = "<group>"; };
 		36EBF8A11748DA510051EF21 /* bakck_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bakck_white.png; sourceTree = "<group>"; };
 		36F1F8C916F7631E004EDB60 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -400,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36EA9220174A6DC000C3C895 /* Social.framework in Frameworks */,
 				FA693EC2170AD644005A0B66 /* CoreTelephony.framework in Frameworks */,
 				36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */,
 				369D176616E900BF004F9BFB /* AudioToolbox.framework in Frameworks */,
@@ -417,6 +420,7 @@
 		3606259516528B35006D7075 = {
 			isa = PBXGroup;
 			children = (
+				36EA921F174A6DC000C3C895 /* Social.framework */,
 				FA104E12173CA376002060F6 /* TinyDiaryPro.entitlements */,
 				FA693EC1170AD644005A0B66 /* CoreTelephony.framework */,
 				36F1F8C916F7631E004EDB60 /* MessageUI.framework */,
