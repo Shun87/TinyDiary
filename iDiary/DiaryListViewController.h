@@ -19,8 +19,6 @@ extern NSString *const HTMLExtentsion;
 <UITableViewDataSource, UITableViewDelegate, AdvancedCellDelegate,
 DocumentsAccessDelegate, UIActionSheetDelegate>
 {
-    NSMutableArray *entityArray;
-    NSMutableArray *monthArray;
     IBOutlet UITableView *mTableView;
     
     AdvancedCell *tmpCell;
@@ -36,6 +34,8 @@ DocumentsAccessDelegate, UIActionSheetDelegate>
     TTSocial *mySocial;
     
     NSString *tagName;
+    
+    NSMutableArray *monthAndYearArray;
 }
 @property (nonatomic, copy)NSString *tagName;
 @property (nonatomic, retain)IBOutlet UITableView *mTableView;
@@ -56,12 +56,13 @@ DocumentsAccessDelegate, UIActionSheetDelegate>
 - (IBAction)deleteAction:(id)sender;
 
 - (void)showDiaryContent:(DocEntity *)entity newFile:(BOOL)newFile;
-- (void)deleteFile:(NSURL *)url;
+- (void)deleteFile:(DocEntity *)entry;
 
 - (void)reloadDataFromArray:(NSArray *)units;
 
 - (DocEntity *)preUrl:(DocEntity *)entry;
 - (DocEntity *)nextUrl:(DocEntity *)entry;
-- (NSInteger)indexForEntry:(DocEntity *)entry;
-- (NSInteger)totalCount;
+- (BOOL)isFirstObj:(DocEntity *)entry;
+- (BOOL)isLastObj:(DocEntity *)entry;
+
 @end

@@ -9,7 +9,6 @@
 "Edit"  = "Edit";
 "Save"  = "Save";
 "Settings" = "Settings";
-"Cancel" = "Cancel";
 "Delete" = "Delete";
 "Back" = "Back";
 "SetiCloudOn" = "iCloud synchronize";
@@ -25,8 +24,6 @@
 "RequireDesc" = "Require a passcode when the app becomes active";
 "Take photo" = "Take photo";
 "Pick" = "Pick from album";
-"about" = "About";
-"App Version" = "App Version";
 "E-mail" = "E-mail";
 "PhotoLibray" = "Open Albums";
 "snapshot" = "Open Camera";
@@ -42,3 +39,20 @@
 "Timeline" = "Timeline";
 "Calendar" = "Calendar";
 "No title" = "No title";
+"Feedback" = "Feedback";
+"About" = "About";
+"Invite By Email" = "Invite By Email";
+"Invite By SMS" = "Invite By SMS";
+"Send feekback" = "Send feekback";
+"Version" = "Version";
+"Cancel" = "Cancel";
+"invite" = "Hello,'Font Design'is a great app and easy to use,check out it on the App Store,I think you'll like it! https://itunes.apple.com/us/app/font-design-pro-custom-font/id645489866?mt=8";
+"No mail account" = "There are no mail accouts configured, You can add or creat a mail account in Settings";
+"group member" = "Members";
+"ok" = "OK";
+"Remove ads" = "Remove ads";
+"Restore" = "Restore";
+"pro" = "Font Designer Pro";
+"learn more" = "learn more";
+"FontDesigner" = "Font Design Pro";
+"Rate us" ="Rate us";

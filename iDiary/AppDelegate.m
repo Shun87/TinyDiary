@@ -19,7 +19,7 @@
 #import "TagsViewController.h"
 #import "FilePath.h"
 #import "UIColor+HexColor.h"
-#import "Kal.h"
+
 @implementation AppDelegate
 @synthesize window ;
 @synthesize tabBarController;
@@ -80,11 +80,10 @@
     UIViewController *settingController = [[[SystemSettingViewController alloc] initWithNibName:@"SystemSettingViewController" bundle:nil] autorelease];
     UINavigationController *nav2 = [[[UINavigationController alloc] initWithRootViewController:settingController] autorelease];
 
-    //UIViewController *calendarController = [[[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil] autorelease];
+    UIViewController *calendarController = [[[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil] autorelease];
    
-    KalViewController *kalViewController = [[KalViewController alloc] init];
-    UINavigationController *nav3 = [[[UINavigationController alloc] initWithRootViewController:kalViewController] autorelease];
-    //kalViewController.title = NSLocalizedString(@"", <#comment#>)
+    UINavigationController *nav3 = [[[UINavigationController alloc] initWithRootViewController:calendarController] autorelease];
+
     UIViewController *tagController = [[[TagsViewController alloc] initWithNibName:@"TagsViewController" bundle:nil] autorelease];
     UINavigationController *nav4 = [[[UINavigationController alloc] initWithRootViewController:tagController] autorelease];
     
@@ -128,8 +127,7 @@
     [self.window addSubview:hud];
 	hud.labelText = @"Loading";
 	[hud show:YES];
-
-    //[self reloadNotes:YES];
+    hud.delegate = self;
     
     return YES;
 }
@@ -137,10 +135,10 @@
 #pragma mark -
 #pragma mark MBProgressHUDDelegate methods
 
-- (void)hudWasHidden:(MBProgressHUD *)hud
+- (void)hudWasHidden:(MBProgressHUD *)ahud
 {
 	// Remove HUD from screen when the HUD was hidded
-	[hud removeFromSuperview];
+	[ahud removeFromSuperview];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

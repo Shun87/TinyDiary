@@ -8,6 +8,7 @@
 
 #import "FilePath.h"
 #import "DocEntity.h"
+#import "MonthSort.h"
 
 @implementation FilePath
 
@@ -52,6 +53,22 @@
     return date;
 }
 
++ (NSString *)monthAndYear:(NSDate *)date
+{
+     NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setDateFormat:@"LLLL yyyy"];
+    return [dateFormatter stringFromDate:date];
+}
+
++ (NSDate *)dateFromMonthAndYearStr:(NSString *)str
+{
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setDateFormat:@"LLLL yyyy"];
+    return [dateFormatter dateFromString:str];
+}
+
 + (void)sortUsingDescending:(NSMutableArray *)array
 {
     [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2){
@@ -60,6 +77,27 @@
         NSURL *url2 = ((DocEntity *)obj2).docURL;
         NSDate *date1 = [FilePath timeFromURL:url1];
         NSDate *date2 = [FilePath timeFromURL:url2];
+        NSComparisonResult result = [date1 compare:date2];
+        if (result ==  NSOrderedAscending)
+        {
+            return NSOrderedDescending;
+        }
+        else if (result ==  NSOrderedDescending)
+        {
+            return NSOrderedAscending;
+        }
+        return NSOrderedSame;
+    }];
+}
+
++ (void)sortDateUsingDescending:(NSMutableArray *)array
+{
+    [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        
+        NSString *my1 = ((MonthSort *)obj1).monthAndYear;
+        NSString *my2 = ((MonthSort *)obj2).monthAndYear;
+        NSDate *date1 = [FilePath dateFromMonthAndYearStr:my1];
+        NSDate *date2 = [FilePath dateFromMonthAndYearStr:my2];
         NSComparisonResult result = [date1 compare:date2];
         if (result ==  NSOrderedAscending)
         {

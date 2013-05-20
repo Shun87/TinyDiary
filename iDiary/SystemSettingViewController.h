@@ -11,5 +11,7 @@
 @interface SystemSettingViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
     IBOutlet UITableView *mTableView;
+    NSArray *appArray;
 }
+@property (nonatomic, retain)NSArray *appArray;
 @end

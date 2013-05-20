@@ -33,7 +33,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+     KalViewController *kalViewController = [[KalViewController alloc] init];
+    kalViewController.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin 
+    | UIViewAutoresizingFlexibleHeight;
+    
+    kalViewController.delegate = self;
+    [self.view addSubview:kalViewController.view];
 }
 
 - (void)viewDidUnload
@@ -49,4 +54,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)didSelectDate:(KalDate *)date
+{
+    
+}
 @end

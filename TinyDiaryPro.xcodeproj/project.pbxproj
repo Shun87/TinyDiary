@@ -61,7 +61,6 @@
 		36CEAF281658558400C33018 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CEAF261658558400C33018 /* SystemSettingViewController.m */; };
 		36CEAF291658558400C33018 /* SystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36CEAF271658558400C33018 /* SystemSettingViewController.xib */; };
 		36D25AB2166E347A00BFC041 /* DiaryDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D25AB1166E347A00BFC041 /* DiaryDescription.m */; };
-		36EBF89F1748C97A0051EF21 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36EBF89E1748C97A0051EF21 /* Social.framework */; };
 		36EBF8A21748DA510051EF21 /* bakck_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBF8A01748DA510051EF21 /* bakck_white@2x.png */; };
 		36EBF8A31748DA510051EF21 /* bakck_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBF8A11748DA510051EF21 /* bakck_white.png */; };
 		36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36F1F8C916F7631E004EDB60 /* MessageUI.framework */; };
@@ -161,6 +160,17 @@
 		FA88FB181748AB7000A41819 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB141748AB7000A41819 /* calendar@2x.png */; };
 		FA88FB191748AB7000A41819 /* timeline.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB151748AB7000A41819 /* timeline.png */; };
 		FA88FB1A1748AB7000A41819 /* timeline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA88FB161748AB7000A41819 /* timeline@2x.png */; };
+		FAA4663C1749D6730096CD1C /* MonthSort.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA4663B1749D6720096CD1C /* MonthSort.m */; };
+		FAA46651174A1A9B0096CD1C /* sectionBk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA46650174A1A9B0096CD1C /* sectionBk@2x.png */; };
+		FAA46653174A1B4A0096CD1C /* sectionBk.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA46652174A1B4A0096CD1C /* sectionBk.png */; };
+		FAA4666D174A478F0096CD1C /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA46665174A47860096CD1C /* email.png */; };
+		FAA4666E174A478F0096CD1C /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA46666174A47870096CD1C /* email@2x.png */; };
+		FAA4666F174A478F0096CD1C /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA46667174A47880096CD1C /* feedback.png */; };
+		FAA46670174A478F0096CD1C /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA46668174A478A0096CD1C /* feedback@2x.png */; };
+		FAA46671174A478F0096CD1C /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA46669174A478A0096CD1C /* like.png */; };
+		FAA46672174A478F0096CD1C /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA4666A174A478B0096CD1C /* like@2x.png */; };
+		FAA46673174A478F0096CD1C /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA4666B174A478E0096CD1C /* sms.png */; };
+		FAA46674174A478F0096CD1C /* sms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA4666C174A478F0096CD1C /* sms@2x.png */; };
 		FAD1D8C31664BEBC00D71865 /* CancelTouchesScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD1D8C21664BEBC00D71865 /* CancelTouchesScrollView.m */; };
 		FAD1D8C71664C06100D71865 /* ScrollableToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD1D8C61664C06100D71865 /* ScrollableToolView.m */; };
 /* End PBXBuildFile section */
@@ -255,7 +265,6 @@
 		36D25AB1166E347A00BFC041 /* DiaryDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryDescription.m; sourceTree = "<group>"; };
 		36D3714A16D69820003B5555 /* DSActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
 		36D3714B16D69820003B5555 /* DSActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
-		36EBF89E1748C97A0051EF21 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		36EBF8A01748DA510051EF21 /* bakck_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bakck_white@2x.png"; sourceTree = "<group>"; };
 		36EBF8A11748DA510051EF21 /* bakck_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bakck_white.png; sourceTree = "<group>"; };
 		36F1F8C916F7631E004EDB60 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -368,6 +377,18 @@
 		FA88FB141748AB7000A41819 /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@2x.png"; sourceTree = "<group>"; };
 		FA88FB151748AB7000A41819 /* timeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline.png; sourceTree = "<group>"; };
 		FA88FB161748AB7000A41819 /* timeline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline@2x.png"; sourceTree = "<group>"; };
+		FAA4663A1749D6720096CD1C /* MonthSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthSort.h; sourceTree = "<group>"; };
+		FAA4663B1749D6720096CD1C /* MonthSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthSort.m; sourceTree = "<group>"; };
+		FAA46650174A1A9B0096CD1C /* sectionBk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sectionBk@2x.png"; sourceTree = "<group>"; };
+		FAA46652174A1B4A0096CD1C /* sectionBk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionBk.png; sourceTree = "<group>"; };
+		FAA46665174A47860096CD1C /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
+		FAA46666174A47870096CD1C /* email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email@2x.png"; sourceTree = "<group>"; };
+		FAA46667174A47880096CD1C /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback.png; sourceTree = "<group>"; };
+		FAA46668174A478A0096CD1C /* feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback@2x.png"; sourceTree = "<group>"; };
+		FAA46669174A478A0096CD1C /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		FAA4666A174A478B0096CD1C /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
+		FAA4666B174A478E0096CD1C /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
+		FAA4666C174A478F0096CD1C /* sms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms@2x.png"; sourceTree = "<group>"; };
 		FAD1D8C11664BEBC00D71865 /* CancelTouchesScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelTouchesScrollView.h; sourceTree = "<group>"; };
 		FAD1D8C21664BEBC00D71865 /* CancelTouchesScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelTouchesScrollView.m; sourceTree = "<group>"; };
 		FAD1D8C51664C06100D71865 /* ScrollableToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollableToolView.h; sourceTree = "<group>"; };
@@ -379,7 +400,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36EBF89F1748C97A0051EF21 /* Social.framework in Frameworks */,
 				FA693EC2170AD644005A0B66 /* CoreTelephony.framework in Frameworks */,
 				36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */,
 				369D176616E900BF004F9BFB /* AudioToolbox.framework in Frameworks */,
@@ -397,7 +417,6 @@
 		3606259516528B35006D7075 = {
 			isa = PBXGroup;
 			children = (
-				36EBF89E1748C97A0051EF21 /* Social.framework */,
 				FA104E12173CA376002060F6 /* TinyDiaryPro.entitlements */,
 				FA693EC1170AD644005A0B66 /* CoreTelephony.framework */,
 				36F1F8C916F7631E004EDB60 /* MessageUI.framework */,
@@ -439,12 +458,12 @@
 				369628C31699DAEE00EEFAFF /* documents */,
 				36B7B867169CBBE300806C4C /* FilePath.h */,
 				36B7B868169CBBE300806C4C /* FilePath.m */,
-				365E55EA173D42E300D3BBA3 /* MBProgressHUD.h */,
-				365E55EB173D42E300D3BBA3 /* MBProgressHUD.m */,
 				360625B316528B35006D7075 /* AppDelegate.h */,
 				360625B416528B35006D7075 /* AppDelegate.m */,
 				FA79CF231742546D00A81003 /* TagsViewController.h */,
 				FA79CF241742546D00A81003 /* TagsViewController.m */,
+				FAA4663A1749D6720096CD1C /* MonthSort.h */,
+				FAA4663B1749D6720096CD1C /* MonthSort.m */,
 				FA79CF1E1742540400A81003 /* CalendarViewController.h */,
 				FA79CF1F1742540500A81003 /* CalendarViewController.m */,
 				36A2E84E16D50606009144E3 /* DocumentsAccess.h */,
@@ -606,6 +625,16 @@
 		FA20EDEF173B72CF00CFA1F7 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				FAA46665174A47860096CD1C /* email.png */,
+				FAA46666174A47870096CD1C /* email@2x.png */,
+				FAA46667174A47880096CD1C /* feedback.png */,
+				FAA46668174A478A0096CD1C /* feedback@2x.png */,
+				FAA46669174A478A0096CD1C /* like.png */,
+				FAA4666A174A478B0096CD1C /* like@2x.png */,
+				FAA4666B174A478E0096CD1C /* sms.png */,
+				FAA4666C174A478F0096CD1C /* sms@2x.png */,
+				FAA46650174A1A9B0096CD1C /* sectionBk@2x.png */,
+				FAA46652174A1B4A0096CD1C /* sectionBk.png */,
 				36EBF8A01748DA510051EF21 /* bakck_white@2x.png */,
 				36EBF8A11748DA510051EF21 /* bakck_white.png */,
 				FA88FB131748AB7000A41819 /* calendar.png */,
@@ -698,6 +727,8 @@
 				FA88FB091748734800A41819 /* TDBadgedCell.m */,
 				36FFFA8F17472F50002B034D /* TITokenField.h */,
 				36FFFA9017472F50002B034D /* TITokenField.m */,
+				365E55EA173D42E300D3BBA3 /* MBProgressHUD.h */,
+				365E55EB173D42E300D3BBA3 /* MBProgressHUD.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -857,6 +888,16 @@
 				FA88FB1A1748AB7000A41819 /* timeline@2x.png in Resources */,
 				36EBF8A21748DA510051EF21 /* bakck_white@2x.png in Resources */,
 				36EBF8A31748DA510051EF21 /* bakck_white.png in Resources */,
+				FAA46651174A1A9B0096CD1C /* sectionBk@2x.png in Resources */,
+				FAA46653174A1B4A0096CD1C /* sectionBk.png in Resources */,
+				FAA4666D174A478F0096CD1C /* email.png in Resources */,
+				FAA4666E174A478F0096CD1C /* email@2x.png in Resources */,
+				FAA4666F174A478F0096CD1C /* feedback.png in Resources */,
+				FAA46670174A478F0096CD1C /* feedback@2x.png in Resources */,
+				FAA46671174A478F0096CD1C /* like.png in Resources */,
+				FAA46672174A478F0096CD1C /* like@2x.png in Resources */,
+				FAA46673174A478F0096CD1C /* sms.png in Resources */,
+				FAA46674174A478F0096CD1C /* sms@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -911,6 +952,7 @@
 				FA0AFD4F174318EF00815DF2 /* PlistDocument.m in Sources */,
 				FA0AFD7E1743767600815DF2 /* DiaryInfo.m in Sources */,
 				FA88FB0A1748734800A41819 /* TDBadgedCell.m in Sources */,
+				FAA4663C1749D6730096CD1C /* MonthSort.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -965,7 +1007,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E93961BC-D3CF-4CD3-8551-02AB44CDB17F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5E93DE4-4443-4A45-8B30-C8164C022CE5";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1008,7 +1050,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "Tiny Diary Pro";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E93961BC-D3CF-4CD3-8551-02AB44CDB17F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5E93DE4-4443-4A45-8B30-C8164C022CE5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

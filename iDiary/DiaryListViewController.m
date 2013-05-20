@@ -2,7 +2,7 @@
 //  DiaryListViewController.m
 //  iDiary
 //
-//  Created by chenshun on 12-11-16.
+//  Created by ; on 12-11-16.
 //  Copyright (c) 2012年 ChenShun. All rights reserved.
 //
 
@@ -11,12 +11,14 @@
 #import "CommmonMethods.h"
 #import "DiaryDescription.h"
 #import "NoteDocument.h"
+#import "MonthSort.h"
 
 #import "NSDateAdditions.h"
 #import "FilePath.h"
 #import "NSDate+FormattedStrings.h"
 #import "AppDelegate.h"
 #import "PlistDocument.h"
+#import "UIColor+HexColor.h"
 
 NSString *const TDDocumentsDirectoryName = @"Documents";
 NSString *const HTMLExtentsion = @".html";
@@ -26,8 +28,6 @@ NSString *const HTMLExtentsion = @".html";
 {    
     NoteDocument *document;
     
-    NSInteger fileCount;
-    
     NSIndexPath *indexPathToDel;
     NSIndexPath *indexPathToShare;
 }
@@ -35,9 +35,7 @@ NSString *const HTMLExtentsion = @".html";
 @property (nonatomic, retain)NSIndexPath *indexPathToDel;
 @property (nonatomic, retain)NSURL *iCloudRoot;
 @property (nonatomic, retain) NoteDocument *document;
-- (void)reloadNotes:(BOOL)needReload;
-- (void)loadLocalNotes;
-- (int)indexOfEntryWithFileURL:(NSURL *)fileURL;
+
 @end
 
 @implementation DiaryListViewController
@@ -64,7 +62,6 @@ NSString *const HTMLExtentsion = @".html";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [entityArray release];
     [mTableView release];
     [tmpCell release];
     [cellNib release];
@@ -81,6 +78,8 @@ NSString *const HTMLExtentsion = @".html";
     [indexPathToDel release];
     [indexPathToShare release];
     [tagName release];
+    
+    [monthAndYearArray release];
     [super dealloc];
 }
 
@@ -90,15 +89,19 @@ NSString *const HTMLExtentsion = @".html";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.mTableView.rowHeight = 80;
-    self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    fileCount = 0;
-    
-    self.mTableView.backgroundColor = HEXCOLOR(0xfdfdfd, 1.0);
-    self.view.backgroundColor = HEXCOLOR(0xfdfdfd, 1.0);
-    
     self.cellNib = [UINib nibWithNibName:@"AdvancedCell" bundle:nil];
     
+    self.view.backgroundColor = [UIColor colorFromHex:LightGray];
+    self.mTableView.rowHeight = 80;
+    self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    mTableView.backgroundView = nil;
+    mTableView.backgroundColor = [UIColor clearColor];
+    self.mTableView.allowsSelectionDuringEditing = YES;
+    
+    mySocial = [[TTSocial alloc] init];
+    mySocial.viewController = self;
+    
+    monthAndYearArray = [[NSMutableArray alloc] init];
     if ([tagName length] > 0)
     {
         // TAG页面
@@ -125,13 +128,7 @@ NSString *const HTMLExtentsion = @".html";
         [rightItem release];
     }
    
-    entityArray = [[NSMutableArray alloc] init];
-    
-    self.mTableView.allowsSelectionDuringEditing = YES;
-
-    mySocial = [[TTSocial alloc] init];
-    mySocial.viewController = self;
-    
+   
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(documentStateChange:)
                                                  name:UIDocumentStateChangedNotification
@@ -140,34 +137,30 @@ NSString *const HTMLExtentsion = @".html";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(dataSourceChanged:)
                                                  name:@"DataSourceChanged" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(storageLocationChanged:)
-                                                 name:@"StorageLocationChanged" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(resignActive:) 
+                                                 name:@"appillssResignActive" object:nil];
+    // APP发消息通知重新加载数据源
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadSource:) 
                                                  name:ReloadDiaryInfoUnits object:nil];
 }
 
-- (IBAction)goBack:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)reloadDataFromArray:(NSArray *)units
 {
-    [entityArray removeAllObjects];
+    [monthAndYearArray removeAllObjects];
     
-    for (int i=0; i<[units count]; i++)
-    {
-        DiaryInfo *info = [units objectAtIndex:i];
-        NSURL *url = [NSURL fileURLWithPath:info.url];
-        [self addOrUpdateEntryWithURL:url metadata:nil state:UIDocumentStateNormal version:nil needReload:NO
-                            diaryInfo:info];
-    }
-    
-    [FilePath sortUsingDescending:entityArray];
+    [self addSortedEntryByMonthAndYear:units];
     [self.mTableView reloadData];
+}
+
+- (void)resignActive:(NSNotification *)notification
+{
+    if ([self.tagName length] > 0)
+    {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
 }
 
 - (void)reloadSource:(NSNotification *)notification
@@ -178,7 +171,6 @@ NSString *const HTMLExtentsion = @".html";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-   // [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigaionBarRed.png"] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)resolveConfict:(NSURL *)url
@@ -207,143 +199,36 @@ NSString *const HTMLExtentsion = @".html";
 // 添加修改数据源的时候发送的消息处理函数
 - (void)dataSourceChanged:(NSNotification *)notification
 {
-    DocEntity *entity = (DocEntity *)[notification object];
-    
-    if (entity != nil)
+    DocEntity *entry = (DocEntity *)[notification object];
+    NSDate *date = [FilePath timeFromURL:entry.docURL];
+    NSString *monthAndYear = [FilePath monthAndYear:date];
+    if (entry != nil)
     {
-        int index = [self indexOfEntryWithFileURL:entity.docURL];
-        if (index >= 0)
+        if (entry.indexPath != nil)
         {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-            [self.mTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]
+            [self.mTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:entry.indexPath, nil]
                                    withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         else
         {
-            [entityArray insertObject:entity atIndex:0];
-            [self.mTableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] 
-                                   withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-    }
-}
-
-- (void)updataDataSource:(NSArray *)urlArray
-{
-    NSURL *iCloudDocURL = [[AppDelegate app].docAccess iCloudDocURL];
-    int nCount = [entityArray count];
-    [entityArray enumerateObjectsUsingBlock:^(DocEntity * entry, NSUInteger idx, BOOL *stop) 
-    {
-        if (idx < nCount)
-        {
-            NSString *fileName = entry.docURL.lastPathComponent;
-            entry.docURL = [iCloudDocURL URLByAppendingPathComponent:fileName];
-            
-            NSLog(@"updataDataSource %@", entry.docURL);
-        }
-        else
-        {
-            *stop = YES;
-        }
-    }];
-}
-
-- (void)storageLocationChanged:(NSNotification *)notification
-{
-    [self reloadNotes:YES];
-}
-
-- (void)loadLocalNotes
-{
-    [entityArray removeAllObjects];
-    NSURL *localDocURL = [FilePath localDocumentsDirectoryURL];
-    NSURL *infoURL = [localDocURL URLByAppendingPathComponent:DiaryInfoLog];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[infoURL path]])
-    {
-        PlistDocument *plistDoc = [[PlistDocument alloc] initWithFileURL:infoURL];
-        [plistDoc openWithCompletionHandler:^(BOOL success){
-        
-            if (success)
+            // 添加的情况
+            NSInteger index = [self indexForMonthAndYear:monthAndYear];
+            if (index >= 0 && index < [monthAndYearArray count])
             {
-                NSArray *units = [plistDoc units];
-                for (int i=0; i<[units count]; i++)
-                {
-                    DiaryInfo *info = [units objectAtIndex:i];
-                    NSURL *url = [NSURL fileURLWithPath:info.url];
-                    [self addOrUpdateEntryWithURL:url metadata:nil state:UIDocumentStateNormal version:nil needReload:NO];
-                }
+                MonthSort *monthSort = [monthAndYearArray objectAtIndex:index];
+                [monthSort.entryArray insertObject:entry atIndex:0];
+
             }
-        }];
-    }
-    
-//    NSArray * localDocuments = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:localDocURL
-//                                                             includingPropertiesForKeys:nil 
-//                                                                                options:0 
-//                                                                                  error:nil];
-//    fileCount = [localDocuments count];
-//    for (int i=0; i < fileCount; i++)
-//    {
-//        NSURL * fileURL = [localDocuments objectAtIndex:i];
-//
-//        
-//        if ([[fileURL pathExtension] isEqualToString:kNotePacketExtension])
-//        {
-//            [self addOrUpdateEntryWithURL:fileURL metadata:nil state:UIDocumentStateNormal version:nil needReload:NO];
-//        }
-//    }
-//    
-    [FilePath sortUsingDescending:entityArray];
-    [self.mTableView reloadData];
-}
-
-- (int)indexOfEntryWithFileURL:(NSURL *)fileURL 
-{
-    __block int retval = -1;
-    [entityArray enumerateObjectsUsingBlock:^(DocEntity * entry, NSUInteger idx, BOOL *stop) {
-        if ([entry.docURL isEqual:fileURL]) {
-            retval = idx;
-            *stop = YES;
-        }
-    }];
-    return retval;    
-}
-
-- (void)addOrUpdateEntryWithURL:(NSURL *)fileURL
-                       metadata:(Metadata *)metadata
-                          state:(UIDocumentState)state
-                        version:(NSFileVersion *)version
-                     needReload:(BOOL)reload
-diaryInfo:(DiaryInfo *)info
-{
-    DocEntity *entity = nil;
-    int index = [self indexOfEntryWithFileURL:fileURL];
-    if (index >= 0)
-    {
-        entity = [entityArray objectAtIndex:index];
-        entity.title = info.title;
-        [entity.tags addObjectsFromArray:[info.tags componentsSeparatedByString:@"|"]];
-        entity.metadata = metadata;
-        entity.state = state;
-        entity.version = version;
-        if (reload)
-        {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-            [self.mTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] 
-                                   withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-    }
-    else
-    {
-        entity = [[[DocEntity alloc] initWithFileURL:fileURL
-                                                      metadata:metadata
-                                                         state:state
-                                                       version:version] autorelease];
-        entity.title = info.title;
-        [entity.tags addObjectsFromArray:[info.tags componentsSeparatedByString:@"|"]];
-        [entityArray insertObject:entity atIndex:0];
-        if (reload)
-        {
+            else
+            {
+                MonthSort *monthSort = [[MonthSort alloc] init];
+                monthSort.monthAndYear = monthAndYear;
+                [monthSort.entryArray addObject:entry];
+            }
+            
             [self.mTableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] 
                                    withRowAnimation:UITableViewRowAnimationAutomatic];
+    
         }
     }
 }
@@ -462,7 +347,6 @@ diaryInfo:(DiaryInfo *)info
                 // Check status
                 if (!closeSuccess) {
                     NSLog(@"Failed to close %@", entity.docURL);
-                    // Continue anyway...
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -483,13 +367,13 @@ diaryInfo:(DiaryInfo *)info
 // this method is used in case the user scrolled into a set of cells that don't have their app icons yet
 - (void)loadImagesForOnscreenRows
 {
-    if ([entityArray count] > 0)
+    if ([monthAndYearArray count] > 0)
     {
         NSArray *visiblePaths = [self.mTableView indexPathsForVisibleRows];
         for (NSIndexPath *indexPath in visiblePaths)
         {
-            DocEntity *entity = [entityArray objectAtIndex:indexPath.row];
-            
+            MonthSort *monthSort = [monthAndYearArray objectAtIndex:[indexPath section]];
+            DocEntity *entity = [monthSort.entryArray objectAtIndex:[indexPath row]];
             if (!entity.metadata) // avoid the app icon download if the app already has an icon
             {
                 [self startLoadDoc:entity forIndexPath:indexPath];
@@ -531,39 +415,40 @@ diaryInfo:(DiaryInfo *)info
     contentViewController.newFile = newFile;
     contentViewController.entity = entity;
     contentViewController.listViewController = self;
-    
+    NSLog(@"%@", entity.docURL);
     UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:contentViewController];
     [self presentModalViewController:modalNavController animated:YES];
     [contentViewController release];
     [modalNavController release];
 }
 
-- (void)deleteFile:(NSURL *)url
+- (void)deleteFile:(DocEntity *)entry
 {
-    __block int index = -1;
-    [entityArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+    // 删除文件
+    if ([AppDelegate app].docAccess != nil)
+    {
+        [[AppDelegate app].docAccess deleteFile:entry.docURL];
+    }
     
-        DocEntity *entiy = (DocEntity *)obj;
-        if ([entiy.docURL.path isEqualToString:url.path])
+    // 删除数据源å
+    NSDate *date = [FilePath timeFromURL:entry.docURL];
+    NSString *monthAndYear = [FilePath monthAndYear:date];
+    
+    for (int i=0; i<[monthAndYearArray count]; i++)
+    {
+        MonthSort *monthSort = [monthAndYearArray objectAtIndex:i];
+        if ([monthSort.monthAndYear isEqualToString:monthAndYear])
         {
-            index = idx;
-            *stop = YES;
+            if ([monthSort.entryArray containsObject:entry])
+            {
+                [monthSort.entryArray removeObject:entry];
+            }
+            break;
         }
-    }];
-
-    if (index < 0 || index >= [entityArray count])
-    {
-        return;
     }
     
-    DocEntity *entity = [entityArray objectAtIndex:index];
-    if (entity != nil && [AppDelegate app].docAccess != nil)
-    {
-        [[AppDelegate app].docAccess deleteFile:entity.docURL];
-    }
-    [entityArray removeObject:entity];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [self.mTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.mTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:entry.indexPath, nil] 
+                           withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)didReceiveMemoryWarning
@@ -611,44 +496,37 @@ diaryInfo:(DiaryInfo *)info
             [self reloadNotes:YES];
         }                
     } 
-//    // @"What would you like to do with the documents currently on this iPad?" 
-//    // Cancel: @"Continue Using iCloud" 
-//    // Other 1: @"Keep a Local Copy"
-//    // Other 2: @"Keep on iCloud Only"
-//    else if (alertView.tag == 2) {
-//        
-//        if (buttonIndex == alertView.cancelButtonIndex) {
-//            
-//            [self setiCloudOn:YES];
-//            [self refresh];
-//            
-//        } else if (buttonIndex == alertView.firstOtherButtonIndex) {
-//            
-//            if (_iCloudURLsReady) {
-//                [self iCloudToLocalImpl];
-//            } else {
-//                _copyiCloudToLocal = YES;
-//            }
-//            
-//        } else if (buttonIndex == alertView.firstOtherButtonIndex + 1) {            
-//            
-//            // Do nothing
-//            
-//        } 
-//        
-//    }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [monthAndYearArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [entityArray count];
+    MonthSort *monthSort = [monthAndYearArray objectAtIndex:section];
+    return [monthSort.entryArray count];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 25)];
+    UIImage *image = [UIImage imageNamed:@"sectionBk"];
+    imageView.image = image;
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 22)];
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = UITextAlignmentCenter;
+    [imageView addSubview:label];
+    
+    MonthSort *monthSort = [monthAndYearArray objectAtIndex:section];
+    label.text = monthSort.monthAndYear;
+    label.textColor = [UIColor darkGrayColor];
+    label.font = [UIFont boldSystemFontOfSize:15];
+    label.textColor = [UIColor colorFromHex:Light_blue];
+    return imageView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -666,15 +544,21 @@ diaryInfo:(DiaryInfo *)info
     NSString *backgroundImagePath = [[NSBundle mainBundle] pathForResource:@"cellBk" ofType:@"png"];
     [cell setBackgroundImageName:backgroundImagePath];
     
-    if ([entityArray count] > 0)
+    NSInteger section = [indexPath section];
+    NSInteger row = [indexPath row];
+    if ([monthAndYearArray count] > section)
     {
-        DocEntity *entity = [entityArray objectAtIndex:[indexPath row]];
-        [self fillCell:cell withEntity:entity];
-
-        if (entity.metadata == nil)
+        MonthSort *monthSort = [monthAndYearArray objectAtIndex:section];
+        if ([monthSort.entryArray count] > row)
         {
-            // 如果为空则去加载填充
-            [self startLoadDoc:entity forIndexPath:indexPath];
+            DocEntity *entity = [monthSort.entryArray  objectAtIndex:row];
+            [self fillCell:cell withEntity:entity];
+            NSInteger row = [indexPath row];
+            if (entity.metadata == nil)
+            {
+                // 如果为空则去加载填充
+                [self startLoadDoc:entity forIndexPath:indexPath];
+            }
         }
     }
     
@@ -692,19 +576,25 @@ diaryInfo:(DiaryInfo *)info
 {
     if (!mTableView.isEditing)
     {
-        DocEntity *entity = [entityArray objectAtIndex:[indexPath row]];
-        if (!entity.downloadSuccess)
+        NSInteger section = [indexPath section];
+        if ([monthAndYearArray count] > section)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"notice", nil) 
-                                                                message:NSLocalizedString(@"downloading", nil) 
-                                                               delegate:nil
-                                                      cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                                      otherButtonTitles:nil, nil];
-            [alertView show];
-            [alertView release];
-            return;
+            MonthSort *monthSort = [monthAndYearArray objectAtIndex:section];
+            DocEntity *entity = [monthSort.entryArray objectAtIndex:[indexPath row]];
+            if (!entity.downloadSuccess)
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"notice", nil) 
+                                                                    message:NSLocalizedString(@"downloading", nil) 
+                                                                   delegate:nil
+                                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                          otherButtonTitles:nil, nil];
+                [alertView show];
+                [alertView release];
+                return;
+            }
+            [self showDiaryContent:entity newFile:NO];
         }
-        [self showDiaryContent:entity newFile:NO];
+       
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
@@ -726,38 +616,184 @@ diaryInfo:(DiaryInfo *)info
     [self loadImagesForOnscreenRows];
 }
 
-// 前一篇
+//// 前一篇
 - (DocEntity *)preUrl:(DocEntity *)entry
 {
-    NSInteger index = [entityArray indexOfObject:entry];
-    index--;
-    if (index < 0 || index >= [entityArray count])
+    DocEntity *result = nil;
+    NSDate *date = [FilePath timeFromURL:entry.docURL];
+    NSString *monthAndYear = [FilePath monthAndYear:date];
+    for (int i=0; i<[monthAndYearArray count]; i++)
     {
-        return nil;
+        MonthSort *monthSort = [monthAndYearArray objectAtIndex:i];
+        if ([monthSort.monthAndYear isEqualToString:monthAndYear])
+        {
+            NSInteger index = [monthSort.entryArray indexOfObject:entry];
+            index--;
+            if (index < 0 || index >= [monthSort.entryArray count])
+            {
+                if (i - 1 > 0)
+                {
+                    monthSort = [monthAndYearArray objectAtIndex:i - 1];
+                    if ([monthSort.entryArray count] > 0)
+                    {
+                        result = [monthSort.entryArray lastObject];
+                    }
+                }
+            }
+            else
+            {
+                result = [monthSort.entryArray objectAtIndex:index];
+            }
+            break;
+        }
     }
     
-    return [entityArray objectAtIndex:index];
+    return result;
 }
-
+//
 //后一篇日记
 - (DocEntity *)nextUrl:(DocEntity *)entry
 {
-    NSInteger index = [entityArray indexOfObject:entry];
-    index++;
-    if (index >= [entityArray count])
+    DocEntity *result = nil;
+    NSDate *date = [FilePath timeFromURL:entry.docURL];
+    NSString *monthAndYear = [FilePath monthAndYear:date];
+    for (int i=0; i<[monthAndYearArray count]; i++)
     {
-        return nil;
+        MonthSort *monthSort = [monthAndYearArray objectAtIndex:i];
+        if ([monthSort.monthAndYear isEqualToString:monthAndYear])
+        {
+            NSInteger index = [monthSort.entryArray indexOfObject:entry];
+            index++;
+            if (index >= [monthSort.entryArray count])
+            {
+                if (i + 1 < [monthAndYearArray count])
+                {
+                    monthSort = [monthAndYearArray objectAtIndex:i + 1];
+                    if ([monthSort.entryArray count] > 0)
+                    {
+                        result = [monthSort.entryArray objectAtIndex:0];
+                    }
+                }
+            }
+            else
+            {
+                result = [monthSort.entryArray objectAtIndex:index];
+            }
+            break;
+        }
     }
-    return [entityArray objectAtIndex:index];
+    
+    return result;
 }
 
-- (NSInteger)indexForEntry:(DocEntity *)entry
+- (BOOL)isFirstObj:(DocEntity *)entry
 {
-    return [entityArray indexOfObject:entry];
+    BOOL first = YES;
+    if ([monthAndYearArray count] > 0)
+    {
+        MonthSort *monthSort = [monthAndYearArray objectAtIndex:0];
+        DocEntity *aEntry = [monthSort.entryArray objectAtIndex:0];
+        if (aEntry == entry)
+        {
+            first = YES;
+        }
+        else
+        {
+            first = NO;
+        }
+    }
+
+    return first;
 }
 
-- (NSInteger)totalCount
+- (BOOL)isLastObj:(DocEntity *)entry
 {
-    return [entityArray count];
+    BOOL last = YES;
+    if ([monthAndYearArray count] > 0)
+    {
+        MonthSort *monthSort = [monthAndYearArray lastObject];
+        DocEntity *aEntry = [monthSort.entryArray lastObject];
+        if (aEntry == entry)
+        {
+            last = YES;
+        }
+        else
+        {
+            last = NO;
+        }
+    }
+    
+    return last;
 }
+
+- (void)addSortedEntryByMonthAndYear:(NSArray *)array
+{    
+    // 安日期分类
+    for (DiaryInfo *info in array)
+    {
+        NSDate *date = [FilePath timeFromURL:[NSURL fileURLWithPath:info.url]];
+        NSString *monthAndYear = [FilePath monthAndYear:date];
+        DocEntity *entry = [[DocEntity alloc] initWithFileURL:[NSURL fileURLWithPath:info.url]
+                                                     metadata:nil
+                                                        state:UIDocumentStateNormal
+                                                      version:nil];
+        entry.title = info.title;
+        [entry.tags addObjectsFromArray:[info.tags componentsSeparatedByString:@"|"]];
+        
+
+        // 开始查找
+        int j = 0;
+        BOOL exist = NO;
+        for (; j<[monthAndYearArray count]; j++)
+        {
+            MonthSort *monthSort = [monthAndYearArray objectAtIndex:j];
+            if ([monthSort.monthAndYear isEqualToString:monthAndYear])
+            {
+                [monthSort.entryArray addObject:entry];
+                exist = YES;
+                break;
+            }
+            
+            if (j >= [monthAndYearArray count])
+            {
+                exist = NO;
+            }
+        }
+        
+        // 没找到
+        if (!exist)
+        {
+            MonthSort *monthSort = [[MonthSort alloc] init];
+            monthSort.monthAndYear = monthAndYear;
+            [monthSort.entryArray addObject:entry];
+            [monthAndYearArray addObject:monthSort];
+            
+            [monthSort release];
+        }
+    }
+    
+    [FilePath sortDateUsingDescending:monthAndYearArray];
+}
+
+- (NSInteger)indexForMonthAndYear:(NSString *)str
+{
+    NSInteger index = -1;
+    for (int j = 0; j<[monthAndYearArray count]; j++)
+    {
+        MonthSort *monthSort = [monthAndYearArray objectAtIndex:j];
+        if ([monthSort.monthAndYear isEqualToString:str])
+        {
+            index = j;
+            break;
+        }
+    }
+    
+    return index;
+}
+
+- (IBAction)goBack:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end

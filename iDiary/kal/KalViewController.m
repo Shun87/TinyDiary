@@ -46,8 +46,6 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
     logic = [[KalLogic alloc] initForDate:date];
     self.initialDate = date;
     self.selectedDate = date;
-    self.title = NSLocalizedString(@"Calendar", nil);
-    self.tabBarItem.image = [UIImage imageNamed:@"calendar"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(significantTimeChangeOccurred) name:UIApplicationSignificantTimeChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:KalDataSourceChangedNotification object:nil];
   }
@@ -187,7 +185,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
   {
     self.title = NSLocalizedString(@"Calendar", nil);
   }
-  KalView *kalView = [[[KalView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] delegate:self logic:logic] autorelease];
+  KalView *kalView = [[[KalView alloc] initWithFrame:CGRectMake(0, 0, 320, 460) delegate:self logic:logic] autorelease];
   self.view = kalView;
   tableView = kalView.tableView;
   tableView.dataSource = dataSource;

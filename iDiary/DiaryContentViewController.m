@@ -208,11 +208,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(enterBackgroud:)
-                                                 name:UIApplicationDidEnterBackgroundNotification
-                                               object:nil];
-    
-    
+                                             selector:@selector(resignActive:) 
+                                                 name:@"appillssResignActive" object:nil];
     headView.backgroundColor = [UIColor redColor];
     
     [self loadContent];
@@ -220,16 +217,16 @@ const NSInteger kActionSheetPickPhoto = 1000;
 
 - (void)loadContent
 {
-    NSInteger total = [(DiaryListViewController *)self.listViewController totalCount];
-    NSInteger curIndex = [(DiaryListViewController *)self.listViewController indexForEntry:self.entity];
-    if (total == 1)
+    BOOL firstObj = [(DiaryListViewController *)self.listViewController isFirstObj:self.entity];
+    BOOL lastObj = [(DiaryListViewController *)self.listViewController isLastObj:self.entity];
+    if (firstObj && lastObj)
     {
         self.preButton.enabled = NO;
         self.nextButton.enabled = NO;
     }
     else
     {
-        if (curIndex > 0)
+        if (!firstObj)
         {
             self.preButton.enabled = YES;
         }
@@ -238,7 +235,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
             self.preButton.enabled = NO;
         }
         
-        if (curIndex < total - 1)
+        if (!lastObj)
         {
             self.nextButton.enabled = YES;
         }
@@ -727,7 +724,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     }];
 
 
-    [(DiaryListViewController *)listViewController deleteFile:self.doc.fileURL];
+    [(DiaryListViewController *)listViewController deleteFile:self.entity];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -930,9 +927,9 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [self dismissModalViewControllerAnimated: YES];
 }
 
-- (void)enterBackgroud:(NSNotification *)notification
+- (void)resignActive:(NSNotification *)notification
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:NO];
 }
 
 - (void)dealloc

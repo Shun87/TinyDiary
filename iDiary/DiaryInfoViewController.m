@@ -282,7 +282,10 @@
             {
                 [cell.contentView addSubview:atextField];
             }
-            
+            if ([entity.title length] == 0)
+            {
+                entity.title = NSLocalizedString(@"No title", nil);
+            }
             atextField.text = entity.title;
         }
         else

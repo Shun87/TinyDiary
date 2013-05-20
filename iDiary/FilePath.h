@@ -14,5 +14,11 @@
 + (NSString*)generateFileNameBy:(NSDate *)date extension:(NSString *)extension;
 + (NSString *)tempRoot;
 + (NSDate *)timeFromURL:(NSURL *)url;
+
+// sort
 + (void)sortUsingDescending:(NSMutableArray *)array;
++ (void)sortDateUsingDescending:(NSMutableArray *)array;
+
++ (NSString *)monthAndYear:(NSDate *)date;
++ (NSDate *)dateFromMonthAndYearStr:(NSString *)str;
 @end

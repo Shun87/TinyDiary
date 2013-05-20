@@ -39,3 +39,9 @@
 - (void)showAndSelectDate:(NSDate *)date;           // Updates the state of the calendar to display the specified date's month and selects the tile for that date.
 
 @end
+
+@protocol  KalViewControllerDelegate <NSObject>
+
+- (void)selectDate:(KalDate *)date;
+
+@end
