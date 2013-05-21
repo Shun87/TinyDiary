@@ -87,35 +87,41 @@
     return [dateFormatter stringFromDate:date];
 }
 
-+ (void)sortUsingDescending:(NSMutableArray *)array
++ (NSString *)shortMonthAndYear:(NSDate *)date
 {
-    [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2){
-        
-        NSURL *url1 = ((DocEntity *)obj1).docURL;
-        NSURL *url2 = ((DocEntity *)obj2).docURL;
-        NSDate *date1 = [FilePath timeFromURL:url1];
-        NSDate *date2 = [FilePath timeFromURL:url2];
-        NSComparisonResult result = [date1 compare:date2];
-        if (result ==  NSOrderedAscending)
-        {
-            return NSOrderedDescending;
-        }
-        else if (result ==  NSOrderedDescending)
-        {
-            return NSOrderedAscending;
-        }
-        return NSOrderedSame;
-    }];
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setDateFormat:@"LLL yyyy"];
+    
+    return [dateFormatter stringFromDate:date];
 }
 
-+ (void)sortDateUsingDescending:(NSMutableArray *)array
++ (NSString *)week:(NSDate *)date
+{
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setDateFormat:@"cccc"];
+    
+    return [dateFormatter stringFromDate:date];
+}
+
++ (NSString *)day:(NSDate *)date
+{
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setDateFormat:@"d"];
+    
+    return [dateFormatter stringFromDate:date];
+}
+
++ (void)sortInfoUsingDescending:(NSMutableArray *)array
 {
     [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2){
         
-        NSString *my1 = ((MonthSort *)obj1).monthAndYear;
-        NSString *my2 = ((MonthSort *)obj2).monthAndYear;
-        NSDate *date1 = [FilePath dateFromMonthAndYearStr:my1];
-        NSDate *date2 = [FilePath dateFromMonthAndYearStr:my2];
+        NSURL *url1 = [NSURL fileURLWithPath:((DiaryInfo *)obj1).url];
+        NSURL *url2 = [NSURL fileURLWithPath:((DiaryInfo *)obj2).url];
+        NSDate *date1 = [FilePath timeFromURL:url1];
+        NSDate *date2 = [FilePath timeFromURL:url2];
         NSComparisonResult result = [date1 compare:date2];
         if (result ==  NSOrderedAscending)
         {

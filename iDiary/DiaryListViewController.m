@@ -111,29 +111,42 @@ NSString *const HTMLExtentsion = @".html";
         }
         else if (specDate != nil)
         {
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+            int width = 100;
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 44)];
             view.backgroundColor = [UIColor clearColor];
-            UILabel *yearLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 14)];
-            yearLabel.backgroundColor = [UIColor clearColor];
-            [view addSubview:yearLabel];
-            yearLabel.textColor = [UIColor whiteColor];
-            yearLabel.font = [UIFont systemFontOfSize:12];
-            yearLabel.text = [NSString stringWithFormat:@"%d", [self.specDate cc_componentsForMonthDayAndYear].year];
-            yearLabel.textAlignment = UITextAlignmentCenter;
-            yearLabel.shadowColor = [UIColor darkGrayColor];
+            self.navigationItem.titleView = view;
             
-            UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, 200, 28)];
+            UILabel *dayLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 44)] autorelease];
             dayLabel.backgroundColor = [UIColor clearColor];
             [view addSubview:dayLabel];
             dayLabel.textAlignment = UITextAlignmentCenter;
             dayLabel.textColor = [UIColor blackColor];
-            dayLabel.font = [UIFont boldSystemFontOfSize:21];
-            dayLabel.text = [FilePath monthAndDay:self.specDate];
+            dayLabel.font = [UIFont boldSystemFontOfSize:30];
+            dayLabel.text = [FilePath day:self.specDate];
             dayLabel.textColor = [UIColor whiteColor];
             dayLabel.shadowColor = [UIColor darkGrayColor];
-            self.navigationItem.titleView = view;
-        }
             
+            UILabel *weekLabel = [[[UILabel alloc] initWithFrame:CGRectMake(50, 8, 150, 14)] autorelease];
+            weekLabel.backgroundColor = [UIColor clearColor];
+            [view addSubview:weekLabel];
+            weekLabel.textColor = [UIColor whiteColor];
+            weekLabel.font = [UIFont systemFontOfSize:12];
+            weekLabel.text = [FilePath week:self.specDate];
+            weekLabel.shadowColor = [UIColor darkGrayColor];
+            weekLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+            
+            UILabel *yearLabel = [[[UILabel alloc] initWithFrame:CGRectMake(50, 22, 150, 14)] autorelease];
+            yearLabel.backgroundColor = [UIColor clearColor];
+            [view addSubview:yearLabel];
+            yearLabel.textColor = [UIColor whiteColor];
+            yearLabel.font = [UIFont systemFontOfSize:12];
+            yearLabel.text = [FilePath monthAndYear:self.specDate];
+            yearLabel.shadowColor = [UIColor darkGrayColor];
+            yearLabel.numberOfLines=0;
+            yearLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+            [view release];
+        }
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:[UIImage imageNamed:@"back_white.png"] forState:UIControlStateNormal];
         [button setFrame:CGRectMake(0, 0, 42, 40)];
@@ -550,9 +563,9 @@ NSString *const HTMLExtentsion = @".html";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if ([monthAndYearArray count] > 1)
+    if ([monthAndYearArray count] >= 1)
     {
-        return 24;
+        return 25;
     }
     return 0;
 }
@@ -562,7 +575,7 @@ NSString *const HTMLExtentsion = @".html";
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 25)];
     UIImage *image = [UIImage imageNamed:@"sectionBk"];
     imageView.image = image;
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 22)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 1, 320, 22)];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = UITextAlignmentCenter;
     [imageView addSubview:label];
@@ -574,8 +587,8 @@ NSString *const HTMLExtentsion = @".html";
 
     label.text = monthSort.monthAndYear;
     label.textColor = [UIColor darkGrayColor];
-    label.font = [UIFont boldSystemFontOfSize:15];
-    label.textColor = [UIColor colorFromHex:Light_blue];
+    label.font = [UIFont systemFontOfSize:14];
+    label.textColor = [UIColor colorFromHex:0x717171];
     return imageView;
 }
 
@@ -820,8 +833,6 @@ NSString *const HTMLExtentsion = @".html";
             [monthSort release];
         }
     }
-    
-    [FilePath sortDateUsingDescending:monthAndYearArray];
 }
 
 - (NSInteger)indexForMonthAndYear:(NSString *)str

@@ -271,6 +271,7 @@
             if (success)
             {
                 [self.diaryInfoArray addObjectsFromArray:[plistDoc units] ];
+                [FilePath sortInfoUsingDescending:self.diaryInfoArray];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
                                                                     object:self.diaryInfoArray];
             }
@@ -314,6 +315,7 @@
                 if (success)
                 {
                     [self.diaryInfoArray addObjectsFromArray:[plistDoc units] ];
+                    [FilePath sortInfoUsingDescending:self.diaryInfoArray];
                     [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
                                                                         object:self.diaryInfoArray];
                 }

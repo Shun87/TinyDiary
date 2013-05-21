@@ -16,13 +16,14 @@
 + (NSDate *)timeFromURL:(NSURL *)url;
 
 // sort
-+ (void)sortUsingDescending:(NSMutableArray *)array;
-+ (void)sortDateUsingDescending:(NSMutableArray *)array;
++ (void)sortInfoUsingDescending:(NSMutableArray *)array;
 
 + (NSString *)monthAndYear:(NSDate *)date;
 + (NSDate *)dateFromMonthAndYearStr:(NSString *)str;
++ (NSString *)shortMonthAndYear:(NSDate *)date;
 + (NSString *)monthAndDay:(NSDate *)date;
-
++ (NSString *)week:(NSDate *)date;
++ (NSString *)day:(NSDate *)date;
 + (NSString *)dayString:(NSDate *)date;
 @end
 
