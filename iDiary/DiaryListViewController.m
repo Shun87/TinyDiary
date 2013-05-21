@@ -291,98 +291,6 @@ NSString *const HTMLExtentsion = @".html";
     }];
 }
 
-- (void)fillCell:(AdvancedCell *)cell withEntity:(DocEntity *)entity
-{
-    // 这个方法不要调用tableView reloadData的方法，会造成死循环
-    NSDate *date = [FilePath timeFromURL:entity.docURL];
-    [cell setData:date];
-    if (entity.metadata != nil)
-    {
-        if (entity.metadata.detailText != nil)
-        {
-            [cell setcontent:entity.metadata.detailText];
-        }
-    
-        if (entity.metadata.thumbnailImage != nil)
-        {
-            cell.thumbnail = entity.metadata.thumbnailImage;
-        }
-    }
-    
-    if ([entity.title length] == 0)
-    {
-        [cell setTitleStr:NSLocalizedString(@"No title", nil)];
-    }
-    else
-    {
-        [cell setTitleStr:entity.title];
-    }
-}
-
-- (void)metadataLoadSuccess:(DocEntity *)entity
-{
-    if (entity != nil)
-    {
-        entity.downloadSuccess = YES;
-        AdvancedCell *cell = (AdvancedCell *)[self.mTableView cellForRowAtIndexPath:entity.indexPath];
-        if (cell != nil)
-        {
-            [self fillCell:cell withEntity:entity];
-        }
-    }
-}
-
-- (void)startLoadDoc:(DocEntity *)entity forIndexPath:(NSIndexPath *)indexPath
-{
-    NoteDocument *doc = [[NoteDocument alloc] initWithFileURL:entity.docURL];
-    [doc openWithCompletionHandler:^(BOOL success){
-        if (success)
-        {
-            // 只有需要去加载的时候才去设置indexPath，默认的indexPath为空
-            entity.metadata = doc.metadata;
-            entity.state = doc.documentState;
-            entity.version = [NSFileVersion currentVersionOfItemAtURL:entity.docURL];
-            entity.indexPath = indexPath;
-            [doc closeWithCompletionHandler:^(BOOL closeSuccess){
-                
-                // Check status
-                if (!closeSuccess) {
-                    NSLog(@"Failed to close %@", entity.docURL);
-                }
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                 
-                    [self metadataLoadSuccess:entity];
-                    [doc release];
-                    
-                });
-            }];
-        }
-        else
-        {
-            NSLog(@"Failed to openWithCompletionHandler %@", entity.docURL);
-        }
-    }];
-}
-
-// this method is used in case the user scrolled into a set of cells that don't have their app icons yet
-- (void)loadImagesForOnscreenRows
-{
-    if ([monthAndYearArray count] > 0)
-    {
-        NSArray *visiblePaths = [self.mTableView indexPathsForVisibleRows];
-        for (NSIndexPath *indexPath in visiblePaths)
-        {
-            MonthSort *monthSort = [monthAndYearArray objectAtIndex:[indexPath section]];
-            DocEntity *entity = [monthSort.entryArray objectAtIndex:[indexPath row]];
-            if (!entity.metadata) // avoid the app icon download if the app already has an icon
-            {
-                [self startLoadDoc:entity forIndexPath:indexPath];
-            }
-        }
-    }
-}
-
 - (IBAction)editAction:(id)sender
 {
     [self.mTableView setEditing:YES animated:YES];
@@ -499,6 +407,99 @@ NSString *const HTMLExtentsion = @".html";
     } 
 }
 
+- (void)fillCell:(AdvancedCell *)cell withEntity:(DocEntity *)entity
+{
+    // 这个方法不要调用tableView reloadData的方法，会造成死循环
+    NSDate *date = [FilePath timeFromURL:entity.docURL];
+    [cell setData:date];
+    if (entity.metadata != nil)
+    {
+        if (entity.metadata.detailText != nil)
+        {
+            [cell setcontent:entity.metadata.detailText];
+        }
+        
+        if (entity.metadata.thumbnailImage != nil)
+        {
+            cell.thumbnail = entity.metadata.thumbnailImage;
+        }
+    }
+    
+    if ([entity.title length] == 0)
+    {
+        [cell setTitleStr:NSLocalizedString(@"No title", nil)];
+    }
+    else
+    {
+        [cell setTitleStr:entity.title];
+    }
+}
+
+- (void)metadataLoadSuccess:(DocEntity *)entity
+{
+    if (entity != nil)
+    {
+        entity.downloadSuccess = YES;
+        AdvancedCell *cell = (AdvancedCell *)[self.mTableView cellForRowAtIndexPath:entity.indexPath];
+        if (cell != nil)
+        {
+            [self fillCell:cell withEntity:entity];
+        }
+    }
+}
+
+- (void)startLoadDoc:(DocEntity *)entity forIndexPath:(NSIndexPath *)indexPath
+{
+    // entity的indexPath一定要在这里赋值,因为滑动的时候会去进到这里,但是参数INDEXPATH可能和entity的不一样,所以要以参数为准
+    entity.indexPath = indexPath;
+    NoteDocument *doc = [[NoteDocument alloc] initWithFileURL:entity.docURL];
+    [doc openWithCompletionHandler:^(BOOL success){
+        if (success)
+        {
+            // 只有需要去加载的时候才去设置indexPath，默认的indexPath为空
+            entity.metadata = doc.metadata;
+            entity.state = doc.documentState;
+            entity.version = [NSFileVersion currentVersionOfItemAtURL:entity.docURL];
+            [doc closeWithCompletionHandler:^(BOOL closeSuccess){
+                
+                // Check status
+                if (!closeSuccess) {
+                    NSLog(@"Failed to close %@", entity.docURL);
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self metadataLoadSuccess:entity];
+                    [doc release];
+                    
+                });
+            }];
+        }
+        else
+        {
+            NSLog(@"Failed to openWithCompletionHandler %@", entity.docURL);
+        }
+    }];
+}
+
+// this method is used in case the user scrolled into a set of cells that don't have their app icons yet
+- (void)loadImagesForOnscreenRows
+{
+    if ([monthAndYearArray count] > 0)
+    {
+        NSArray *visiblePaths = [self.mTableView indexPathsForVisibleRows];
+        for (NSIndexPath *indexPath in visiblePaths)
+        {
+            MonthSort *monthSort = [monthAndYearArray objectAtIndex:[indexPath section]];
+            DocEntity *entity = [monthSort.entryArray objectAtIndex:[indexPath row]];
+            if (!entity.metadata) // avoid the app icon download if the app already has an icon
+            {
+                [self startLoadDoc:entity forIndexPath:indexPath];
+            }
+        }
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -574,7 +575,6 @@ NSString *const HTMLExtentsion = @".html";
         {
             DocEntity *entity = [monthSort.entryArray  objectAtIndex:row];
             [self fillCell:cell withEntity:entity];
-            NSInteger row = [indexPath row];
             if (entity.metadata == nil)
             {
                 // 如果为空则去加载填充
