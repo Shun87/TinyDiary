@@ -10,5 +10,8 @@
 #import "Kal.h"
 
 @interface CalendarViewController : UIViewController
-
+{
+    KalViewController *kalViewController;
+    NSMutableArray *dayDiaryArray;
+}
 @end

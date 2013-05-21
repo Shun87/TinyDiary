@@ -217,7 +217,7 @@
         
         if ([indexPath section] == 0 && [indexPath row] == 0)
         {
-            atextField = [[UITextField alloc] initWithFrame:CGRectMake(100, 12, 190, 45)];
+            atextField = [[UITextField alloc] initWithFrame:CGRectMake(100, 12, 180, 45)];
             atextField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
             atextField.tag = 1001;
             atextField.textAlignment = UITextAlignmentRight;
@@ -230,7 +230,7 @@
         }
         else
         {
-            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(150, 2, 140, 45)] autorelease];
+            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(130, 2, 150, 45)] autorelease];
             label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
             [cell.contentView addSubview:label];
             label.tag = 1002;

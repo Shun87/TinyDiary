@@ -7,8 +7,19 @@
 //
 
 #import "CalendarViewController.h"
+#import "DiaryListViewController.h"
+#import "AppDelegate.h"
+#import "FilePath.h"
+#import "NSDateAdditions.h"
 
 @implementation CalendarViewController
+
+- (void)dealloc
+{
+    [kalViewController release];
+    [dayDiaryArray release];
+    [super dealloc];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,12 +44,50 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     KalViewController *kalViewController = [[KalViewController alloc] init];
+    kalViewController = [[KalViewController alloc] init];
     kalViewController.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin 
     | UIViewAutoresizingFlexibleHeight;
-    
-    kalViewController.delegate = self;
     [self.view addSubview:kalViewController.view];
+    
+    dayDiaryArray = [[NSMutableArray alloc] init];
+    UIBarButtonItem *today = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Today", nil)
+                                                              style:UIBarButtonItemStyleBordered
+                                                             target:self
+                                                             action:@selector(today:)];
+    self.navigationItem.rightBarButtonItem = today;
+    [today release];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(selectkalDate:) name:@"SelectDate" object:nil];
+}
+
+- (void)selectkalDate:(NSNotification *)notification
+{
+    NSDate *date = (NSDate *)[notification object];
+    NSString *day = [FilePath dayString:date];
+    NSMutableArray *diaryArray = [NSMutableArray array];
+    for (int i=0; i<[[AppDelegate app].diaryInfoArray count]; i++)
+    {
+        DiaryInfo *info = [[AppDelegate app].diaryInfoArray objectAtIndex:i];
+        NSDate *infoDate = [FilePath timeFromURL:[NSURL fileURLWithPath:info.url]];
+        NSString *dayStr = [FilePath dayString:infoDate];
+        if ([day isEqualToString:dayStr])
+        {
+            [diaryArray addObject:info];
+        }
+    }
+    DiaryListViewController *diaryListController = [[DiaryListViewController alloc] initWithNibName:@"DiaryListViewController"
+                                                                                             bundle:nil];
+    diaryListController.specDate = date;
+
+    [self.navigationController pushViewController:diaryListController animated:YES];
+    [diaryListController reloadDataFromArray:diaryArray];
+    [diaryListController release];
+}
+
+- (IBAction)today:(id)sender
+{
+    [kalViewController showAndSelectDate:[NSDate date]];
 }
 
 - (void)viewDidUnload

@@ -146,6 +146,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     } else {
       self.selectedTile = tile;
     }
+      
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectDate" object:[tile.date NSDate]];
   }
   self.highlightedTile = nil;
 }

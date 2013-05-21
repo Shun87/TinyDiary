@@ -69,6 +69,24 @@
     return [dateFormatter dateFromString:str];
 }
 
++ (NSString *)dayString:(NSDate *)date
+{
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setDateFormat:@"yyyyMMdd"];
+
+    return [dateFormatter stringFromDate:date];
+}
+
++ (NSString *)monthAndDay:(NSDate *)date
+{
+    NSDateFormatter* dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setDateFormat:@"LLLL d"];
+    
+    return [dateFormatter stringFromDate:date];
+}
+
 + (void)sortUsingDescending:(NSMutableArray *)array
 {
     [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2){

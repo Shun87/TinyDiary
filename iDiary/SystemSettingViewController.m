@@ -128,10 +128,12 @@
             UISwitch *switchCtrl = [[[UISwitch alloc] initWithFrame:CGRectMake(210, 11.0f, 100, 40)] autorelease];
             [cell.contentView addSubview:switchCtrl];
             switchCtrl.tag = 1001 + row;
+            cell.imageView.image = [UIImage imageNamed:@"lock"];
         }
         else if (row == 1)
         {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.imageView.image = [UIImage imageNamed:@"changePsd"];
         }
 
     }

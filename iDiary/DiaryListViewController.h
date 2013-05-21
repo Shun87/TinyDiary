@@ -33,11 +33,13 @@ DocumentsAccessDelegate, UIActionSheetDelegate>
     
     TTSocial *mySocial;
     
-    NSString *tagName;
+    NSString *tagName;      // 特定TAG的日记
+    NSDate *specDate; //特定日期的日记
     
     NSMutableArray *monthAndYearArray;
 }
 @property (nonatomic, copy)NSString *tagName;
+@property (nonatomic, copy)NSDate *specDate;
 @property (nonatomic, retain)IBOutlet UITableView *mTableView;
 @property (nonatomic, retain) IBOutlet AdvancedCell *tmpCell;
 @property (nonatomic, retain) UINib *cellNib;

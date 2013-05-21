@@ -45,7 +45,7 @@ NSString *const HTMLExtentsion = @".html";
 @synthesize iCloudRoot;
 @synthesize document;
 @synthesize indexPathToDel, indexPathToShare;
-@synthesize tagName;
+@synthesize tagName, specDate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,7 +78,7 @@ NSString *const HTMLExtentsion = @".html";
     [indexPathToDel release];
     [indexPathToShare release];
     [tagName release];
-    
+    [specDate release];
     [monthAndYearArray release];
     [super dealloc];
 }
@@ -102,13 +102,41 @@ NSString *const HTMLExtentsion = @".html";
     mySocial.viewController = self;
     
     monthAndYearArray = [[NSMutableArray alloc] init];
-    if ([tagName length] > 0)
+    if ([tagName length] > 0 || specDate != nil)
     {
         // TAG页面
-         self.navigationItem.title = tagName;
+        if ([tagName length] > 0)
+        {
+             self.navigationItem.title = tagName;
+        }
+        else if (specDate != nil)
+        {
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+            view.backgroundColor = [UIColor clearColor];
+            UILabel *yearLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 14)];
+            yearLabel.backgroundColor = [UIColor clearColor];
+            [view addSubview:yearLabel];
+            yearLabel.textColor = [UIColor whiteColor];
+            yearLabel.font = [UIFont systemFontOfSize:12];
+            yearLabel.text = [NSString stringWithFormat:@"%d", [self.specDate cc_componentsForMonthDayAndYear].year];
+            yearLabel.textAlignment = UITextAlignmentCenter;
+            yearLabel.shadowColor = [UIColor darkGrayColor];
+            
+            UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, 200, 28)];
+            dayLabel.backgroundColor = [UIColor clearColor];
+            [view addSubview:dayLabel];
+            dayLabel.textAlignment = UITextAlignmentCenter;
+            dayLabel.textColor = [UIColor blackColor];
+            dayLabel.font = [UIFont boldSystemFontOfSize:21];
+            dayLabel.text = [FilePath monthAndDay:self.specDate];
+            dayLabel.textColor = [UIColor whiteColor];
+            dayLabel.shadowColor = [UIColor darkGrayColor];
+            self.navigationItem.titleView = view;
+        }
+            
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setImage:[UIImage imageNamed:@"bakck_white.png"] forState:UIControlStateNormal];
-        [button setFrame:CGRectMake(0, 0, 40, 40)];
+        [button setImage:[UIImage imageNamed:@"back_white.png"] forState:UIControlStateNormal];
+        [button setFrame:CGRectMake(0, 0, 42, 40)];
         button.showsTouchWhenHighlighted = YES;
         [button addTarget:self
                    action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
@@ -324,7 +352,7 @@ NSString *const HTMLExtentsion = @".html";
     contentViewController.newFile = newFile;
     contentViewController.entity = entity;
     contentViewController.listViewController = self;
-    NSLog(@"%@", entity.docURL);
+
     UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:contentViewController];
     [self presentModalViewController:modalNavController animated:YES];
     [contentViewController release];
