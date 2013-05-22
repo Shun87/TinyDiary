@@ -70,7 +70,7 @@
 
 - (void)bold
 {
-    [webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Bold\")"];
+    [webView stringByEvaluatingJavaScriptFromString:@"SearchText()"];
 }
 
 - (void)italic

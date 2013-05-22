@@ -453,6 +453,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     
     
     NSString *newInnerHtml = [self.richEditor innerHtml];
+    NSLog(@"%@", newInnerHtml);
     // 如果HTML内容发生改变或者插入图片都需要保存(插入图片时两个HTMLString可能是一样的)
     if (![self.innerHtmlAtStart isEqualToString:newInnerHtml] || self.insertImagePath.length > 0)
     {
@@ -733,7 +734,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
 - (void)richEditor:(RichEditView *)aRichEditor shouldStartLoadWithRequest:(NSURLRequest *)request
 {
     NSString *string = [[request URL] absoluteString];
-
+    NSLog(@"%@", string);
     NSArray *array = [string componentsSeparatedByString:@":"];
     if ([array count] > 0)
     {
