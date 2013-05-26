@@ -261,7 +261,7 @@
         {
             cell.textLabel.text = NSLocalizedString(@"Version", @"");
             UILabel *label = (UILabel *)[cell.contentView viewWithTag:1008];
-            label.text = @"v1.1";
+            label.text = @"v1.0";
         }
     }
 }
@@ -374,7 +374,7 @@
          }
          else if (row == 3)
          {
-             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/us/app/tinydiary/id623735005?mt=8"]];
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/us/app/Tiny-Diary-Pro-Journal-Daily-Thoughts-Notes/id654461373?mt=8"]];
          }
      }
     else if ([indexPath section] == 2)

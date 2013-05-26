@@ -207,7 +207,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		360625A016528B35006D7075 /* Tiny Diary Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tiny Diary Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		360625A016528B35006D7075 /* TinyDiaryPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyDiaryPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		360625A416528B35006D7075 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		360625A616528B35006D7075 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		360625A816528B35006D7075 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -508,7 +508,7 @@
 		360625A116528B35006D7075 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				360625A016528B35006D7075 /* Tiny Diary Pro.app */,
+				360625A016528B35006D7075 /* TinyDiaryPro.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -884,7 +884,7 @@
 			);
 			name = TinyDiaryPro;
 			productName = iDiary;
-			productReference = 360625A016528B35006D7075 /* Tiny Diary Pro.app */;
+			productReference = 360625A016528B35006D7075 /* TinyDiaryPro.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1188,7 +1188,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E93961BC-D3CF-4CD3-8551-02AB44CDB17F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B033179C-74E7-4C3B-A17B-C9AAF0011302";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1212,7 +1212,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-all_load";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F597AC75-97B2-4959-8E2B-6249D0F6EC4F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8FD5E6F0-DDBE-4B09-BE3A-1FF58C5CC436";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1229,9 +1229,9 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iDiary/TinyDiaryPro-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "Tiny Diary Pro";
+				PRODUCT_NAME = TinyDiaryPro;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E93961BC-D3CF-4CD3-8551-02AB44CDB17F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B033179C-74E7-4C3B-A17B-C9AAF0011302";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1246,8 +1246,8 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iDiary/TinyDiaryPro-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "Tiny Diary Pro";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F597AC75-97B2-4959-8E2B-6249D0F6EC4F";
+				PRODUCT_NAME = TinyDiaryPro;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8FD5E6F0-DDBE-4B09-BE3A-1FF58C5CC436";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
