@@ -35,6 +35,8 @@
 		364C79F81656994C00769E36 /* DiaryContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 364C79F61656994C00769E36 /* DiaryContentViewController.m */; };
 		364C79F91656994C00769E36 /* DiaryContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 364C79F71656994C00769E36 /* DiaryContentViewController.xib */; };
 		364F2C5116BC107700437F84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364F2C5016BC107700437F84 /* QuartzCore.framework */; };
+		365E0E9B175214A70080E71D /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365E0E99175214A70080E71D /* Icon-72@2x.png */; };
+		365E0E9C175214A70080E71D /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 365E0E9A175214A70080E71D /* Icon-72.png */; };
 		3694F172166FAD8F000AB615 /* AdvancedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3694F171166FAD8F000AB615 /* AdvancedCell.xib */; };
 		369628C61699DB2600EEFAFF /* NoteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 369628C51699DB2600EEFAFF /* NoteDocument.m */; };
 		369628CD1699DC5900EEFAFF /* NSDate+FormattedStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 369628C91699DC5900EEFAFF /* NSDate+FormattedStrings.m */; };
@@ -119,7 +121,6 @@
 		FA20EE4D173B72CF00CFA1F7 /* hideKey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20EE0A173B72CF00CFA1F7 /* hideKey@2x.png */; };
 		FA20EE4E173B72CF00CFA1F7 /* htmll1.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20EE0B173B72CF00CFA1F7 /* htmll1.png */; };
 		FA20EE4F173B72CF00CFA1F7 /* htmll1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20EE0C173B72CF00CFA1F7 /* htmll1@2x.png */; };
-		FA20EE50173B72CF00CFA1F7 /* Icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20EE0D173B72CF00CFA1F7 /* Icon-1024.png */; };
 		FA20EE51173B72CF00CFA1F7 /* indent.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20EE0E173B72CF00CFA1F7 /* indent.png */; };
 		FA20EE52173B72CF00CFA1F7 /* indent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20EE0F173B72CF00CFA1F7 /* indent@2x.png */; };
 		FA20EE53173B72CF00CFA1F7 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20EE10173B72CF00CFA1F7 /* info.png */; };
@@ -237,6 +238,8 @@
 		364C79F61656994C00769E36 /* DiaryContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryContentViewController.m; sourceTree = "<group>"; };
 		364C79F71656994C00769E36 /* DiaryContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiaryContentViewController.xib; sourceTree = "<group>"; };
 		364F2C5016BC107700437F84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		365E0E99175214A70080E71D /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		365E0E9A175214A70080E71D /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		365E55EA173D42E300D3BBA3 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		365E55EB173D42E300D3BBA3 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3694F171166FAD8F000AB615 /* AdvancedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvancedCell.xib; sourceTree = "<group>"; };
@@ -356,7 +359,6 @@
 		FA20EE0A173B72CF00CFA1F7 /* hideKey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hideKey@2x.png"; sourceTree = "<group>"; };
 		FA20EE0B173B72CF00CFA1F7 /* htmll1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = htmll1.png; sourceTree = "<group>"; };
 		FA20EE0C173B72CF00CFA1F7 /* htmll1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "htmll1@2x.png"; sourceTree = "<group>"; };
-		FA20EE0D173B72CF00CFA1F7 /* Icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-1024.png"; sourceTree = "<group>"; };
 		FA20EE0E173B72CF00CFA1F7 /* indent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indent.png; sourceTree = "<group>"; };
 		FA20EE0F173B72CF00CFA1F7 /* indent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "indent@2x.png"; sourceTree = "<group>"; };
 		FA20EE10173B72CF00CFA1F7 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
@@ -763,11 +765,12 @@
 				FA20EE0A173B72CF00CFA1F7 /* hideKey@2x.png */,
 				FA20EE0B173B72CF00CFA1F7 /* htmll1.png */,
 				FA20EE0C173B72CF00CFA1F7 /* htmll1@2x.png */,
-				FA20EE0D173B72CF00CFA1F7 /* Icon-1024.png */,
 				369A1B7B173BFE0000C8FB9A /* Icon@2x.png */,
 				369A1B7C173BFE0000C8FB9A /* Icon.png */,
 				369A1B7D173BFE0000C8FB9A /* Icon-Small@2x.png */,
 				369A1B7E173BFE0000C8FB9A /* Icon-Small.png */,
+				365E0E99175214A70080E71D /* Icon-72@2x.png */,
+				365E0E9A175214A70080E71D /* Icon-72.png */,
 				FA20EE0E173B72CF00CFA1F7 /* indent.png */,
 				FA20EE0F173B72CF00CFA1F7 /* indent@2x.png */,
 				FA20EE10173B72CF00CFA1F7 /* info.png */,
@@ -924,7 +927,6 @@
 				FA20EE4D173B72CF00CFA1F7 /* hideKey@2x.png in Resources */,
 				FA20EE4E173B72CF00CFA1F7 /* htmll1.png in Resources */,
 				FA20EE4F173B72CF00CFA1F7 /* htmll1@2x.png in Resources */,
-				FA20EE50173B72CF00CFA1F7 /* Icon-1024.png in Resources */,
 				FA20EE51173B72CF00CFA1F7 /* indent.png in Resources */,
 				FA20EE52173B72CF00CFA1F7 /* indent@2x.png in Resources */,
 				FA20EE53173B72CF00CFA1F7 /* info.png in Resources */,
@@ -1009,6 +1011,8 @@
 				36FBE45C1751EFC500359316 /* nextSearch.png in Resources */,
 				36FBE45F1751FCC200359316 /* search@2x.png in Resources */,
 				36FBE4601751FCC200359316 /* search.png in Resources */,
+				365E0E9B175214A70080E71D /* Icon-72@2x.png in Resources */,
+				365E0E9C175214A70080E71D /* Icon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
