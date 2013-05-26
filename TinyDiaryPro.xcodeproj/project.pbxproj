@@ -314,6 +314,7 @@
 		36FBE4581751EFC500359316 /* nextSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextSearch.png; sourceTree = "<group>"; };
 		36FBE45D1751FCC200359316 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
 		36FBE45E1751FCC200359316 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		36FBE46117520E4700359316 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		36FFFA8F17472F50002B034D /* TITokenField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TITokenField.h; sourceTree = "<group>"; };
 		36FFFA9017472F50002B034D /* TITokenField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TITokenField.m; sourceTree = "<group>"; };
 		FA0AFD4D174318EF00815DF2 /* PlistDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistDocument.h; sourceTree = "<group>"; };
@@ -1074,6 +1075,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				360625AE16528B35006D7075 /* en */,
+				36FBE46117520E4700359316 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

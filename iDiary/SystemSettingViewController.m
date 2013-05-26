@@ -344,6 +344,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+     NSInteger row = [indexPath row];
      if ([indexPath section] == 0 && [indexPath row] == 1)
      {
          PasswordViewController *pwdViewController = [[PasswordViewController alloc] initWithNibName:@"PasswordViewController"
@@ -359,11 +360,10 @@
          TTSocial *social = [[TTSocial alloc] init];
          social.viewController = self;
    
-         NSInteger row = [indexPath row];
 
          if (row == 0)
          {
-             [social sendEmail:NSLocalizedString(@"FontDesigner", nil) body:NSLocalizedString(@"invite", nil) recipient:nil];
+             [social sendEmail:NSLocalizedString(@"TinyDiaryPro", nil) body:NSLocalizedString(@"invite", nil) recipient:nil];
          }
          else if (row == 1)
          {
@@ -371,13 +371,26 @@
          }
          else if (row == 2)
          {
-             [social sendFeedback:NSLocalizedString(@"FontDesigner", nil) body:nil];
+             [social sendFeedback:NSLocalizedString(@"TinyDiaryPro", nil) body:nil];
          }
          else if (row == 3)
          {
-             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/us/app/font-design-pro-custom-font/id645489866?mt=8"]];
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/us/app/tinydiary/id623735005?mt=8"]];
          }
      }
+    else if ([indexPath section] == 2)
+    {
+        if (row < [appArray count])
+        {
+            AppDesc *app = [appArray objectAtIndex:row];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:app.url]];
+        }
+        else
+        {
+            // more
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/us/artist/chen-shun/id623735008"]];
+        }
+    }
 }
 
 @end
