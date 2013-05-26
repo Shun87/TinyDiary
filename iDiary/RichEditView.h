@@ -64,6 +64,10 @@
 
 //Image tag
 - (NSString *)firstImageTagSrc;
+
+- (NSInteger)highlightAllOccurencesOfString:(NSString*)str;
+- (void)removeAllHighlights;
+- (void)showResult:(NSInteger)index;
 @end
 
 @protocol RichEditViewDelegate <NSObject>

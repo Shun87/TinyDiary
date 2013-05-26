@@ -220,28 +220,7 @@
                 selection.addRange(range);//make the range you have just created the visible selection
             }
             
-            var a = new Array();
-            function SearchText()
-            {
-                var sel = window.getSelection();
-                var elm = document.getElementById('content');
-                sel.collapse(elm, 0);
-                while (window.find("s"))
-                {
-                    document.execCommand("HiliteColor", false, "yellow");
-                    sel.collapseToEnd();
-                    
-                    var count = sel.focusNode;
-        
-                    window.location.href="cmd:scrollWindow@parameter&" + count.parentElement.nodeName;
-                    a.push(count.parentElement);
-                }
-            }
-            function goto()
-            {
-                a[2].scrollIntoView();
-            }
-        </script>
+         </script>
             <style>
                 
             #content

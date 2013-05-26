@@ -12,7 +12,7 @@
 #import "MBProgressHUD.h"
 #import "DocumentsAccess.h"
 #import "PlistDocument.h"
-
+#import "UIColor+HexColor.h"
 @class PasswordViewController;
 
 #define ReloadDiaryInfoUnits @"ReloadDiaryInfoUnits"

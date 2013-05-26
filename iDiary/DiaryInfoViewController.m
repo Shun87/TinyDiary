@@ -230,7 +230,7 @@
         }
         else
         {
-            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(130, 2, 150, 45)] autorelease];
+            UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(120, 2, 160, 45)] autorelease];
             label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
             [cell.contentView addSubview:label];
             label.tag = 1002;

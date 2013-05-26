@@ -68,18 +68,44 @@
     [webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
+- (NSInteger)highlightAllOccurencesOfString:(NSString*)str
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"searchTextCode" ofType:@"js"];
+    NSString *jsCode = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    [webView stringByEvaluatingJavaScriptFromString:jsCode];
+    
+    [webView stringByEvaluatingJavaScriptFromString:@"searchText(\"ca\")"];
+}
+
+int n = 0;
+- (void)removeAllHighlights
+{
+    [webView stringByEvaluatingJavaScriptFromString:@"removedHighlights()"];
+    n = 0;
+}
+
+- (void)showResult:(NSInteger)index
+{
+    NSString *js = [NSString stringWithFormat:@"showElement('%d')", n];
+    [webView stringByEvaluatingJavaScriptFromString:js];
+    n++;
+}
+
 - (void)bold
 {
-    [webView stringByEvaluatingJavaScriptFromString:@"SearchText()"];
+    [self highlightAllOccurencesOfString:nil];
+    //[webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Bold\")"];
 }
 
 - (void)italic
 {
-    [webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Italic\")"];
+    [self showResult:0];
+    //[webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Italic\")"];
 }
 
 - (void)underline
 {
+    [self removeAllHighlights];
     [webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Underline\")"];
 }
 

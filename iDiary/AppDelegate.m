@@ -18,7 +18,7 @@
 #import "CalendarViewController.h"
 #import "TagsViewController.h"
 #import "FilePath.h"
-#import "UIColor+HexColor.h"
+
 
 @implementation AppDelegate
 @synthesize window ;
@@ -126,7 +126,7 @@
     hud = [[MBProgressHUD alloc] initWithView:self.window];
     [self.window addSubview:hud];
 	hud.labelText = @"Loading";
-	[hud show:YES];
+	
     hud.delegate = self;
     
     return YES;
@@ -168,6 +168,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [hud show:YES];
     [self reloadNotes:YES];
 }
 
@@ -280,8 +281,12 @@
             [plistDoc release];
         }];
     }
+    else
+    {
+        // 不存在的情况
+        [hud hide:YES];
+    }
     
-    [hud hide:YES];
 }
 
 #pragma mark - iCloudAvailableDelegate
@@ -319,7 +324,11 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
                                                                         object:self.diaryInfoArray];
                 }
-                [hud hide:YES];
+                else
+                {
+                    [hud hide:YES];
+                }
+                
                 [plistDoc closeWithCompletionHandler:nil];
                 [plistDoc release];
             }];

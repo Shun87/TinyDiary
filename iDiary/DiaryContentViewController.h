@@ -16,7 +16,7 @@
 
 @interface DiaryContentViewController : UIViewController<UIWebViewDelegate,
 ScrollableToolViewDelegate, RichEditViewDelegate, UINavigationControllerDelegate,
-UIImagePickerControllerDelegate, UIActionSheetDelegate>
+UIImagePickerControllerDelegate, UIActionSheetDelegate, UISearchBarDelegate>
 {
     RichEditView *richEditor;
     NSURL *htmlFileURL;
@@ -53,6 +53,9 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate>
     NSString *creatTime;
     NSString *modifyTime;
     NSString *tagStr;
+    UISearchBar *aSearchBar;
+    UIButton *searchButton;
+    NSInteger totalSeachResult;
 }
 @property (nonatomic, assign)UIViewController *listViewController;
 @property (nonatomic, retain)IBOutlet  UIToolbar *toolbar;

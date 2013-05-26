@@ -75,12 +75,13 @@
 		36EBF8A31748DA510051EF21 /* bakck_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBF8A11748DA510051EF21 /* bakck_white.png */; };
 		36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36F1F8C916F7631E004EDB60 /* MessageUI.framework */; };
 		36FAAE841661ECA40060FBD8 /* CommmonMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FAAE831661ECA40060FBD8 /* CommmonMethods.m */; };
+		36FBE4531751CD9A00359316 /* searchTextCode.js in Sources */ = {isa = PBXBuildFile; fileRef = 36FBE4521751CD9A00359316 /* searchTextCode.js */; };
+		36FBE4541751CDA300359316 /* searchTextCode.js in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE4521751CD9A00359316 /* searchTextCode.js */; };
 		36FFFA921747315B002B034D /* TITokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FFFA9017472F50002B034D /* TITokenField.m */; };
 		FA0AFD4F174318EF00815DF2 /* PlistDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AFD4E174318EF00815DF2 /* PlistDocument.m */; };
 		FA0AFD7E1743767600815DF2 /* DiaryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AFD7D1743767600815DF2 /* DiaryInfo.m */; };
 		FA0C569416D0F2B400F3BCDC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C569316D0F2B300F3BCDC /* Settings.m */; };
 		FA104E13173CA376002060F6 /* TinyDiaryPro.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = FA104E12173CA376002060F6 /* TinyDiaryPro.entitlements */; };
-		FA20EDE8173B724E00CFA1F7 /* method.js in Sources */ = {isa = PBXBuildFile; fileRef = FA20EDE7173B724E00CFA1F7 /* method.js */; };
 		FA20EDED173B728F00CFA1F7 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA20EDEB173B728F00CFA1F7 /* AboutViewController.m */; };
 		FA20EDEE173B728F00CFA1F7 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA20EDEC173B728F00CFA1F7 /* AboutViewController.xib */; };
 		FA20EE33173B72CF00CFA1F7 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = FA20EDF0173B72CF00CFA1F7 /* add.png */; };
@@ -300,6 +301,7 @@
 		36F1F8C916F7631E004EDB60 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		36FAAE821661ECA40060FBD8 /* CommmonMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommmonMethods.h; sourceTree = "<group>"; };
 		36FAAE831661ECA40060FBD8 /* CommmonMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommmonMethods.m; sourceTree = "<group>"; };
+		36FBE4521751CD9A00359316 /* searchTextCode.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = searchTextCode.js; sourceTree = SOURCE_ROOT; };
 		36FFFA8F17472F50002B034D /* TITokenField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TITokenField.h; sourceTree = "<group>"; };
 		36FFFA9017472F50002B034D /* TITokenField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TITokenField.m; sourceTree = "<group>"; };
 		FA0AFD4D174318EF00815DF2 /* PlistDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistDocument.h; sourceTree = "<group>"; };
@@ -309,7 +311,6 @@
 		FA0C569216D0F2B300F3BCDC /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		FA0C569316D0F2B300F3BCDC /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		FA104E12173CA376002060F6 /* TinyDiaryPro.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TinyDiaryPro.entitlements; path = iDiary/TinyDiaryPro.entitlements; sourceTree = "<group>"; };
-		FA20EDE7173B724E00CFA1F7 /* method.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = method.js; sourceTree = SOURCE_ROOT; };
 		FA20EDEA173B728F00CFA1F7 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		FA20EDEB173B728F00CFA1F7 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		FA20EDEC173B728F00CFA1F7 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
@@ -548,7 +549,7 @@
 			isa = PBXGroup;
 			children = (
 				360E02B0165714AC0089E505 /* index.html */,
-				FA20EDE7173B724E00CFA1F7 /* method.js */,
+				36FBE4521751CD9A00359316 /* searchTextCode.js */,
 				FA20EDEF173B72CF00CFA1F7 /* image */,
 				36976A8F1653CC8E0039F4B0 /* Resource */,
 				360625AC16528B35006D7075 /* TinyDiaryPro-Info.plist */,
@@ -867,6 +868,7 @@
 				36998CC41656C7F8001C1793 /* DiaryListViewController.xib in Resources */,
 				364C79F91656994C00769E36 /* DiaryContentViewController.xib in Resources */,
 				360E02B1165714AC0089E505 /* index.html in Resources */,
+				36FBE4541751CDA300359316 /* searchTextCode.js in Resources */,
 				36CEAF291658558400C33018 /* SystemSettingViewController.xib in Resources */,
 				36A610D7165D71B300848153 /* DiaryGeneralContentCell.xib in Resources */,
 				36A94446165E8818001A291E /* Localizable.strings in Resources */,
@@ -1026,7 +1028,6 @@
 				FA3CAB3A16CA707500D2D705 /* PasswordViewController.m in Sources */,
 				FA0C569416D0F2B400F3BCDC /* Settings.m in Sources */,
 				3697DCDC16EE2E7E00C0B431 /* NoCaretTextField.m in Sources */,
-				FA20EDE8173B724E00CFA1F7 /* method.js in Sources */,
 				FA20EDED173B728F00CFA1F7 /* AboutViewController.m in Sources */,
 				FA79CF211742540500A81003 /* CalendarViewController.m in Sources */,
 				FA79CF261742546D00A81003 /* TagsViewController.m in Sources */,
@@ -1038,6 +1039,7 @@
 				FAA4663C1749D6730096CD1C /* MonthSort.m in Sources */,
 				3628A779174BCE8200829EB0 /* MoreApp.m in Sources */,
 				3628A77F174BD38500829EB0 /* TTSocial.m in Sources */,
+				36FBE4531751CD9A00359316 /* searchTextCode.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -247,8 +247,8 @@ NSString *const HTMLExtentsion = @".html";
     {
         if (entry.indexPath != nil)
         {
-//            [self.mTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:entry.indexPath, nil]
-//                                   withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.mTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:entry.indexPath, nil]
+                                   withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         else
         {
@@ -510,6 +510,8 @@ NSString *const HTMLExtentsion = @".html";
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
+                    [[AppDelegate app].hud hide:YES];
+                    
                     [self metadataLoadSuccess:entity];
                     [doc release];
                     
@@ -518,6 +520,7 @@ NSString *const HTMLExtentsion = @".html";
         }
         else
         {
+            [[AppDelegate app].hud hide:YES];
             NSLog(@"Failed to openWithCompletionHandler %@", entity.docURL);
         }
     }];

@@ -137,9 +137,36 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [editButton addTarget:self
                    action:@selector(editAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    aSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, -44, 320, 44)];
+    [self.navigationController.navigationBar addSubview:aSearchBar];
+    aSearchBar.delegate = self;
+    
+    searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [searchButton setTitle:@"seaach" forState:UIControlStateNormal];
+    [searchButton setFrame:CGRectMake(0, 0, 40, 40)];
+    aSearchBar.showsCancelButton = YES;
+    [searchButton addTarget:self
+                   action:@selector(searchAction:) forControlEvents:UIControlEventTouchUpInside];
+    aSearchBar.tintColor = [UIColor colorFromHex:0x1a7cc5];
+    aSearchBar.alpha = 0.0;
+    
+//    UIView *accessoryView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+//    accessoryView.backgroundColor = [UIColor clearColor];
+    UISegmentedControl *segment = [[[UISegmentedControl alloc] initWithItems:@[@"pre", @"next"]] autorelease];
+    segment.frame = CGRectMake(320 - 80, 0, 55, 30);
+    segment.segmentedControlStyle = UISegmentedControlStyleBar;
+   // [accessoryView addSubview:segment];
+    segment.momentary = YES;
+    aSearchBar.inputAccessoryView = segment;
+    [segment addTarget:self action:@selector(segmentClicked:) forControlEvents:UIControlEventValueChanged];
+//    [accessoryView release];
+    
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
+    UIBarButtonItem *editItem = [[UIBarButtonItem alloc] initWithCustomView:editButton];
+    
     if (!newFile)
     {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:editButton];
+        self.navigationItem.rightBarButtonItems = @[searchItem, editItem];
     }
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
@@ -153,7 +180,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [button addTarget:self
                    action:@selector(exitAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     lable.backgroundColor = [UIColor clearColor];
     lable.textAlignment = UITextAlignmentCenter;
     lable.text = @"Tesef";
@@ -389,6 +416,37 @@ const NSInteger kActionSheetPickPhoto = 1000;
     }
     
     editMode = !editMode;
+    
+//    [self.richEditor showResult:3];
+}
+
+- (IBAction)searchAction:(id)sender
+{
+    [UIView animateWithDuration:0.35 animations:^{
+    
+        CGRect rc = aSearchBar.frame;
+        rc.origin.y = 0;
+        aSearchBar.frame = rc;
+        [self.navigationController.navigationBar bringSubviewToFront:aSearchBar];
+        [aSearchBar becomeFirstResponder];
+        aSearchBar.alpha = 1.0;
+    }
+                     completion:^(BOOL finished){}];
+}
+
+- (IBAction)segmentClicked:(id)sender
+{
+    UISegmentedControl *seg = (UISegmentedControl *)sender;
+    if (seg.selectedSegmentIndex == 0)
+    {
+        NSInteger aindex = totalSeachResult - 1;
+        [self.richEditor showResult:aindex];
+    }
+    else
+    {
+        NSInteger aindex = totalSeachResult + 1;
+        [self.richEditor showResult:3];
+    }
 }
 
 - (IBAction)cancelAction:(id)sender
@@ -933,9 +991,45 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [self dismissModalViewControllerAnimated:NO];
 }
 
+#pragma mark -- SearchDelegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    totalSeachResult = [self.richEditor highlightAllOccurencesOfString:searchBar.text];
+    [aSearchBar resignFirstResponder];
+    [UIView animateWithDuration:0.35 animations:^{
+        
+        CGRect rc = aSearchBar.frame;
+        rc.origin.y = -44;
+        aSearchBar.frame = rc;
+        aSearchBar.alpha = 0.0;
+    }
+                     completion:^(BOOL finished){}];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+{
+    [self.richEditor removeAllHighlights];
+    [aSearchBar resignFirstResponder];
+    [UIView animateWithDuration:0.35 animations:^{
+        
+        CGRect rc = aSearchBar.frame;
+        rc.origin.y = -44;
+        aSearchBar.frame = rc;
+        aSearchBar.alpha = 0.0;
+    }
+                     completion:^(BOOL finished){}];
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [searchButton release];
+    [aSearchBar release];
     [richEditor release];
     [resaveDate release];
     [htmlFileURL release];
