@@ -1,67 +1,69 @@
-/* 
-  Localizable.strings
-  iDiary
-
-  Created by chenshun on 12-11-23.
-  Copyright (c) 2012年 ChenShun. All rights reserved.
-*/
-"TinyDiaryPro" = "Tiny Diary Pro";
-"Edit"  = "Edit";
-"Save"  = "Save";
-"Settings" = "Settings";
-"Delete" = "Delete";
-"Back" = "Back";
-"SetiCloudOn" = "iCloud synchronize";
-"PsdOn" = "Passcode Lock";
-"EnterPasscode" = "Enter your passcode";
-"Change Passcode" = "Change Passcode";
-"ReEnterPasscode" = "Re-enter your passcode";
-"PsdNotSame" = "Passcode you input twice are not same";
-"PsdNotCorrect" = "Passcode wrong";
-"EnterOldPwd" = "Enter your old notes passcode";
-"EnterNewPwd" = "Enter your new notes passcode";
-"Require Immediately" = "Require Immediately";
-"RequireDesc" = "Require a passcode when the app becomes active";
-"Take photo" = "Take photo";
-"Pick" = "Pick from album";
+/*
+ Localizable.strings
+ iDiary
+ 
+ Created by chenshun on ';-''-;.
+ Copyright (c) ;0';年 ChenShun. All rights reserved.
+ */
+"TinyDiaryPro" = "微日記 專業版";
+"Edit"  = "編輯";
+"Save"  = "保存";
+"Settings" = "設置";
+"Delete" = "刪除";
+"Back" = "返回";
+"SetiCloudOn" = "iCloud雲同步";
+"PsdOn" = "密碼保護";
+"EnterPasscode" = "請輸入密碼。";
+"Change Passcode" = "修改密碼";
+"ReEnterPasscode" = "請再次輸入密碼。";
+"PsdNotSame" = "兩次輸入的密碼不一致，請重新輸入。";
+"PsdNotCorrect" = "密碼不正確，請重新輸入。";
+"EnterOldPwd" = "輸入初始密碼。";
+"EnterNewPwd" = "設置新的密碼。";
+"Require Immediately" = "程序激活密碼驗證";
+"RequireDesc" = "程序從後台激活時需密碼驗證。";
+"Take photo" = "拍照";
+"Pick" = "從相冊中選取";
 "E-mail" = "E-mail";
-"PhotoLibray" = "Open Albums";
-"snapshot" = "Open Camera";
-"OK" = "OK";
-"notice" = "Notice";
-"downloading" = "This note is downloading, please try again later";
-"sendFeedback" = "Send Feedback";
-"Diary info" = "Diary info";
-"Title" = "Title";
-"Tags" = "Tags";
-"Modified" = "Modified";
-"Created" = "Created";
-"Timeline" = "Timeline";
-"Calendar" = "Calendar";
-"No title" = "No title";
-"Feedback" = "Feedback";
-"About" = "About";
-"Invite By Email" = "Invite By Email";
-"Invite By SMS" = "Invite By SMS";
-"Send feekback" = "Send feekback";
-"Version" = "Version";
-"Cancel" = "Cancel";
-"invite" = "Hello,'TinyDiaryPro'is a great app and easy to use,check out it on the App Store,I think you'll like it! itms://itunes.apple.com/us/app/tinydiary/id623735005?mt=8";
-"No mail notice" = "No Mail accout";
-"No facebook notice" = "No Facebook accout";
-"No twitter notice" = "No Twitter accout";
-"No Sina notice" = "No Sian Weibo accout";
-"No mail account" = "There are no mail accouts configured, You can add or creat a mail account in Settings";
-"No facebook account" = "There are no Facebook accouts configured, You can add or creat a mail account in Settings";
-"No twitter account" = "There are no Twitter accouts configured, You can add or creat a mail account in Settings";
-"No Sina account" = "There are no Sina Weibo accouts configured, You can add or creat a mail account in Settings";
-"Device not support" = "您的设备系统不支持分享到Facebook的功能！";
-"group member" = "Members";
-"ok" = "OK";
-"Remove ads" = "Remove ads";
-"Restore" = "Restore";
-"learn more" = "learn more";
-"Rate us" ="Rate us";
-"View more" = "View More";
-"More Apps" = "More Apps";
-"today" = "Today";
+"PhotoLibray" = "從相冊中選取";
+"snapshot" = "拍照";
+"OK" = "好";
+"notice" = "提示";
+"downloading" = "此日期的筆記正在下載,請等會再嘗試";
+"sendFeedback" = "用戶反饋";
+"Diary info" = "日記信息";
+"Title" = "標題";
+"Tags" = "標簽";
+"Modified" = "修改日期";
+"Created" = "創建日期";
+"Timeline" = "時間軸";
+"Calendar" = "日曆";
+"No title" = "無標題";
+"Settings" = "設置";
+"Feedback" = "反饋";
+"About" = "關于";
+"Invite By Email" = "郵件邀請";
+"Invite By SMS" = "短信邀請";
+"Send feekback" = "發送反饋";
+"Version" = "版本號";
+"GroupSMSCondition" = "群發短信需要再“設置”應用程序中關閉iMessage、群發訊息和彩信。";
+"Cancel" = "取消";
+"invite" = "'TinyDiaryPro'是個非常棒的軟件，相信你會喜歡，快去app store下載吧！itms://itunes.apple.com/us/app/tinydiary/id623735005?mt=8";
+"No mail notice" = "無郵箱帳戶";
+"No facebook notice" = "無Facebook 帳戶";
+"No twitter notice" = "無Twitter 帳戶";
+"No Sina notice" = "無微博帳戶";
+"No mail account" = "尚未配置郵箱帳戶，您可再“設置”中添加或創建郵箱帳戶";
+"No facebook account" = "尚未配置Facebook帳戶，您可再“設置”中添加或創建郵箱帳戶";
+"No twitter account" = "尚未配置Twitter帳戶，您可再“設置”中添加或創建郵箱帳戶";
+"No Sina account" = "尚未配置新浪微博帳戶，您可再“設置”中添加或創建郵箱帳戶";
+"Device not support" = "您的設備系統不支持分享的功能!";
+"group member" = "分組成員";
+"ok" = "確定";
+"Remove ads" = "移除廣告";
+"Restore" = "恢複";
+"learn more" = "了解更多";
+"Rate us" ="評論我們";
+"View more" = "查看更多";
+"More Apps" = "更多應用";
+"today" = "今天";

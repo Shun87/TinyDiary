@@ -261,7 +261,7 @@
         {
             cell.textLabel.text = NSLocalizedString(@"Version", @"");
             UILabel *label = (UILabel *)[cell.contentView viewWithTag:1008];
-            label.text = @"v1.0";
+            label.text = @"v1.1";
         }
     }
 }
@@ -360,7 +360,6 @@
          TTSocial *social = [[TTSocial alloc] init];
          social.viewController = self;
    
-
          if (row == 0)
          {
              [social sendEmail:NSLocalizedString(@"TinyDiaryPro", nil) body:NSLocalizedString(@"invite", nil) recipient:nil];

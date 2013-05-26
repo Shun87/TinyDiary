@@ -1,0 +1,69 @@
+/*
+ Localizable.strings
+ iDiary
+ 
+ Created by chenshun on 12-11-23.
+ Copyright (c) 2012年 ChenShun. All rights reserved.
+ */
+"TinyDiaryPro" = "マイクロ日記の専門版";
+"Edit"  = "編集";
+"Save"  = "保存";
+"Settings" = "設置";
+"Delete" = "削除";
+"Back" = "戻る";
+"SetiCloudOn" = "iCloud雲同期";
+"PsdOn" = "パスワードを守る";
+"EnterPasscode" = "パスワードを入力してください。";
+"Change Passcode" = "パスワードの変更";
+"ReEnterPasscode" = "パスワードを再入力してください。";
+"PsdNotSame" = "二度のパスワードを入力して、再び入力して下さい。";
+"PsdNotCorrect" = "パスワードが正しくありませんて、再び入力して下さい";
+"EnterOldPwd" = "初期パスワード入力。";
+"EnterNewPwd" = "新しいパスワード設定。";
+"Require Immediately" = "程序激活密码验证";
+"RequireDesc" = "程序从后台激活时需密码验证。";
+"Take photo" = "写真を撮る";
+"Pick" = "アルバムの中から選び";
+"E-mail" = "E-mail";
+"PhotoLibray" = "アルバムの中から選び";
+"snapshot" = "写真を撮る";
+"OK" = "良い";
+"notice" = "ヒント";
+"downloading" = "この日のノートをダウンロードして、また試みてください";
+"sendFeedback" = "ユーザーのフィードバック";
+"Diary info" = "日記の情報";
+"Title" = "標題";
+"Tags" = "ラベル";
+"Modified" = "改正の期日";
+"Created" = "日付";
+"Timeline" = "時間軸";
+"Calendar" = "カレンダー";
+"No title" = "無標題";
+"Settings" = "設置";
+"Feedback" = "フィードバック";
+"About" = "について";
+"Invite By Email" = "メール招待";
+"Invite By SMS" = "メール招待";
+"Send feekback" = "フィードバックの送信";
+"Version" = "バージョン番号";
+"GroupSMSCondition" = "群発メール必要が「設定」アプリで閉鎖iMessage、群発情報やデコメール。";
+"Cancel" = "キャンセル";
+"invite" = "' TinyDiaryPro 'は素敵なソフトウェアを信じて、あなたが好きになって、すぐに行ってapp store下載だろう！itms：//itunes.apple.com/us/app/tinydiary/id623735005？mt＝8";
+"No mail notice" = "無メールアカウント";
+"No facebook notice" = "無Facebook口座";
+"No twitter notice" = "無Twitter口座";
+"No Sina notice" = "無Twitterアカウント";
+"No mail account" = "まだ配置メールアカウント、貴方はもう「設定」で添加やメールアカウントを作成して";
+"No facebook account" = "まだ配置Facebookアカウント、貴方はもう「設定」で添加やメールアカウントを作成して";
+"No twitter account" = "まだ配置Twitterアカウント、貴方はもう「設定」で添加やメールアカウントを作成して";
+"No Sina account" = "まだ配置新浪微博アカウント、貴方はもう「設定」で添加やメールアカウントを作成して";
+"Device not support" = "あなたの設備を支持しないの機能共有システム";
+"group member" = "グループのメンバー";
+"ok" = "確定";
+"Remove ads" = "広告を取り除く";
+"Restore" = "回復";
+"learn more" = "もっと知りたい";
+"Rate us" ="私たちが";
+"View more" = "楽しむ";
+"More Apps" = "多くの応用";
+"today" = "今日";

@@ -18,7 +18,7 @@
 #import "CalendarViewController.h"
 #import "TagsViewController.h"
 #import "FilePath.h"
-
+#import "iRate.h"
 
 @implementation AppDelegate
 @synthesize window ;
@@ -126,9 +126,12 @@
     hud = [[MBProgressHUD alloc] initWithView:self.window];
     [self.window addSubview:hud];
 	hud.labelText = @"Loading";
-	
     hud.delegate = self;
     
+   // [iRate sharedInstance].applicationBundleID = @"com.cshun.tinyDiary";
+	[iRate sharedInstance].onlyPromptIfLatestVersion = NO;
+    [iRate sharedInstance].daysUntilPrompt = 1.5;
+
     return YES;
 }
 

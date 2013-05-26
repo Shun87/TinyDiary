@@ -57,7 +57,7 @@
 "No facebook account" = "尚未配置Facebook帐户，您可再“设置”中添加或创建邮箱帐户";
 "No twitter account" = "尚未配置Twitter帐户，您可再“设置”中添加或创建邮箱帐户";
 "No Sina account" = "尚未配置新浪微博帐户，您可再“设置”中添加或创建邮箱帐户";
-"Device not support" = "拧";
+"Device not support" = "您的设备系统不支持分享的功能！";
 "group member" = "分组成员";
 "ok" = "确定";
 "Remove ads" = "移除广告";
