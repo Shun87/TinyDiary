@@ -22,7 +22,7 @@
 		360625C916528B35006D7075 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 360625C816528B35006D7075 /* second@2x.png */; };
 		360E02B1165714AC0089E505 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 360E02B0165714AC0089E505 /* index.html */; };
 		361FA24716A2AB680026A3C6 /* Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 361FA24616A2AB680026A3C6 /* Metadata.m */; };
-		3628A767174BBC5D00829EB0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3628A766174BBC5D00829EB0 /* Social.framework */; };
+		3628A767174BBC5D00829EB0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3628A766174BBC5D00829EB0 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3628A776174BCE8200829EB0 /* AppList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3628A76B174BCE8200829EB0 /* AppList.plist */; };
 		3628A777174BCE8200829EB0 /* FontDesigner.png in Resources */ = {isa = PBXBuildFile; fileRef = 3628A76D174BCE8200829EB0 /* FontDesigner.png */; };
 		3628A778174BCE8200829EB0 /* FontDesigner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3628A76E174BCE8200829EB0 /* FontDesigner@2x.png */; };
@@ -81,6 +81,8 @@
 		36FBE45A1751EFC500359316 /* preSearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE4561751EFC500359316 /* preSearch.png */; };
 		36FBE45B1751EFC500359316 /* nextSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE4571751EFC500359316 /* nextSearch@2x.png */; };
 		36FBE45C1751EFC500359316 /* nextSearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE4581751EFC500359316 /* nextSearch.png */; };
+		36FBE45F1751FCC200359316 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE45D1751FCC200359316 /* search@2x.png */; };
+		36FBE4601751FCC200359316 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE45E1751FCC200359316 /* search.png */; };
 		36FFFA921747315B002B034D /* TITokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FFFA9017472F50002B034D /* TITokenField.m */; };
 		FA0AFD4F174318EF00815DF2 /* PlistDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AFD4E174318EF00815DF2 /* PlistDocument.m */; };
 		FA0AFD7E1743767600815DF2 /* DiaryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AFD7D1743767600815DF2 /* DiaryInfo.m */; };
@@ -310,6 +312,8 @@
 		36FBE4561751EFC500359316 /* preSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preSearch.png; sourceTree = "<group>"; };
 		36FBE4571751EFC500359316 /* nextSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nextSearch@2x.png"; sourceTree = "<group>"; };
 		36FBE4581751EFC500359316 /* nextSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextSearch.png; sourceTree = "<group>"; };
+		36FBE45D1751FCC200359316 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
+		36FBE45E1751FCC200359316 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		36FFFA8F17472F50002B034D /* TITokenField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TITokenField.h; sourceTree = "<group>"; };
 		36FFFA9017472F50002B034D /* TITokenField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TITokenField.m; sourceTree = "<group>"; };
 		FA0AFD4D174318EF00815DF2 /* PlistDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistDocument.h; sourceTree = "<group>"; };
@@ -695,6 +699,8 @@
 		FA20EDEF173B72CF00CFA1F7 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				36FBE45D1751FCC200359316 /* search@2x.png */,
+				36FBE45E1751FCC200359316 /* search.png */,
 				36FBE4551751EFC500359316 /* preSearch@2x.png */,
 				36FBE4561751EFC500359316 /* preSearch.png */,
 				36FBE4571751EFC500359316 /* nextSearch@2x.png */,
@@ -1000,6 +1006,8 @@
 				36FBE45A1751EFC500359316 /* preSearch.png in Resources */,
 				36FBE45B1751EFC500359316 /* nextSearch@2x.png in Resources */,
 				36FBE45C1751EFC500359316 /* nextSearch.png in Resources */,
+				36FBE45F1751FCC200359316 /* search@2x.png in Resources */,
+				36FBE4601751FCC200359316 /* search.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

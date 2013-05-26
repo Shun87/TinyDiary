@@ -18,6 +18,7 @@
 #import "FilePath.h"
 #import "DiaryInfoViewController.h"
 #import "PlistDocument.h"
+#import "TTSocial.h"
 
 typedef enum
 {
@@ -69,6 +70,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
     
     // doc 文件是否打开
     BOOL opened;
+    
+    TTSocial *social;
 }
 @property (nonatomic, copy)NSString *insertImagePath;
 @property (nonatomic, copy)NSString *htmlPath;
@@ -130,14 +133,17 @@ const NSInteger kActionSheetPickPhoto = 1000;
     regularFiles = [[NSMutableArray alloc] init];
     htmlImageSize = CGSizeZero;
     
+    social = [[TTSocial alloc] init];
+    social.viewController = self;
+    
     self.editButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [editButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
     [editButton setFrame:CGRectMake(0, 0, 40, 40)];
     [editButton addTarget:self
                    action:@selector(editAction:) forControlEvents:UIControlEventTouchUpInside];
     UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [searchButton setTitle:@"seaach" forState:UIControlStateNormal];
-    [searchButton setFrame:CGRectMake(0, 0, 40, 40)];
+    [searchButton setImage:[UIImage imageNamed:@"search.png"] forState:UIControlStateNormal];
+    [searchButton setFrame:CGRectMake(0, 0, 42, 42)];
     [searchButton addTarget:self
                      action:@selector(searchAction:) forControlEvents:UIControlEventTouchUpInside];
     aSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, -44, 320, 44)];
@@ -182,21 +188,44 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [button addTarget:self
                    action:@selector(exitAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
-    lable.backgroundColor = [UIColor clearColor];
-    lable.textAlignment = UITextAlignmentCenter;
-    lable.text = @"Tesef";
-    lable.font = [UIFont boldSystemFontOfSize:18];
-    lable.textColor = [UIColor darkGrayColor];
-    self.navigationItem.titleView = lable;
-    [lable release];
+    NSDate *date = [FilePath timeFromURL:htmlFileURL];
+    int width = 100;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 44)];
+    view.backgroundColor = [UIColor clearColor];
+    self.navigationItem.titleView = view;
+
+    dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 44)];
+    dayLabel.backgroundColor = [UIColor clearColor];
+    [view addSubview:dayLabel];
+    dayLabel.textAlignment = UITextAlignmentCenter;
+    dayLabel.font = [UIFont systemFontOfSize:30];
+    dayLabel.text = [FilePath day:date];
+    dayLabel.textColor = [UIColor darkGrayColor];
     
+    weekLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 8, 150, 14)];
+    weekLabel.backgroundColor = [UIColor clearColor];
+    [view addSubview:weekLabel];
+    weekLabel.textColor = [UIColor darkGrayColor];
+    weekLabel.font = [UIFont systemFontOfSize:12];
+    weekLabel.text = [FilePath week:date];
+    weekLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+    
+    myLable = [[UILabel alloc] initWithFrame:CGRectMake(50, 22, 150, 14)];
+    myLable.backgroundColor = [UIColor clearColor];
+    [view addSubview:myLable];
+    myLable.textColor = [UIColor darkGrayColor];
+    myLable.font = [UIFont systemFontOfSize:12];
+    myLable.text = [FilePath monthAndYear:date];
+    myLable.numberOfLines=0;
+    myLable.lineBreakMode = UILineBreakModeCharacterWrap;
+    [view release];
+
     [self.toolbar setTintColor:HEXCOLOR(0xfcfcfc, 1)];
     [self.toolbar setBackgroundImage:[UIImage imageNamed:@"toolbarbk"]
                   forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
-    
+
     keyboardHeight = 0;
-    
+
     CGRect rc = self.view.bounds;
     rc.size.height -= 56;
     self.richEditor = [[[RichEditView alloc] initWithFrame:rc] autorelease];
@@ -298,7 +327,11 @@ const NSInteger kActionSheetPickPhoto = 1000;
             }
         }];
     }
-
+    
+    NSDate *date = [FilePath timeFromURL:htmlFileURL];
+    dayLabel.text = [FilePath day:date];
+    weekLabel.text = [FilePath week:date];
+    myLable.text = [FilePath monthAndYear:date];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -384,7 +417,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
             }
         }];
     }
-
+    [self.richEditor removeAllHighlights];
     [self saveDocument:YES];
     
     // 重新ReloadData 刷新资源列表
@@ -479,11 +512,27 @@ const NSInteger kActionSheetPickPhoto = 1000;
 
 - (IBAction)shareAction:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:nil, nil];
+    UIActionSheet *actionSheet = nil;
+    if ([[UIDevice currentDevice].systemVersion compare:@"6.0"] == NSOrderedDescending)
+    {
+       actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                      delegate:self
+                             cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                        destructiveButtonTitle:nil
+                             otherButtonTitles:NSLocalizedString(@"SMS", nil),NSLocalizedString(@"Email", nil)
+           ,NSLocalizedString(@"Facebook", nil)
+           ,NSLocalizedString(@"Twitter", nil),
+           NSLocalizedString(@"Sina", nil), nil];
+    }
+    else
+    {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                  delegate:self
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:NSLocalizedString(@"SMS", nil),NSLocalizedString(@"Email", nil), nil];
+    }
+
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     actionSheet.tag = ActionSheetShare;
     actionSheet.delegate = self;
@@ -523,7 +572,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
 }
 
 - (void)saveDocument:(BOOL)close
-{   
+{
+    
     // 插入图片需要先保存图片,在插入HTML标签,所以获取outerHtml有滞后性,获取的是插入图片标签前的内容
     // edited表示是否编辑了,如果插入图片,点击保存按钮相对于重复调用了saveDocument, 所以退出页面的时候不需要再保存了.
     // edited就是在点击保存安扭的函数中设置为NO的.
@@ -636,6 +686,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     {
         [self loadOtherContent:entry direction:NO];
     }
+    [self.editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
 }
 
 - (IBAction)loadPreContent:(id)sender
@@ -645,6 +696,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
     {
         [self loadOtherContent:entry direction:YES];
     }
+    
+    [self.editButton setImage:[UIImage imageNamed:@"edit.png"] forState:UIControlStateNormal];
 }
 
 - (IBAction)diaryInfoView:(id)sender
@@ -654,11 +707,6 @@ const NSInteger kActionSheetPickPhoto = 1000;
     infoViewController.entity = self.entity;
     [self.navigationController pushViewController:infoViewController animated:YES];
     [infoViewController release];
-}
-
-- (IBAction)outGoing:(id)sender
-{
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -691,12 +739,32 @@ const NSInteger kActionSheetPickPhoto = 1000;
     }
     else if (actionSheet.tag == ActionSheetShare)
     {
-//        if (indexPathToShare != nil)
-//        {
-//            DocEntity *entity = [entityArray objectAtIndex:[indexPathToShare row]];
-//            NSString *detail = entity.metadata.detailText;
-//            [self shareText:detail index:buttonIndex];
-//        }
+        NSString *text = [self.richEditor getGeneralText];
+        [self shareText:text index:buttonIndex];
+    }
+}
+
+- (void)shareText:(NSString *)text index:(NSInteger)aIndex
+{
+    if (aIndex == 0)
+    {
+        [social showSMSPicker:text phones:nil];
+    }
+    else if (aIndex == 1)
+    {
+        [social showMailPicker:text to:nil cc:nil bcc:nil images:nil];
+    }
+    else if (aIndex == 2)
+    {
+        [social showFaceBook:text];
+    }
+    else if (aIndex == 3)
+    {
+        [social showTwitter:text];
+    }
+    else if (aIndex == 4)
+    {
+        [social showSina:text];
     }
 }
 
@@ -1047,6 +1115,9 @@ const NSInteger kActionSheetPickPhoto = 1000;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
   
+    [dayLabel release];
+    [myLable release];
+    [weekLabel release];
     [aSearchBar release];
     [richEditor release];
     [resaveDate release];

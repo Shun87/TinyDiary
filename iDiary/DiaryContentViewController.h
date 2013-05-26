@@ -57,6 +57,9 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate, UISearchBarDelegate>
     NSInteger totalSeachResult;
     NSInteger curIndex;
     UILabel *searchlabel;
+    UILabel *dayLabel;
+    UILabel *weekLabel;
+    UILabel *myLable;
 }
 
 @property (nonatomic, assign)UIViewController *listViewController;
@@ -96,5 +99,4 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate, UISearchBarDelegate>
 - (IBAction)loadNextContent:(id)sender;
 - (IBAction)loadPreContent:(id)sender;
 - (IBAction)diaryInfoView:(id)sender;
-- (IBAction)outGoing:(id)sender;
 @end

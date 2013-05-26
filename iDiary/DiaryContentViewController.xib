@@ -444,12 +444,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">outGoing:</string>
+						<string key="label">shareAction:</string>
 						<reference key="source" ref="64916582"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">104</int>
+					<int key="connectionID">108</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -675,7 +675,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">107</int>
+			<int key="maxID">108</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -691,10 +691,11 @@
 						<string key="editAction:">id</string>
 						<string key="loadNextContent:">id</string>
 						<string key="loadPreContent:">id</string>
+						<string key="nextResult:">id</string>
 						<string key="outGoing:">id</string>
+						<string key="preResult:">id</string>
 						<string key="saveAction:">id</string>
 						<string key="searchAction:">id</string>
-						<string key="segmentClicked:">id</string>
 						<string key="shareAction:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -730,8 +731,16 @@
 							<string key="name">loadPreContent:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="nextResult:">
+							<string key="name">nextResult:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="outGoing:">
 							<string key="name">outGoing:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="preResult:">
+							<string key="name">preResult:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="saveAction:">
@@ -740,10 +749,6 @@
 						</object>
 						<object class="IBActionInfo" key="searchAction:">
 							<string key="name">searchAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="segmentClicked:">
-							<string key="name">segmentClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="shareAction:">
