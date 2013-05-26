@@ -37,6 +37,7 @@
 		364F2C5116BC107700437F84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364F2C5016BC107700437F84 /* QuartzCore.framework */; };
 		365E0E9B175214A70080E71D /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365E0E99175214A70080E71D /* Icon-72@2x.png */; };
 		365E0E9C175214A70080E71D /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 365E0E9A175214A70080E71D /* Icon-72.png */; };
+		365E0EA2175234EE0080E71D /* InputSeachBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 365E0EA1175234EE0080E71D /* InputSeachBar.m */; };
 		3694F172166FAD8F000AB615 /* AdvancedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3694F171166FAD8F000AB615 /* AdvancedCell.xib */; };
 		369628C61699DB2600EEFAFF /* NoteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 369628C51699DB2600EEFAFF /* NoteDocument.m */; };
 		369628CD1699DC5900EEFAFF /* NSDate+FormattedStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 369628C91699DC5900EEFAFF /* NSDate+FormattedStrings.m */; };
@@ -240,6 +241,10 @@
 		364F2C5016BC107700437F84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		365E0E99175214A70080E71D /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		365E0E9A175214A70080E71D /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		365E0E9D1752154E0080E71D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		365E0E9E175215510080E71D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		365E0EA0175234EE0080E71D /* InputSeachBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputSeachBar.h; sourceTree = "<group>"; };
+		365E0EA1175234EE0080E71D /* InputSeachBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputSeachBar.m; sourceTree = "<group>"; };
 		365E55EA173D42E300D3BBA3 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		365E55EB173D42E300D3BBA3 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3694F171166FAD8F000AB615 /* AdvancedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvancedCell.xib; sourceTree = "<group>"; };
@@ -510,6 +515,8 @@
 				369628C31699DAEE00EEFAFF /* documents */,
 				36B7B867169CBBE300806C4C /* FilePath.h */,
 				36B7B868169CBBE300806C4C /* FilePath.m */,
+				365E0EA0175234EE0080E71D /* InputSeachBar.h */,
+				365E0EA1175234EE0080E71D /* InputSeachBar.m */,
 				360625B316528B35006D7075 /* AppDelegate.h */,
 				360625B416528B35006D7075 /* AppDelegate.m */,
 				FA79CF231742546D00A81003 /* TagsViewController.h */,
@@ -1069,6 +1076,7 @@
 				3628A779174BCE8200829EB0 /* MoreApp.m in Sources */,
 				3628A77F174BD38500829EB0 /* TTSocial.m in Sources */,
 				36FBE4531751CD9A00359316 /* searchTextCode.js in Sources */,
+				365E0EA2175234EE0080E71D /* InputSeachBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1080,6 +1088,7 @@
 			children = (
 				360625AE16528B35006D7075 /* en */,
 				36FBE46117520E4700359316 /* zh-Hans */,
+				365E0E9D1752154E0080E71D /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1100,6 +1109,7 @@
 			children = (
 				36A94447165E8818001A291E /* en */,
 				36A94449165E8828001A291E /* zh-Hans */,
+				365E0E9E175215510080E71D /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

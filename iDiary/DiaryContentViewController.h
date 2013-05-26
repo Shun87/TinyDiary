@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ScrollableToolView.h"
 #import "RichEditView.h"
-
+#import "InputSeachBar.h"
 
 @class NoteDocument;
 @class DocEntity;

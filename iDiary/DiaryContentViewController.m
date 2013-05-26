@@ -146,7 +146,15 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [searchButton setFrame:CGRectMake(0, 0, 42, 42)];
     [searchButton addTarget:self
                      action:@selector(searchAction:) forControlEvents:UIControlEventTouchUpInside];
-    aSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, -44, 320, 44)];
+    if ([[UIDevice currentDevice].systemVersion compare:@"6.0"] == NSOrderedSame
+        || [[UIDevice currentDevice].systemVersion compare:@"6.0"] == NSOrderedDescending)
+    {
+        aSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, -44, 320, 44)];
+    }
+    else
+    {
+        aSearchBar = [[InputSeachBar alloc] initWithFrame:CGRectMake(0, -44, 320, 44)];
+    }
     [self.navigationController.navigationBar addSubview:aSearchBar];
     aSearchBar.delegate = self;
     aSearchBar.showsCancelButton = YES;
@@ -513,7 +521,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
 - (IBAction)shareAction:(id)sender
 {
     UIActionSheet *actionSheet = nil;
-    if ([[UIDevice currentDevice].systemVersion compare:@"6.0"] == NSOrderedDescending)
+    if ([[UIDevice currentDevice].systemVersion compare:@"6.0"] == NSOrderedDescending
+        || [[UIDevice currentDevice].systemVersion compare:@"6.0"] == NSOrderedSame)
     {
        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                       delegate:self
