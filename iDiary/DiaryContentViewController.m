@@ -283,8 +283,14 @@ const NSInteger kActionSheetPickPhoto = 1000;
 
 - (void)loadContent
 {
-    BOOL firstObj = [(DiaryListViewController *)self.listViewController isFirstObj:self.entity];
-    BOOL lastObj = [(DiaryListViewController *)self.listViewController isLastObj:self.entity];
+    BOOL firstObj = YES;
+    BOOL lastObj = YES;
+    if (!newFile)
+    {
+        firstObj = [(DiaryListViewController *)self.listViewController isFirstObj:self.entity];
+        lastObj = [(DiaryListViewController *)self.listViewController isLastObj:self.entity];
+    }
+ 
     if (firstObj && lastObj)
     {
         self.preButton.enabled = NO;

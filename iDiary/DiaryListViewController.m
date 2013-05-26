@@ -247,7 +247,23 @@ NSString *const HTMLExtentsion = @".html";
     {
         if (entry.indexPath != nil)
         {
-            [self.mTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:entry.indexPath, nil]
+            int nSection = 0;
+            int nRow = 0;
+            for (int i=0; i<[monthAndYearArray count]; i++)
+            {
+                MonthSort *monthSort = [monthAndYearArray objectAtIndex:i];
+                if ([monthSort.monthAndYear isEqualToString:monthAndYear])
+                {
+                    nSection = i;
+                    if ([monthSort.entryArray containsObject:entry])
+                    {
+                        nRow = [monthSort.entryArray indexOfObject:entry];
+                    }
+                    break;
+                }
+            }
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:nRow inSection:nSection];
+            [self.mTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]
                                    withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         else
@@ -380,24 +396,29 @@ NSString *const HTMLExtentsion = @".html";
         [[AppDelegate app].docAccess deleteFile:entry.docURL];
     }
     
-    // 删除数据源å
+    // 删除数据源
     NSDate *date = [FilePath timeFromURL:entry.docURL];
     NSString *monthAndYear = [FilePath monthAndYear:date];
     
+    int nSection = 0;
+    int nRow = 0;
     for (int i=0; i<[monthAndYearArray count]; i++)
     {
         MonthSort *monthSort = [monthAndYearArray objectAtIndex:i];
         if ([monthSort.monthAndYear isEqualToString:monthAndYear])
         {
+            nSection = i;
             if ([monthSort.entryArray containsObject:entry])
             {
+                nRow = [monthSort.entryArray indexOfObject:entry];
                 [monthSort.entryArray removeObject:entry];
             }
             break;
         }
     }
     
-    [self.mTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:entry.indexPath, nil] 
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:nRow inSection:nSection];
+    [self.mTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]
                            withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

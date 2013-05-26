@@ -279,7 +279,10 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
                                                                     object:self.diaryInfoArray];
             }
-
+            else
+            {
+                [hud hide:YES];
+            }
             [plistDoc closeWithCompletionHandler:nil];
             [plistDoc release];
         }];
@@ -327,11 +330,7 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:ReloadDiaryInfoUnits
                                                                         object:self.diaryInfoArray];
                 }
-                else
-                {
-                    [hud hide:YES];
-                }
-                
+                [hud hide:YES];
                 [plistDoc closeWithCompletionHandler:nil];
                 [plistDoc release];
             }];

@@ -44,7 +44,7 @@
 		365E0EAA175248940080E71D /* psd.png in Resources */ = {isa = PBXBuildFile; fileRef = 365E0EA6175248940080E71D /* psd.png */; };
 		365E0EAF17525D050080E71D /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 365E0EAC17525D050080E71D /* iRate.bundle */; };
 		365E0EB017525D050080E71D /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 365E0EAE17525D050080E71D /* iRate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		365E0EB217525E7E0080E71D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365E0EB117525E7D0080E71D /* StoreKit.framework */; };
+		365E0EB217525E7E0080E71D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365E0EB117525E7D0080E71D /* StoreKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		3694F172166FAD8F000AB615 /* AdvancedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3694F171166FAD8F000AB615 /* AdvancedCell.xib */; };
 		369628C61699DB2600EEFAFF /* NoteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 369628C51699DB2600EEFAFF /* NoteDocument.m */; };
 		369628CD1699DC5900EEFAFF /* NSDate+FormattedStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 369628C91699DC5900EEFAFF /* NSDate+FormattedStrings.m */; };
