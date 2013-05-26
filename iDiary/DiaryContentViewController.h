@@ -54,11 +54,11 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate, UISearchBarDelegate>
     NSString *modifyTime;
     NSString *tagStr;
     UISearchBar *aSearchBar;
-    UIButton *searchButton;
     NSInteger totalSeachResult;
     NSInteger curIndex;
     UILabel *searchlabel;
 }
+
 @property (nonatomic, assign)UIViewController *listViewController;
 @property (nonatomic, retain)IBOutlet  UIToolbar *toolbar;
 @property (nonatomic, retain) UIImagePickerController *imagePickerController;

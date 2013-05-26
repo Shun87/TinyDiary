@@ -135,7 +135,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [editButton setFrame:CGRectMake(0, 0, 40, 40)];
     [editButton addTarget:self
                    action:@selector(editAction:) forControlEvents:UIControlEventTouchUpInside];
-    searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [searchButton setTitle:@"seaach" forState:UIControlStateNormal];
     [searchButton setFrame:CGRectMake(0, 0, 40, 40)];
     [searchButton addTarget:self
@@ -150,7 +150,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     aSearchBar.inputAccessoryView = accessoryView;
     accessoryView.backgroundColor = [UIColor whiteColor];
     [accessoryView release];
-    searchlabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 100, 38)];
+    searchlabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 38)];
     [accessoryView addSubview:searchlabel];
     searchlabel.textColor = [UIColor blackColor];
     searchlabel.backgroundColor = [UIColor clearColor];
@@ -530,7 +530,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     
     
     NSString *newInnerHtml = [self.richEditor innerHtml];
-    NSLog(@"%@", newInnerHtml);
+
     // 如果HTML内容发生改变或者插入图片都需要保存(插入图片时两个HTMLString可能是一样的)
     if (![self.innerHtmlAtStart isEqualToString:newInnerHtml] || self.insertImagePath.length > 0)
     {
@@ -1018,6 +1018,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
         [self.richEditor setEditable:YES];
     }
     curIndex = 0;
+    searchlabel.text = nil;
     totalSeachResult = [self.richEditor highlightAllOccurencesOfString:searchBar.text];
 }
 
@@ -1025,6 +1026,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
 {
     [aSearchBar resignFirstResponder];
     curIndex = 0;
+    searchlabel.text = nil;
     [UIView animateWithDuration:0.35 animations:^{
         
         CGRect rc = aSearchBar.frame;
@@ -1044,7 +1046,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [searchButton release];
+  
     [aSearchBar release];
     [richEditor release];
     [resaveDate release];
