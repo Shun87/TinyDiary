@@ -1,4 +1,5 @@
 var searchArray = new Array();
+
 function deleteAll()
 {
     searchArray.splice(0, searchArray.length)
@@ -22,6 +23,8 @@ function searchText(text)
         window.location.href="cmd:scrollWindow@parameter&" + span.nodeName;
         searchArray.push(span);
     }
+    window.location.href="cmd:scrollWindow@parameter&" + searchArray.length;
+    return searchArray.length;
 }
 
 function showElement(index)

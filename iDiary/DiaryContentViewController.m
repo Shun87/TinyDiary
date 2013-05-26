@@ -133,44 +133,46 @@ const NSInteger kActionSheetPickPhoto = 1000;
     self.editButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [editButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
     [editButton setFrame:CGRectMake(0, 0, 40, 40)];
-    
     [editButton addTarget:self
                    action:@selector(editAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    aSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, -44, 320, 44)];
-    [self.navigationController.navigationBar addSubview:aSearchBar];
-    aSearchBar.delegate = self;
-    
     searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [searchButton setTitle:@"seaach" forState:UIControlStateNormal];
     [searchButton setFrame:CGRectMake(0, 0, 40, 40)];
-    aSearchBar.showsCancelButton = YES;
     [searchButton addTarget:self
-                   action:@selector(searchAction:) forControlEvents:UIControlEventTouchUpInside];
+                     action:@selector(searchAction:) forControlEvents:UIControlEventTouchUpInside];
+    aSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, -44, 320, 44)];
+    [self.navigationController.navigationBar addSubview:aSearchBar];
+    aSearchBar.delegate = self;
+    aSearchBar.showsCancelButton = YES;
     aSearchBar.tintColor = [UIColor colorFromHex:0x1a7cc5];
     aSearchBar.alpha = 0.0;
+    UIView *accessoryView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 38)];
+    aSearchBar.inputAccessoryView = accessoryView;
+    accessoryView.backgroundColor = [UIColor whiteColor];
+    [accessoryView release];
+    searchlabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 100, 38)];
+    [accessoryView addSubview:searchlabel];
+    searchlabel.textColor = [UIColor blackColor];
+    searchlabel.backgroundColor = [UIColor clearColor];
+    UIButton *prebutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [prebutton setImage:[UIImage imageNamed:@"preSearch.png"] forState:UIControlStateNormal];
+    prebutton.frame = CGRectMake(230, 0, 40, 38);
+    [prebutton addTarget:self action:@selector(preResult:) forControlEvents:UIControlEventTouchUpInside];
+    [accessoryView addSubview:prebutton];
+    UIButton *nextbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [nextbutton setImage:[UIImage imageNamed:@"nextSearch.png"] forState:UIControlStateNormal];
+    nextbutton.frame = CGRectMake(270, 0, 40, 38);
+    [accessoryView addSubview:nextbutton];
+    [nextbutton addTarget:self action:@selector(nextResult:) forControlEvents:UIControlEventTouchUpInside];
     
-//    UIView *accessoryView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
-//    accessoryView.backgroundColor = [UIColor clearColor];
-    UISegmentedControl *segment = [[[UISegmentedControl alloc] initWithItems:@[@"pre", @"next"]] autorelease];
-    segment.frame = CGRectMake(320 - 80, 0, 55, 30);
-    segment.segmentedControlStyle = UISegmentedControlStyleBar;
-   // [accessoryView addSubview:segment];
-    segment.momentary = YES;
-    aSearchBar.inputAccessoryView = segment;
-    [segment addTarget:self action:@selector(segmentClicked:) forControlEvents:UIControlEventValueChanged];
-//    [accessoryView release];
-    
-    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
-    UIBarButtonItem *editItem = [[UIBarButtonItem alloc] initWithCustomView:editButton];
-    
+    UIBarButtonItem *searchItem = [[[UIBarButtonItem alloc] initWithCustomView:searchButton] autorelease];
+    UIBarButtonItem *editItem = [[[UIBarButtonItem alloc] initWithCustomView:editButton] autorelease];
     if (!newFile)
     {
         self.navigationItem.rightBarButtonItems = @[searchItem, editItem];
     }
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
-    
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
@@ -214,7 +216,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
                                                               imageNames:images
                                                               titleArray:nil
                                                                 delegate:self] autorelease];
-    
+    scrollableToolView.editView = self.richEditor;
     
     [self.view addSubview:scrollableToolView];
     
@@ -416,14 +418,12 @@ const NSInteger kActionSheetPickPhoto = 1000;
     }
     
     editMode = !editMode;
-    
-//    [self.richEditor showResult:3];
 }
 
 - (IBAction)searchAction:(id)sender
 {
     [UIView animateWithDuration:0.35 animations:^{
-    
+        
         CGRect rc = aSearchBar.frame;
         rc.origin.y = 0;
         aSearchBar.frame = rc;
@@ -434,19 +434,38 @@ const NSInteger kActionSheetPickPhoto = 1000;
                      completion:^(BOOL finished){}];
 }
 
-- (IBAction)segmentClicked:(id)sender
+- (IBAction)preResult:(id)sender
 {
-    UISegmentedControl *seg = (UISegmentedControl *)sender;
-    if (seg.selectedSegmentIndex == 0)
+    if (totalSeachResult == 0)
     {
-        NSInteger aindex = totalSeachResult - 1;
-        [self.richEditor showResult:aindex];
+        return;
     }
-    else
+    
+    curIndex--;
+    if (curIndex == -1)
     {
-        NSInteger aindex = totalSeachResult + 1;
-        [self.richEditor showResult:3];
+        curIndex = totalSeachResult - 1;
     }
+    [self.richEditor showResult:curIndex];
+    
+    [self.richEditor showResult:curIndex];
+    
+    searchlabel.text = [NSString stringWithFormat:@"%d/%d", curIndex+1, totalSeachResult];
+}
+
+- (IBAction)nextResult:(id)sender
+{
+    if (totalSeachResult == 0)
+    {
+        return;
+    }
+    [self.richEditor showResult:curIndex];
+    curIndex = (curIndex + 1) % totalSeachResult;
+    
+    [self.richEditor showResult:curIndex];
+    
+    searchlabel.text = [NSString stringWithFormat:@"%d/%d", curIndex+1, totalSeachResult];
+
 }
 
 - (IBAction)cancelAction:(id)sender
@@ -994,8 +1013,18 @@ const NSInteger kActionSheetPickPhoto = 1000;
 #pragma mark -- SearchDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    if (!newFile)
+    {
+        [self.richEditor setEditable:YES];
+    }
+    curIndex = 0;
     totalSeachResult = [self.richEditor highlightAllOccurencesOfString:searchBar.text];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
     [aSearchBar resignFirstResponder];
+    curIndex = 0;
     [UIView animateWithDuration:0.35 animations:^{
         
         CGRect rc = aSearchBar.frame;
@@ -1004,25 +1033,12 @@ const NSInteger kActionSheetPickPhoto = 1000;
         aSearchBar.alpha = 0.0;
     }
                      completion:^(BOOL finished){}];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
     [self.richEditor removeAllHighlights];
     [aSearchBar resignFirstResponder];
-    [UIView animateWithDuration:0.35 animations:^{
-        
-        CGRect rc = aSearchBar.frame;
-        rc.origin.y = -44;
-        aSearchBar.frame = rc;
-        aSearchBar.alpha = 0.0;
-    }
-                     completion:^(BOOL finished){}];
 }
 
 - (void)dealloc
@@ -1034,7 +1050,7 @@ const NSInteger kActionSheetPickPhoto = 1000;
     [resaveDate release];
     [htmlFileURL release];
     [scrollableToolView release];
-    
+    [searchlabel release];
     [filePathToSave release];
     [doc release];
     

@@ -11,10 +11,11 @@
 #import "CommmonMethods.h"
 @implementation ScrollableToolView
 @synthesize scrollView;
-@synthesize delegate;
+@synthesize delegate, editView;
 
 - (void)dealloc
 {
+    [editView release];
     [textArray release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
@@ -142,6 +143,7 @@
     [UIView setAnimationDuration:animationDuration];
     self.frame = CGRectMake(0, keyboardRect.origin.y - 87, rect.size.width, self.bounds.size.height);
     [UIView commitAnimations];
+    
 }
 
 - (void)keyboardWillHide:(NSNotification *)aNotification

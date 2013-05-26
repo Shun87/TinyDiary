@@ -77,6 +77,10 @@
 		36FAAE841661ECA40060FBD8 /* CommmonMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FAAE831661ECA40060FBD8 /* CommmonMethods.m */; };
 		36FBE4531751CD9A00359316 /* searchTextCode.js in Sources */ = {isa = PBXBuildFile; fileRef = 36FBE4521751CD9A00359316 /* searchTextCode.js */; };
 		36FBE4541751CDA300359316 /* searchTextCode.js in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE4521751CD9A00359316 /* searchTextCode.js */; };
+		36FBE4591751EFC500359316 /* preSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE4551751EFC500359316 /* preSearch@2x.png */; };
+		36FBE45A1751EFC500359316 /* preSearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE4561751EFC500359316 /* preSearch.png */; };
+		36FBE45B1751EFC500359316 /* nextSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE4571751EFC500359316 /* nextSearch@2x.png */; };
+		36FBE45C1751EFC500359316 /* nextSearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FBE4581751EFC500359316 /* nextSearch.png */; };
 		36FFFA921747315B002B034D /* TITokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FFFA9017472F50002B034D /* TITokenField.m */; };
 		FA0AFD4F174318EF00815DF2 /* PlistDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AFD4E174318EF00815DF2 /* PlistDocument.m */; };
 		FA0AFD7E1743767600815DF2 /* DiaryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0AFD7D1743767600815DF2 /* DiaryInfo.m */; };
@@ -302,6 +306,10 @@
 		36FAAE821661ECA40060FBD8 /* CommmonMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommmonMethods.h; sourceTree = "<group>"; };
 		36FAAE831661ECA40060FBD8 /* CommmonMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommmonMethods.m; sourceTree = "<group>"; };
 		36FBE4521751CD9A00359316 /* searchTextCode.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = searchTextCode.js; sourceTree = SOURCE_ROOT; };
+		36FBE4551751EFC500359316 /* preSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preSearch@2x.png"; sourceTree = "<group>"; };
+		36FBE4561751EFC500359316 /* preSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preSearch.png; sourceTree = "<group>"; };
+		36FBE4571751EFC500359316 /* nextSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nextSearch@2x.png"; sourceTree = "<group>"; };
+		36FBE4581751EFC500359316 /* nextSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextSearch.png; sourceTree = "<group>"; };
 		36FFFA8F17472F50002B034D /* TITokenField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TITokenField.h; sourceTree = "<group>"; };
 		36FFFA9017472F50002B034D /* TITokenField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TITokenField.m; sourceTree = "<group>"; };
 		FA0AFD4D174318EF00815DF2 /* PlistDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistDocument.h; sourceTree = "<group>"; };
@@ -687,6 +695,10 @@
 		FA20EDEF173B72CF00CFA1F7 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				36FBE4551751EFC500359316 /* preSearch@2x.png */,
+				36FBE4561751EFC500359316 /* preSearch.png */,
+				36FBE4571751EFC500359316 /* nextSearch@2x.png */,
+				36FBE4581751EFC500359316 /* nextSearch.png */,
 				3628A781174BDA7200829EB0 /* today@2x.png */,
 				3628A782174BDA7200829EB0 /* today.png */,
 				FAB8A4D2174B96C400C515EF /* changePsd.png */,
@@ -984,6 +996,10 @@
 				3628A77B174BCE8200829EB0 /* SMS2Group@2x.png in Resources */,
 				3628A783174BDA7300829EB0 /* today@2x.png in Resources */,
 				3628A784174BDA7300829EB0 /* today.png in Resources */,
+				36FBE4591751EFC500359316 /* preSearch@2x.png in Resources */,
+				36FBE45A1751EFC500359316 /* preSearch.png in Resources */,
+				36FBE45B1751EFC500359316 /* nextSearch@2x.png in Resources */,
+				36FBE45C1751EFC500359316 /* nextSearch.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

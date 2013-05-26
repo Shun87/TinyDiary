@@ -74,38 +74,34 @@
     NSString *jsCode = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     [webView stringByEvaluatingJavaScriptFromString:jsCode];
     
-    [webView stringByEvaluatingJavaScriptFromString:@"searchText(\"ca\")"];
+    jsCode = [NSString stringWithFormat:@"searchText(\"%@\")", str];
+    NSString *result = [webView stringByEvaluatingJavaScriptFromString:jsCode];
+    return [result intValue];
 }
 
-int n = 0;
 - (void)removeAllHighlights
 {
     [webView stringByEvaluatingJavaScriptFromString:@"removedHighlights()"];
-    n = 0;
 }
 
 - (void)showResult:(NSInteger)index
 {
-    NSString *js = [NSString stringWithFormat:@"showElement('%d')", n];
+    NSString *js = [NSString stringWithFormat:@"showElement('%d')", index];
     [webView stringByEvaluatingJavaScriptFromString:js];
-    n++;
 }
 
 - (void)bold
 {
-    [self highlightAllOccurencesOfString:nil];
-    //[webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Bold\")"];
+    [webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Bold\")"];
 }
 
 - (void)italic
 {
-    [self showResult:0];
-    //[webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Italic\")"];
+    [webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Italic\")"];
 }
 
 - (void)underline
 {
-    [self removeAllHighlights];
     [webView stringByEvaluatingJavaScriptFromString:@"document.execCommand(\"Underline\")"];
 }
 
@@ -201,6 +197,13 @@ int n = 0;
 {
     NSString *value = (editable ? @"true" : @"false");
     [self setAttribute:@"contenteditable" value:value];
+}
+
+- (BOOL)editable
+{
+    NSString *jsCode = [NSString stringWithFormat:@"getAttribute(\"contenteditable\")"];
+    NSString *str = [webView stringByEvaluatingJavaScriptFromString:jsCode];
+    return [str boolValue];
 }
 
 - (void)undo

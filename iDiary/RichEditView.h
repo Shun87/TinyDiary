@@ -60,6 +60,7 @@
 
 // edit
 - (void)setEditable:(BOOL)editable;
+- (BOOL)editable;
 - (void)undo;
 
 //Image tag

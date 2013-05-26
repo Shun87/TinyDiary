@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CancelTouchesScrollView.h"
+#import "RichEditView.h"
 
 @protocol ScrollableToolViewDelegate;
 @interface ScrollableToolView : UIView<UIScrollViewDelegate>
@@ -19,7 +20,9 @@
     NSMutableArray *textArray;
     id<ScrollableToolViewDelegate>delegate;
     UIImageView *hilightImageView;
+    RichEditView *editView;
 }
+@property (nonatomic, retain)RichEditView *editView;
 @property (nonatomic, retain)CancelTouchesScrollView *scrollView;
 @property (nonatomic, assign)id<ScrollableToolViewDelegate>delegate;
 

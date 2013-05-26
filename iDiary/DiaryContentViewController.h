@@ -56,6 +56,8 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate, UISearchBarDelegate>
     UISearchBar *aSearchBar;
     UIButton *searchButton;
     NSInteger totalSeachResult;
+    NSInteger curIndex;
+    UILabel *searchlabel;
 }
 @property (nonatomic, assign)UIViewController *listViewController;
 @property (nonatomic, retain)IBOutlet  UIToolbar *toolbar;
