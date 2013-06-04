@@ -198,7 +198,7 @@ NSString *const HTMLExtentsion = @".html";
 
 - (void)resignActive:(NSNotification *)notification
 {
-    if ([self.tagName length] > 0)
+    if ([self.tagName length] > 0 || specDate != nil)
     {
         [self.navigationController popToRootViewControllerAnimated:NO];
     }
