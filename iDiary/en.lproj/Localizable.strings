@@ -46,15 +46,15 @@
 "Send feekback" = "Send feekback";
 "Version" = "Version";
 "Cancel" = "Cancel";
-"invite" = "Hello,'TinyDiaryPro'is a great app and easy to use,check out it on the App Store,I think you'll like it! itms://itunes.apple.com/us/app/Tiny-Diary-Pro-Journal-Daily-Thoughts-Notes/id654461373?mt=8";
+"invite" = "Hello,'Daily Life'is a great app and easy to use,check out it on the App Store,I think you'll like it! itms://itunes.apple.com/us/app/Tiny-Diary-Pro-Journal-Daily-Thoughts-Notes/id654461373?mt=8";
 "No mail notice" = "No Mail accout";
 "No facebook notice" = "No Facebook accout";
 "No twitter notice" = "No Twitter accout";
 "No Sina notice" = "No Sian Weibo accout";
 "No mail account" = "There are no mail accouts configured, You can add or creat a mail account in Settings";
-"No facebook account" = "There are no Facebook accouts configured, You can add or creat a mail account in Settings";
-"No twitter account" = "There are no Twitter accouts configured, You can add or creat a mail account in Settings";
-"No Sina account" = "There are no Sina Weibo accouts configured, You can add or creat a mail account in Settings";
+"No facebook account" = "There are no Facebook accouts configured, You can add or creat a Facebook account in Settings";
+"No twitter account" = "There are no Twitter accouts configured, You can add or creat a Twitter account in Settings";
+"No Sina account" = "There are no Sina Weibo accouts configured, You can add or creat a Sina account in Settings";
 "Device not support" = "Your device is not support to share diary!";
 "group member" = "Members";
 "ok" = "OK";
@@ -65,3 +65,4 @@
 "View more" = "View More";
 "More Apps" = "More Apps";
 "today" = "Today";
+"No Matches" = "No Matches";

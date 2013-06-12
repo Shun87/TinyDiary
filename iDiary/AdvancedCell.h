@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#define Time_light_gray 0x7a7f88
+#define Tip_Blue    0x145dd6
+#define Day_Color   0x4c5a65
+#define Title_Color 0x3b3b3b
+
 @protocol AdvancedCellDelegate;
 
 @interface AdvancedCell : UITableViewCell
@@ -18,12 +23,12 @@
     IBOutlet UILabel  *week;
     IBOutlet UILabel *time;
     IBOutlet UILabel  *title;
-    
     UIImage *thumbnail;
     
     BOOL opened;
     
     id<AdvancedCellDelegate> delegate;
+    NSMutableArray *badgeArray;
 }
 @property (nonatomic, assign)id<AdvancedCellDelegate> delegate;
 @property (nonatomic, retain)UIImage *thumbnail;
@@ -39,6 +44,8 @@
 - (void)setData:(NSDate *)date;
 - (void)setTitleStr:(NSString *)text;
 - (void)setcontent:(NSString *)text;
+- (void)setDayColor:(UIColor *)color;
+- (void)setDiaryTag:(NSArray *)tags;
 @end
 
 

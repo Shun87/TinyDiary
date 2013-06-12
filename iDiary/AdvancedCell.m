@@ -11,14 +11,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import "NSDate+FormattedStrings.h"
 #import "NSDateAdditions.h"
+#import "TDBadgedCell.h"
 
 const CGFloat kLeftMargin = 10;
 const CGFloat kRightMargin = 70;
-
-#define Time_light_gray 0x7a7f88
-#define Tip_Blue    0x145dd6
-#define Day_Color   0x4c5a65
-#define Title_Color 0x3b3b3b
 
 
 @implementation AdvancedCell
@@ -50,12 +46,13 @@ const CGFloat kRightMargin = 70;
 {
     opened = NO;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    badgeArray = [[NSMutableArray alloc] init];
     time.font = [UIFont systemFontOfSize:10];
     week.font = [UIFont systemFontOfSize:11];
     day.font = [UIFont boldSystemFontOfSize:35];
     time.textColor = HEXCOLOR(Time_light_gray, 1);
     week.textColor = HEXCOLOR(Time_light_gray, 1);
+
     day.textColor = HEXCOLOR(Day_Color, 1);
     contentLabel.numberOfLines = 0;
     contentLabel.font = [UIFont systemFontOfSize:11];
@@ -77,15 +74,59 @@ const CGFloat kRightMargin = 70;
     rect.size.width = self.bounds.size.width - kRightMargin - rect.origin.x;
     contentLabel.frame = rect;
     
+
     UIView *subView = [[[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)] autorelease];
     [self.contentView addSubview:subView];
     subView.backgroundColor = HEXCOLOR(0xe0e0e0, 1);
     subView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 }
 
+- (void)setDiaryTag:(NSArray *)tags
+{
+    if ([tags count] <= 0)
+    {
+        return;
+    }
+    
+    CGRect rect = contentLabel.frame;
+    for (int i=0; i<[tags count]; i++)
+    {
+        TDBadgeView *badgeView = [[[TDBadgeView alloc] initWithFrame:CGRectZero] autorelease];
+        [self.contentView addSubview:badgeView];
+
+        NSString *subTag = [tags objectAtIndex:i];
+
+        CGSize badgeSize = [subTag sizeWithFont:[UIFont boldSystemFontOfSize: 12]];
+        rect.origin.y = self.frame.size.height - 20;
+        rect.size = badgeSize;
+        badgeView.frame = rect;
+        badgeView.badgeString = subTag;
+        badgeView.badgeColor = HEXCOLOR(0x40adbc, 1.0);
+        if (i == 1)
+        {
+            badgeView.badgeString = @". . .";
+            rect.size.width = 30;
+            badgeView.frame = rect;
+        }
+        
+        [badgeArray addObject:badgeView];
+        rect.origin.x += rect.size.width + 5;
+        
+        if (i == 1)
+        {
+            break;
+        }
+    }
+}
+
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
     [super setHighlighted:highlighted animated:animated];
+}
+
+- (void)setDayColor:(UIColor *)color
+{
+    day.textColor = color;
 }
 
 - (void)setBackgroundImageName:(NSString *)imagePath
@@ -149,6 +190,14 @@ const CGFloat kRightMargin = 70;
     CGRect titleRect = title.frame;
     titleRect.origin.x = rect.origin.x;
     title.frame = titleRect;
+    
+    for (int i=0; i<[badgeArray count]; i++)
+    {
+        TDBadgeView *badgeView = [badgeArray objectAtIndex:i];
+        CGRect badgetRect = badgeView.frame;
+        badgetRect.origin.x += size.width + kLeftMargin;
+        badgeView.frame = badgetRect;
+    }
 }
 
 - (void)setData:(NSDate *)date
@@ -166,6 +215,13 @@ const CGFloat kRightMargin = 70;
     self.day.text = [dateFormatter stringFromDate:date];
     [dateFormatter setDateFormat:@"EEEE"];
     self.week.text = [dateFormatter stringFromDate:date];
+    
+    [dateFormatter setDateFormat:@"e"];
+    NSString *dayOfWeek = [dateFormatter stringFromDate:date];
+    if ([dayOfWeek integerValue] <= 3)
+    {
+        day.textColor = HEXCOLOR(0x40adbc, 1.0);
+    }
 }
 
 - (void)dealloc
@@ -175,6 +231,7 @@ const CGFloat kRightMargin = 70;
     [week release];
     [title release];
     [time release];
+    [badgeArray release];
     [super dealloc];
 }
 @end

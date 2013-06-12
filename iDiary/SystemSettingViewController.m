@@ -374,7 +374,7 @@
          }
          else if (row == 3)
          {
-             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/us/app/Tiny-Diary-Pro-Journal-Daily-Thoughts-Notes/id654461373?mt=8"]];
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/us/app/id654461373?mt=8"]];
          }
      }
     else if ([indexPath section] == 2)

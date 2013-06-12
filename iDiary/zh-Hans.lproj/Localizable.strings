@@ -48,15 +48,15 @@
 "Version" = "版本号";
 "GroupSMSCondition" = "群发短信需要再“设置”应用程序中关闭iMessage、群发讯息和彩信。";
 "Cancel" = "取消";
-"invite" = "'TinyDiaryPro'是个非常棒的软件，相信你会喜欢，快去app store下载吧！itms://itunes.apple.com/us/app/Tiny-Diary-Pro-Journal-Daily-Thoughts-Notes/id654461373?mt=8";
+"invite" = "'生活笔记'是个非常棒的软件，相信你会喜欢，快去app store下载吧！itms://itunes.apple.com/us/app/Tiny-Diary-Pro-Journal-Daily-Thoughts-Notes/id654461373?mt=8";
 "No mail notice" = "无邮箱帐户";
 "No facebook notice" = "无Facebook 帐户";
 "No twitter notice" = "无Twitter 帐户";
 "No Sina notice" = "无微博帐户";
 "No mail account" = "尚未配置邮箱帐户，您可再“设置”中添加或创建邮箱帐户";
-"No facebook account" = "尚未配置Facebook帐户，您可再“设置”中添加或创建邮箱帐户";
-"No twitter account" = "尚未配置Twitter帐户，您可再“设置”中添加或创建邮箱帐户";
-"No Sina account" = "尚未配置新浪微博帐户，您可再“设置”中添加或创建邮箱帐户";
+"No facebook account" = "尚未配置Facebook帐户，您可再“设置”中添加或创建facebook帐户";
+"No twitter account" = "尚未配置Twitter帐户，您可再“设置”中添加或创建twitter帐户";
+"No Sina account" = "尚未配置新浪微博帐户，您可再“设置”中添加或创建Sina帐户";
 "Device not support" = "您的设备系统不支持分享的功能！";
 "group member" = "分组成员";
 "ok" = "确定";
@@ -67,3 +67,4 @@
 "View more" = "查看更多";
 "More Apps" = "更多应用";
 "today" = "今天";
+"No Matches" = "无匹配";

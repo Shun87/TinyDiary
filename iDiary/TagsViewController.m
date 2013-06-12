@@ -184,7 +184,6 @@
     cell.badgeString = [NSString stringWithFormat:@"%d", [tag.diaryInfoArray count]];
     cell.textLabel.text = tag.tagName;
     cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
-    
     return cell;
 }
 

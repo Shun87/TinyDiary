@@ -17,6 +17,7 @@
 
 #import "CalendarViewController.h"
 #import "TagsViewController.h"
+#import "MainViewController.h"
 #import "FilePath.h"
 #import "iRate.h"
 
@@ -69,6 +70,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     diaryInfoArray = [[NSMutableArray alloc] init];
@@ -90,7 +93,9 @@
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     [self.tabBarController setViewControllers:[NSArray arrayWithObjects:aNavigationController, nav3, nav4, nav2, nil]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    [[UINavigationBar appearance] setTintColor:[UIColor colorFromHex:0x1a7cc5]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorFromHex:0x282d31]];
+    
+    MainViewController *mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     self.window.rootViewController = self.tabBarController;
     
     // Initialize the banner at the bottom of the screen.0
@@ -114,6 +119,9 @@
     
     [self.window makeKeyAndVisible];
     
+    //
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bars.png"] forBarMetrics:UIBarMetricsDefault];
+    
     [self hidePsdView];
     BOOL pwdLock = [[[NSUserDefaults standardUserDefaults] objectForKey:kPsdOn] boolValue];
     if (pwdLock)
@@ -130,7 +138,7 @@
     
    // [iRate sharedInstance].applicationBundleID = @"com.cshun.tinyDiary";
 	[iRate sharedInstance].onlyPromptIfLatestVersion = NO;
-    [iRate sharedInstance].daysUntilPrompt = 1.5;
+    [iRate sharedInstance].daysUntilPrompt = 2.5;
 
     return YES;
 }

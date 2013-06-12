@@ -269,24 +269,36 @@ NSString *const HTMLExtentsion = @".html";
         else
         {
             // 添加的情况
-            NSInteger index = [self indexForMonthAndYear:monthAndYear];
-            if (index >= 0 && index < [monthAndYearArray count])
+            if ([monthAndYearArray count] == 0)
             {
-                MonthSort *monthSort = [monthAndYearArray objectAtIndex:index];
-                [monthSort.entryArray insertObject:entry atIndex:0];
-
-            }
-            else
-            {
+                // 刚开始第一个的日记
                 MonthSort *monthSort = [[MonthSort alloc] init];
                 monthSort.monthAndYear = monthAndYear;
                 [monthSort.entryArray addObject:entry];
-                [monthAndYearArray addObject:monthSort];
+                [monthAndYearArray insertObject:monthSort atIndex:0];
+                [self.mTableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]
+                                       withRowAnimation:UITableViewRowAnimationAutomatic];
             }
-
-            [self.mTableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]
-                                   withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+            else
+            {
+                NSInteger index = [self indexForMonthAndYear:monthAndYear];
+                if (index >= 0 && index < [monthAndYearArray count])
+                {
+                    MonthSort *monthSort = [monthAndYearArray objectAtIndex:index];
+                    [monthSort.entryArray insertObject:entry atIndex:0];
+                    [self.mTableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]
+                                           withRowAnimation:UITableViewRowAnimationAutomatic];
+                    
+                }
+                else
+                {
+                    MonthSort *monthSort = [[MonthSort alloc] init];
+                    monthSort.monthAndYear = monthAndYear;
+                    [monthSort.entryArray addObject:entry];
+                    [monthAndYearArray insertObject:monthSort atIndex:0];
+                    [self.mTableView insertSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+            }
         }
     }
 }
@@ -474,6 +486,7 @@ NSString *const HTMLExtentsion = @".html";
     // 这个方法不要调用tableView reloadData的方法，会造成死循环
     NSDate *date = [FilePath timeFromURL:entity.docURL];
     [cell setData:date];
+    [cell setDiaryTag:entity.tags];
     if (entity.metadata != nil)
     {
         if (entity.metadata.detailText != nil)
@@ -610,8 +623,8 @@ NSString *const HTMLExtentsion = @".html";
     }
 
     label.text = monthSort.monthAndYear;
-    label.textColor = [UIColor darkGrayColor];
-    label.font = [UIFont systemFontOfSize:14];
+    //label.textColor = [UIColor white];
+    label.font = [UIFont boldSystemFontOfSize:14];
     label.textColor = [UIColor colorFromHex:0x717171];
     return imageView;
 }
@@ -626,6 +639,7 @@ NSString *const HTMLExtentsion = @".html";
         cell = tmpCell;
         cell.delegate = self;
         self.tmpCell = nil;
+        
     }
     
     NSString *backgroundImagePath = [[NSBundle mainBundle] pathForResource:@"cellBk" ofType:@"png"];
@@ -647,6 +661,7 @@ NSString *const HTMLExtentsion = @".html";
             }
         }
     }
+    
     
     return cell;
 }

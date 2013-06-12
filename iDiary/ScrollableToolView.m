@@ -134,20 +134,23 @@
 
 - (void)keyboardWillShow:(NSNotification *)aNotification 
 {
-    NSTimeInterval animationDuration =
-    [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    CGRect keyboardRect = [[[aNotification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    CGRect rect = [[UIScreen mainScreen] bounds];
-    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    self.frame = CGRectMake(0, keyboardRect.origin.y - 87, rect.size.width, self.bounds.size.height);
-    [UIView commitAnimations];
-    
+    if ([delegate shouldBeFirstResponder])
+    {
+        NSTimeInterval animationDuration =
+        [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        CGRect keyboardRect = [[[aNotification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        
+        CGRect rect = [[UIScreen mainScreen] bounds];
+        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        self.frame = CGRectMake(0, keyboardRect.origin.y - 87, rect.size.width, self.bounds.size.height);
+        [UIView commitAnimations];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
+
     NSTimeInterval animationDuration =
     [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     

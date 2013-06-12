@@ -52,7 +52,9 @@
     dayDiaryArray = [[NSMutableArray alloc] init];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"today.png"] forState:UIControlStateNormal];
+    
+    UIImage *image = [[UIImage imageNamed:@"rightButton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(2, 5, 10, 10)];
+    [button setBackgroundImage:image forState:UIControlStateNormal];
     [button setTitle:NSLocalizedString(@"today", nil) forState:UIControlStateNormal];
     [button setFrame:CGRectMake(0, 0, 60, 30)];
     [button addTarget:self
@@ -61,6 +63,7 @@
     button.titleLabel.textColor = [UIColor whiteColor];
     button.titleLabel.shadowColor = [UIColor darkGrayColor];
     button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+    
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = rightItem;
     [rightItem release];

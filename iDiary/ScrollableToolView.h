@@ -35,5 +35,5 @@
 @protocol ScrollableToolViewDelegate <NSObject>
 
 - (void)selectItemOnScrollTool:(id)sender;
-
+- (BOOL)shouldBeFirstResponder;
 @end

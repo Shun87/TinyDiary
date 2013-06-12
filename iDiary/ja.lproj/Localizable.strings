@@ -48,7 +48,7 @@
 "Version" = "バージョン番号";
 "GroupSMSCondition" = "群発メール必要が「設定」アプリで閉鎖iMessage、群発情報やデコメール。";
 "Cancel" = "キャンセル";
-"invite" = "' TinyDiaryPro 'は素敵なソフトウェアを信じて、あなたが好きになって、すぐに行ってapp store下載だろう！itms://itunes.apple.com/us/app/Tiny-Diary-Pro-Journal-Daily-Thoughts-Notes/id654461373?mt=8";
+"invite" = "'Daily Life'は素敵なソフトウェアを信じて、あなたが好きになって、すぐに行ってapp store下載だろう！itms://itunes.apple.com/us/app/Tiny-Diary-Pro-Journal-Daily-Thoughts-Notes/id654461373?mt=8";
 "No mail notice" = "無メールアカウント";
 "No facebook notice" = "無Facebook口座";
 "No twitter notice" = "無Twitter口座";
@@ -67,3 +67,4 @@
 "View more" = "楽しむ";
 "More Apps" = "多くの応用";
 "today" = "今日";
+"No Matches" = "No Matches";

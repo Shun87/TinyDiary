@@ -46,7 +46,7 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate, UISearchBarDelegate>
     
     BOOL editMode;
     UIToolbar *toolbar;
-    
+    IBOutlet UIView *searchResultBar;
     UIViewController *listViewController;
     
     NSString *title;
@@ -56,12 +56,14 @@ UIImagePickerControllerDelegate, UIActionSheetDelegate, UISearchBarDelegate>
     UISearchBar *aSearchBar;
     NSInteger totalSeachResult;
     NSInteger curIndex;
-    UILabel *searchlabel;
+    IBOutlet UILabel *searchlabel;
     UILabel *dayLabel;
     UILabel *weekLabel;
     UILabel *myLable;
+    
+    NSTimer *timer;
 }
-
+@property (nonatomic, retain)NSTimer *timer;
 @property (nonatomic, assign)UIViewController *listViewController;
 @property (nonatomic, retain)IBOutlet  UIToolbar *toolbar;
 @property (nonatomic, retain) UIImagePickerController *imagePickerController;
