@@ -69,6 +69,9 @@
 - (NSInteger)highlightAllOccurencesOfString:(NSString*)str;
 - (void)removeAllHighlights;
 - (void)showResult:(NSInteger)index;
+
+// PDF
+- (void)genertePDF;
 @end
 
 @protocol RichEditViewDelegate <NSObject>

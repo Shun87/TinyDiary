@@ -91,6 +91,7 @@
 		36CEAF281658558400C33018 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CEAF261658558400C33018 /* SystemSettingViewController.m */; };
 		36CEAF291658558400C33018 /* SystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36CEAF271658558400C33018 /* SystemSettingViewController.xib */; };
 		36D25AB2166E347A00BFC041 /* DiaryDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D25AB1166E347A00BFC041 /* DiaryDescription.m */; };
+		36DF952D17689A95004F58D9 /* PDFGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DF952C17689A95004F58D9 /* PDFGenerator.m */; };
 		36EBF8A21748DA510051EF21 /* bakck_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBF8A01748DA510051EF21 /* bakck_white@2x.png */; };
 		36EBF8A31748DA510051EF21 /* bakck_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 36EBF8A11748DA510051EF21 /* bakck_white.png */; };
 		36F1F8CA16F7631E004EDB60 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36F1F8C916F7631E004EDB60 /* MessageUI.framework */; };
@@ -350,6 +351,8 @@
 		36D25AB1166E347A00BFC041 /* DiaryDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryDescription.m; sourceTree = "<group>"; };
 		36D3714A16D69820003B5555 /* DSActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
 		36D3714B16D69820003B5555 /* DSActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
+		36DF952B17689A95004F58D9 /* PDFGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerator.h; sourceTree = "<group>"; };
+		36DF952C17689A95004F58D9 /* PDFGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerator.m; sourceTree = "<group>"; };
 		36EBF8A01748DA510051EF21 /* bakck_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bakck_white@2x.png"; sourceTree = "<group>"; };
 		36EBF8A11748DA510051EF21 /* bakck_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bakck_white.png; sourceTree = "<group>"; };
 		36F1F8C916F7631E004EDB60 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -560,6 +563,8 @@
 				36B7B868169CBBE300806C4C /* FilePath.m */,
 				365E0EA0175234EE0080E71D /* InputSeachBar.h */,
 				365E0EA1175234EE0080E71D /* InputSeachBar.m */,
+				36DF952B17689A95004F58D9 /* PDFGenerator.h */,
+				36DF952C17689A95004F58D9 /* PDFGenerator.m */,
 				360625B316528B35006D7075 /* AppDelegate.h */,
 				360625B416528B35006D7075 /* AppDelegate.m */,
 				FA79CF231742546D00A81003 /* TagsViewController.h */,
@@ -1172,6 +1177,7 @@
 				365E0EB017525D050080E71D /* iRate.m in Sources */,
 				367EC3261764C65F00A3603B /* MoreApp.m in Sources */,
 				367EC336176618DE00A3603B /* MainViewController.m in Sources */,
+				36DF952D17689A95004F58D9 /* PDFGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

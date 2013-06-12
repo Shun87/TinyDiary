@@ -7,6 +7,7 @@
 //
 
 #import "RichEditView.h"
+#import "PDFGenerator.h"
 
 @interface RichEditView()
 - (void) hideGradientBackground:(UIView*)theView;
@@ -266,6 +267,11 @@
     [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.execCommand('insertImage', false, '%@')", imagePath]];
     NSString *jsFunc = [NSString stringWithFormat:@"ajustImageSize('%@', '%f', '%f')", imagePath, size.width, size.height];
     [webView stringByEvaluatingJavaScriptFromString:jsFunc];
+}
+
+- (void)genertePDF
+{
+    [PDFGenerator creatPDFWithPrintFormatter:webView.viewPrintFormatter];
 }
 
 #pragma mark WebView Delegate
