@@ -113,17 +113,18 @@ const NSInteger kActionSheetPickPhoto = 1000;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (app.adBanner.superview != nil)
+    {
+        [app.adBanner removeFromSuperview];
+    }
     
-//    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    if (app.banner.superview != nil)
-//    {
-//        [app.banner removeFromSuperview];
-//    }
-//    CGRect rect = app.banner.frame;
-//    rect.origin.y = self.view.frame.size.height -  CGSizeFromGADAdSize(kGADAdSizeBanner).height;
-//    app.banner.frame = rect;
-//    app.banner.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-//    [self.view addSubview:app.banner];
+    CGRect rect = app.adBanner.frame;
+    rect.origin.y = 0;
+    app.adBanner.frame = rect;
+    app.adBanner.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [self.view addSubview:app.adBanner];
+    [app.adBanner setRootViewController:self];
 }
 
 - (void)viewDidLoad
@@ -219,7 +220,8 @@ const NSInteger kActionSheetPickPhoto = 1000;
     keyboardHeight = 0;
 
     CGRect rc = self.view.bounds;
-    rc.size.height -= 56;
+    rc.origin.y = 50;
+    rc.size.height -= 106;
     self.richEditor = [[[RichEditView alloc] initWithFrame:rc] autorelease];
     self.richEditor.autoresizingMask = UIViewAutoresizingFlexibleTopMargin
     | UIViewAutoresizingFlexibleBottomMargin

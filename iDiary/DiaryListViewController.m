@@ -90,7 +90,9 @@ NSString *const HTMLExtentsion = @".html";
 {
     [super viewDidLoad];
     self.cellNib = [UINib nibWithNibName:@"AdvancedCell" bundle:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadBanner:)
+                                                 name:@"reloadBanner" object:nil];
     self.view.backgroundColor = [UIColor colorFromHex:LightGray];
     self.mTableView.rowHeight = 80;
     self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -212,6 +214,34 @@ NSString *const HTMLExtentsion = @".html";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (app.adBanner.superview != nil)
+    {
+        [app.adBanner removeFromSuperview];
+    }
+    
+    CGRect rect = app.adBanner.frame;
+    rect.origin.y = self.view.frame.size.height -  CGSizeFromGADAdSize(kGADAdSizeBanner).height;
+    app.adBanner.frame = rect;
+    app.adBanner.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [self.view addSubview:app.adBanner];
+    [app.adBanner setRootViewController:self.tabBarController];
+}
+
+- (void)reloadBanner:(NSNotification *)notification
+{
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (app.adBanner.superview != nil)
+    {
+        [app.adBanner removeFromSuperview];
+    }
+    
+    CGRect rect = app.adBanner.frame;
+    rect.origin.y = self.view.frame.size.height -  CGSizeFromGADAdSize(kGADAdSizeBanner).height;
+    app.adBanner.frame = rect;
+    app.adBanner.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [self.view addSubview:app.adBanner];
 }
 
 - (void)resolveConfict:(NSURL *)url
@@ -892,7 +922,9 @@ NSString *const HTMLExtentsion = @".html";
 
 - (IBAction)goBack:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadBanner" object:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 @end

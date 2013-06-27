@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Settings.h"
-//#import "GADBannerView.h"
+#import "GADBannerView.h"
 #import "MBProgressHUD.h"
 #import "DocumentsAccess.h"
 #import "PlistDocument.h"
@@ -18,14 +18,14 @@
 #define ReloadDiaryInfoUnits @"ReloadDiaryInfoUnits"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, 
-MBProgressHUDDelegate, DocumentsAccessDelegate>
+MBProgressHUDDelegate, DocumentsAccessDelegate, GADBannerViewDelegate>
 {
     UIWindow *window;
     UITabBarController *tabBarController;
     
     UINavigationController *navigationController;
     PasswordViewController *passwordViewController;
-   // GADBannerView *banner;
+    GADBannerView *adBanner;
     
     MBProgressHUD *hud;
     
@@ -35,7 +35,7 @@ MBProgressHUDDelegate, DocumentsAccessDelegate>
 @property (nonatomic, readonly)DocumentsAccess *docAccess;
 @property (nonatomic, retain)NSMutableArray *diaryInfoArray;
 @property (nonatomic, retain)MBProgressHUD *hud;
-//@property (nonatomic, retain) GADBannerView *banner;
+@property (nonatomic, retain) GADBannerView *adBanner;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic)UINavigationController *navigationController;
 @property (strong, nonatomic) UITabBarController *tabBarController;

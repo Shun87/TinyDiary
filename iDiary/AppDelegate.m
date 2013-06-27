@@ -19,7 +19,7 @@
 #import "TagsViewController.h"
 #import "MainViewController.h"
 #import "FilePath.h"
-#import "iRate.h"
+
 
 @implementation AppDelegate
 @synthesize window ;
@@ -27,10 +27,11 @@
 @synthesize navigationController;
 @synthesize passwordViewController;
 @synthesize hud, diaryInfoArray, docAccess;
-//@synthesize banner;
+@synthesize adBanner;
 
 - (void)dealloc
 {
+    [adBanner release];
     [hud release];
     [window release];
     [tabBarController release];
@@ -99,23 +100,23 @@
     self.window.rootViewController = self.tabBarController;
     
     // Initialize the banner at the bottom of the screen.0
-//    CGPoint origin = CGPointMake(0.0,
-//                                 self.window.frame.size.height -
-//                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height);
-//    // Use predefined GADAdSize constants to define the GADBannerView.
-//    self.banner = [[[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner
-//                                                    origin:origin]
-//                     autorelease];
-//    
-//    // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID
-//    // before compiling.
-//    self.banner.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-//    self.banner.adUnitID = @"a15176d8687d52a";
-//    self.banner.delegate = self;
-//    [self.banner setRootViewController:self.navigationController];
-//    self.banner.center =
-//    CGPointMake(self.window.center.x, self.banner.center.y);
-//    [self.banner loadRequest:[self createRequest]];
+    CGPoint origin = CGPointMake(0.0,
+                                 self.window.frame.size.height -
+                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height);
+    // Use predefined GADAdSize constants to define the GADBannerView.
+    self.adBanner = [[[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner
+                                                    origin:origin]
+                     autorelease];
+    
+    // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID
+    // before compiling.
+    self.adBanner.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    self.adBanner.adUnitID = @"a151af6c7d89a27";
+    self.adBanner.delegate = self;
+    [self.adBanner setRootViewController:self.navigationController];
+    self.adBanner.center =
+    CGPointMake(self.window.center.x, self.adBanner.center.y);
+    [self.adBanner loadRequest:[self createRequest]];
     
     [self.window makeKeyAndVisible];
     
@@ -136,9 +137,6 @@
 	hud.labelText = @"Loading";
     hud.delegate = self;
     
-   // [iRate sharedInstance].applicationBundleID = @"com.cshun.tinyDiary";
-	[iRate sharedInstance].onlyPromptIfLatestVersion = NO;
-    [iRate sharedInstance].daysUntilPrompt = 2.5;
 
     return YES;
 }
@@ -351,29 +349,29 @@
     return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
-//#pragma mark GADRequest generation
-//
-//// Here we're creating a simple GADRequest and whitelisting the application
-//// for test ads. You should request test ads during development to avoid
-//// generating invalid impressions and clicks.
-//- (GADRequest *)createRequest {
-//    GADRequest *request = [GADRequest request];
-//    
-//#if DEBUG
-//    request.testDevices = [NSArray arrayWithObjects:GAD_SIMULATOR_ID, nil];
-//#endif
-//    return request;
-//}
-//
-//#pragma mark GADBannerViewDelegate impl
-//
-//// We've received an ad successfully.
-//- (void)adViewDidReceiveAd:(GADBannerView *)adView {
-//    NSLog(@"Received ad successfully");
-//}
-//
-//- (void)adView:(GADBannerView *)view
-//didFailToReceiveAdWithError:(GADRequestError *)error {
-//    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
-//}
+
+// Here we're creating a simple GADRequest and whitelisting the application
+// for test ads. You should request test ads during development to avoid
+// generating invalid impressions and clicks.
+- (GADRequest *)createRequest {
+    GADRequest *request = [GADRequest request];
+    
+#if DEBUG
+    request.testDevices = [NSArray arrayWithObjects:GAD_SIMULATOR_ID, nil];
+#endif
+    return request;
+}
+
+#pragma mark GADBannerViewDelegate impl
+
+// We've received an ad successfully.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    NSLog(@"Received ad successfully");
+}
+
+- (void)adView:(GADBannerView *)view
+didFailToReceiveAdWithError:(GADRequestError *)error {
+    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
+}
+
 @end
